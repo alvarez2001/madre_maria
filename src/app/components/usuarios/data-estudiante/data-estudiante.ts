@@ -1,0 +1,23 @@
+export interface dataEstudiante{
+  ubicacion:string;
+  zona:string;
+  sector:string;
+  municipio:string;
+  parroquia:string;
+  tlf_habitacion?:string;
+  enfermedad:string;
+  tipo_enfermedad:string;
+  alergica:string;
+  tipo_alergica?:string;
+  bautizo:string;
+  comunion:string;
+  confirmacion:string;
+  repitiente:string;
+  procedencia:string;
+  tipo_institucion:string;
+  solvencia:string;
+  canaima:string;
+  serial:string;
+  beca:string;
+  mensualidad:number|null;
+}

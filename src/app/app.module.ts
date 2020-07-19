@@ -1,0 +1,36 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { InicioComponent } from './components/usuarios/inicio/inicio.component';
+import { HeaderUsuarioComponent } from './components/usuarios/header-usuario/header-usuario.component';
+import { MenuUsuarioComponent } from './components/usuarios/menu-usuario/menu-usuario.component';
+import { FooterUsuarioComponent } from './components/usuarios/footer-usuario/footer-usuario.component';
+import { SharedService } from './services/shared/shared.service';
+
+import { InterceptorPrimary } from './services/interceptor/interceptor-principal.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LoginService } from './services/login/login.service';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    InicioComponent,
+    HeaderUsuarioComponent,
+    MenuUsuarioComponent,
+    FooterUsuarioComponent,
+
+  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule],
+  providers: [
+    SharedService,
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: InterceptorPrimary, multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}

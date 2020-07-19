@@ -1,0 +1,307 @@
+<div class="container login pt-4 mt-3">
+  <form #formularioLogin="ngForm" class="was-validated" (ngSubmit)="formRegistro(formularioLogin.form)">
+    <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
+    <fieldset>
+      <legend>Datos del estudiante</legend>
+      <div class="row">
+
+
+
+        <div class="col-sm-6 form-group">
+          <label for="tipo_solicitud">Tipo de registro: *</label>
+          <select name="tipo_solicitud" #tipoSolicitud="ngModel" [(ngModel)]="formModel.tipo_solicitud"  class="form-control" placeholder="Tipo de registro" required (ngModelChange)="cambiado($event)">
+            <option value="" selected disabled>Seleccione un registro</option>
+            <option value="Nuevo ingreso">Nuevo ingreso</option>
+            <option value="Ratificación">Ratificación</option>
+            <option value="Prescolar">Prescolar</option>
+
+          </select>
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <label for="grado_solicitud">Solicitud: *</label>
+          <select name="grado_solicitud" class="form-control"  required #gradoSolicitud="ngModel" [(ngModel)]="formModel.grado_solicitud" (change)="evitarCambiado($event)">
+            <option value="" disabled selected>Seleccione un grado</option>
+
+              <option  [value]="gra" *ngFor="let gra of grados" >{{gra}}</option>
+
+          </select>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="nacionalidad_estudiante">Nacionalidad: *</label>
+
+          <select name="nacionalidad_estudiante"  class="form-control" required [(ngModel)]="formModel.nacionalidad_estudiante" #nacionalidadEstudiante="ngModel">
+            <option value="" disabled selected>Seleccione una nacionalidad</option>
+            <option *ngFor="let nacio of nacionalidad" [value]="nacio.letraIdentificacion">{{nacio.identificacion}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="cedula_estudiante">Cedula: *</label>
+          <input [disabled]="formModel.nacionalidad_estudiante === ''" [cedula]="{tipo:'estudiante', nacionalidad:formModel.nacionalidad_estudiante}" [ngModelOptions]="{updateOn:'blur'}" maxlength="11"
+          required autocomplete="off" type="text" class="form-control" name="cedula_estudiante"  placeholder="Ej: 12345678" [(ngModel)]="formModel.cedula_estudiante" #cedulaEstudiante="ngModel" pattern="[0-9]+" />
+        </div>
+
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="nombres_estudiante">Nombres: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="nombres_estudiante" placeholder="Ej: Angelica de los Angeles" [disabled]="existeEstudiante" [(ngModel)]="formModel.nombres_estudiante" #nombresEstudiante="ngModel" />
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="apellidos_estudiante">Apellidos: *</label>
+          <input required
+          autocomplete="off"
+          [(ngModel)]="formModel.apellidos_estudiante" #apellidosEstudiante="ngModel"
+            type="text"
+            class="form-control"
+            name="apellidos_estudiante"
+            placeholder="Ej: Hernandez Fernandez"
+            [disabled]="existeEstudiante"
+          />
+        </div>
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="lugar_nacimiento">Lugar de nacimiento: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="lugar_nacimiento" placeholder="Ej: Coro"  [disabled]="existeEstudiante" [(ngModel)]="formModel.lugar_nacimiento" #lugarNacimiento="ngModel"/>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="fecha_nacimiento">Fecha de nacimiento: *</label>
+          <input required autocomplete="off" type="date" class="form-control" name="fecha_nacimiento"   [disabled]="existeEstudiante" [(ngModel)]="formModel.fecha_nacimiento" #fechaNacimiento="ngModel"/>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="estado">Estado: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="estado" placeholder="Ej: Falcón" [disabled]="existeEstudiante" [(ngModel)]="formModel.estado" #estado="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="pais">Pais: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="pais" placeholder="Ej: Venezuela" [disabled]="existeEstudiante" [(ngModel)]="formModel.pais" #pais="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="lateralidad">lateralidad: *</label>
+          <select class="form-control" [disabled]="existeEstudiante" [(ngModel)]="formModel.lateralidad" #lateralidad="ngModel" name="lateralidad" required >
+            <option value="" disabled selected >Seleccione una lateralidad</option>
+            <option *ngFor="let latera of lateraldad" [value]="latera">{{latera}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="email_estudiante">Email:</label>
+          <input autocomplete="off" type="email" class="form-control" name="email_estudiante" placeholder="Ej: ejemplo@ejempo.com" [disabled]="existeEstudiante" [(ngModel)]="formModel.email_estudiante" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" #emailEstudiante="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="celular_estudiante">Celular: </label>
+          <input [disabled]="existeEstudiante" type="text" name="celular_estudiante" class="form-control" #celularEstudiante="ngModel" [(ngModel)]="formModel.celular_estudiante" pattern="[0-9]+" placeholder="Ej: 04160000000">
+        </div>
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="sangre_estudiante">Tipo de sangre: </label>
+          <select name="sangre_estudiante" class="form-control" #sangreEstudiante="ngModel" [(ngModel)]="formModel.sangre_estudiante" [disabled]="existeEstudiante">
+            <option value="">Seleccione tipo de sangre</option>
+            <option *ngFor="let sangre of tipoSangre" [value]="sangre">{{sangre}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="factor_rh">Factor Rh: </label>
+          <select [(ngModel)]="formModel.factor_rh" #factorRh="ngModel" name="factor_rh" class="form-control" [disabled]="existeEstudiante">
+            <option value="" selected>Seleccione un Factor Rh</option>
+            <option *ngFor="let factor of factorRH" [value]="factor"> {{factor}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group" *ngIf="formModel.tipo_solicitud === 'Prescolar'">
+          <label for="guarderia">Guarderia: </label>
+          <input type="text" name="guarderia" class="form-control" #guarderia="ngModel" placeholder="" [(ngModel)]="formModel.guarderia" [disabled]="existeEstudiante">
+        </div>
+
+      </div>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Datos del representante</legend>
+      <div class="row">
+
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="nacionalidad_representante">Nacionalidad: *</label>
+          <select name="nacionalidad_representante"  class="form-control" required [(ngModel)]="formModel.nacionalidad_representante" #nacionalidadRepresentante="ngModel">
+            <option value="" disabled selected>Seleccione una nacionalidad</option>
+            <option *ngFor="let nacio of nacionalidad" [value]="nacio.letraIdentificacion">{{nacio.identificacion}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="cedula_representante">Cedula: *</label>
+          <input [disabled]="formModel.nacionalidad_representante === ''" [cedula]="{tipo:'representante', nacionalidad:formModel.nacionalidad_representante}" required autocomplete="off" type="text" class="form-control" name="cedula_representante" placeholder="Ej: 00000000" [(ngModel)]="formModel.cedula_representante" pattern="[0-9]+" #cedulaRepresentante="ngModel" [ngModelOptions]="{updateOn:'blur'}" maxlength="11" />
+        </div>
+
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="nombres_representante">Nombres: *</label>
+          <input autocomplete="off" type="text" class="form-control" name="nombres_representante" placeholder="Ej: Angela Maritza" required [disabled]="existeRepresentante" [(ngModel)]="formModel.nombres_representante" #nombresRepresentante="ngModel"  />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="apellidos_representante">Apellidos: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="apellidos_representante" placeholder="Ej: Hernandez Suarez" [disabled]="existeRepresentante" [(ngModel)]="formModel.apellidos_representante" #apellidosRepresentante="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="parentesco">Parentesco: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="parentesco" placeholder="Ej: Padre, Madre"  [disabled]="existeRepresentante" [(ngModel)]="formModel.parentesco" #parentesco="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="celular_representante">Celular: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="celular_representante" placeholder="04140000000"  [disabled]="existeRepresentante" [(ngModel)]="formModel.celular_representante" #celularRepresentante="ngModel" pattern="[0-9]+" maxlength="11"/>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="email">Email: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="email"  placeholder="Ej: ejemplo@ejemplo.com" [disabled]="existeRepresentante" [(ngModel)]="formModel.email" #email="ngModel" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="ocupacion_representante">Ocupación: *</label>
+          <input required autocomplete="off" type="text" class="form-control" name="ocupacion_representante" placeholder="Ej: Vendedor" [disabled]="existeRepresentante" [(ngModel)]="formModel.ocupacion_representante" #ocupacionRepresentante="ngModel" />
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="tlf_representante">Telefono:</label>
+          <input autocomplete="off" type="text" class="form-control" name="tlf_representante"  placeholder="Ej: 0243000000" [disabled]="existeRepresentante" [(ngModel)]="formModel.tlf_representante" #tlfRepresentante="ngModel" pattern="[0-9]+"  maxlength="11"/>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Datos para inicio de sesión</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="inicioSesion">Usuario:</label>
+          <input autocomplete="off" name="inicioSesion" type="text" class="form-control" placeholder="Ej: V000000" disabled [ngModel]="formModel.cedula_estudiante"/>
+        </div>
+        <div class="col-md-6">
+          <label for="password">Contraseña: *</label>
+          <input autocomplete="off" required name="password" type="password" class="form-control" placeholder="Escriba su contraseña" [(ngModel)]="formModel.password" #password="ngModel"/>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="col-12" >
+      <div class="alert alert-danger alertFixed" *ngIf="formularioLogin.invalid && formularioLogin.touched">
+
+        <small class="d-block" *ngIf="tipoSolicitud.invalid && tipoSolicitud.touched">
+          {{sharedSvc.validarCampos(tipoSolicitud, 'El tipo de solicitud es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="gradoSolicitud.invalid && gradoSolicitud.touched">
+          {{sharedSvc.validarCampos(gradoSolicitud, 'El grado que cursara el estudiante es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="nombresEstudiante.invalid && nombresEstudiante.touched">
+          {{sharedSvc.validarCampos(nombresEstudiante, 'El nombre del estudiante es requerido')}}
+
+        </small>
+        <small class="d-block" *ngIf="apellidosEstudiante.invalid && apellidosEstudiante.touched">
+          {{sharedSvc.validarCampos(apellidosEstudiante, 'El apellido del estudiante es requerido')}}
+        </small>
+        <small class="d-block" *ngIf="nacionalidadEstudiante.invalid && nacionalidadEstudiante.touched">
+          {{sharedSvc.validarCampos(nacionalidadEstudiante, 'La nacionalidad del estudiante es requerido')}}
+        </small>
+        <small class="d-block" *ngIf="cedulaEstudiante.invalid && cedulaEstudiante.touched">
+          {{sharedSvc.validarCampos(cedulaEstudiante, 'La cedula de la estudiante es requerido', 'La cedula de la estudiante solo acepta caracteres numericos')}}
+        </small>
+
+        <small class="d-block" *ngIf="lugarNacimiento.invalid && lugarNacimiento.touched">
+          {{sharedSvc.validarCampos(lugarNacimiento, 'El lugar de nacimiento es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="lugarNacimiento.invalid && lugarNacimiento.touched">
+          {{sharedSvc.validarCampos(lugarNacimiento, 'La fecha de nacimiento es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="estado.invalid && estado.touched">
+          {{sharedSvc.validarCampos(estado, 'El estado es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="pais.invalid && pais.touched">
+          {{sharedSvc.validarCampos(pais, 'El pais es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="emailEstudiante.invalid && emailEstudiante.touched">
+          {{sharedSvc.validarCampos(emailEstudiante, '', 'Ingrese un email con el formato valido Ej: ejemplo@ejemplo.com')}}
+        </small>
+
+        <small class="d-block" *ngIf="lateralidad.invalid && lateralidad.touched">
+          {{sharedSvc.validarCampos(lateralidad, 'La laterialidad es requerido')}}
+        </small>
+
+        <!-- REPRESENTANTE -->
+
+        <small class="d-block" *ngIf="nombresRepresentante.invalid && nombresRepresentante.touched">
+          {{sharedSvc.validarCampos(nombresRepresentante, 'El nombre del representante es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="apellidosRepresentante.invalid && apellidosRepresentante.touched">
+          {{sharedSvc.validarCampos(apellidosRepresentante, 'El apellido del representante es requerido')}}
+        </small>
+
+
+        <small class="d-block" *ngIf="nacionalidadRepresentante.invalid && nacionalidadRepresentante.touched">
+          {{sharedSvc.validarCampos(nacionalidadRepresentante, 'La nacionalidad del representante es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="cedulaRepresentante.invalid && cedulaRepresentante.touched">
+          {{sharedSvc.validarCampos(cedulaRepresentante, 'La cedula del representante es requerido', 'La cedula del representante solo acepta caracteres numericos')}}
+        </small>
+
+        <small class="d-block" *ngIf="parentesco.invalid && parentesco.touched">
+          {{sharedSvc.validarCampos(parentesco, 'El parentesco es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="celularRepresentante.invalid && celularRepresentante.touched">
+          {{sharedSvc.validarCampos(celularRepresentante, 'El celular del representante es requerido', 'El celular del representante solo acepta caracteres numericos')}}
+        </small>
+
+        <small class="d-block" *ngIf="email.invalid && email.touched">
+          {{sharedSvc.validarCampos(email, 'El email del representante es requerido', 'Ingrese un email con el formato valido Ej: ejemplo@ejemplo.com')}}
+        </small>
+
+        <small class="d-block" *ngIf="ocupacionRepresentante.invalid && ocupacionRepresentante.touched">
+          {{sharedSvc.validarCampos(ocupacionRepresentante, 'La ocupación del representante es requerido')}}
+        </small>
+
+        <small class="d-block" *ngIf="password.invalid && password.touched">
+          {{sharedSvc.validarCampos(password, 'La contraseña es requerida')}}
+        </small>
+
+
+      </div>
+    </div>
+
+    <div class="form-group text-center ">
+      <button type="submit"  class="btn btn-primary mb-3 mt-3">
+        Registrar Estudiante
+      </button>
+    </div>
+  </form>
+</div>

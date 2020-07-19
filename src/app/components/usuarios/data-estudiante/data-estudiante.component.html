@@ -1,0 +1,249 @@
+<form #formularioData="ngForm" class="was-validated" (ngSubmit)="guardarData(formularioData.form)">
+  <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
+  <fieldset>
+    <legend>Identificación de la estudiante</legend>
+    <div class="row">
+      <div class="col-12 form-group">
+        <label for="ubicacion">Dirección de habitación: *</label>
+        <input type="text" [(ngModel)]="dataEstudiante.ubicacion" #ubicacion="ngModel" name="ubicacion" required  class="form-control" placeholder="Ej: Av. Principal de El Toro">
+      </div>
+
+      <div class="col-md-4 col-lg-6 form-group">
+        <label for="zona">Zona de ubicación: *</label>
+        <select [(ngModel)]="dataEstudiante.zona" #zona="ngModel" name="zona" required class="form-control">
+          <option value="" selected disabled>Seleccione la zona de ubicación</option>
+
+
+            <option *ngFor="let zonaUbi of zonaUbicacion" [value]="zonaUbi">{{zonaUbi}}</option>
+
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-6 form-group">
+        <label for="sector">Urbanización / sector: *</label>
+        <input [(ngModel)]="dataEstudiante.sector" name="sector" #sector="ngModel" required class="form-control" placeholder="Sector de la habitación">
+      </div>
+
+      <div class="col-md-4 col-lg-4 form-group">
+        <label for="municipio">Municipio: *</label>
+        <select [(ngModel)]="dataEstudiante.municipio" name="municipio" #municipio="ngModel" required class="form-control">
+          <option value="" selected disabled>Seleccione un municipio</option>
+          <option *ngFor="let muni of municipios" [value]="muni">{{muni}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-4 form-group">
+        <label for="parroquia">Parroquia: *</label>
+        <select [(ngModel)]="dataEstudiante.parroquia" name="parroquia" #parroquia="ngModel" required class="form-control">
+          <option value="" selected disabled>Seleccione una parroquia</option>
+          <ng-container *ngFor="let parroquia of parroquias; let i = index" >
+            <optgroup [label]="'Parroquia '+municipios[i]">
+              <option *ngFor="let oneParroquia of parroquia" [value]="oneParroquia">{{oneParroquia}}</option>
+            </optgroup>
+          </ng-container>
+        </select>
+      </div>
+
+
+      <div class="col-md-4 col-lg-4 form-group">
+        <label for="tlf_habitacion">Tlf Habitacion: </label>
+        <input type="text" [(ngModel)]="dataEstudiante.tlf_habitacion" name="tlf_habitacion" #tlfHabitacion="ngModel" class="form-control" placeholder="Ej: 0294000000" pattern="[0-9]+">
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group">
+        <label for="enfermedad">Padece alguna enfermedad? *</label>
+
+        <select required [(ngModel)]="dataEstudiante.enfermedad" name="enfermedad" #enfermedad="ngModel" class="form-control" placeholder="0294000000">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="dataEstudiante.enfermedad === 'Si'">
+        <label for="tipo_enfermedad">¿Cual? </label>
+        <input [required]="dataEstudiante.enfermedad === 'Si'" type="text" [(ngModel)]="dataEstudiante.tipo_enfermedad" name="tipo_enfermedad" #tipoEnfermedad="ngModel" class="form-control" placeholder="Ej: Anemia" >
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group">
+        <label for="alergica">¿Es alérgica? *</label>
+        <select required [(ngModel)]="dataEstudiante.alergica" name="alergica" #alergica="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="dataEstudiante.alergica === 'Si'">
+        <label for="tipo_alergica">¿A? </label>
+        <input [required]="dataEstudiante.alergica === 'Si'" type="text" [(ngModel)]="dataEstudiante.tipo_alergica" name="tipo_alergica" #tipoAlergica="ngModel" class="form-control" placeholder="Ej: Polvo" >
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="bautizo">Bautizo: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.bautizo" name="bautizo" #bautizo="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="comunion">1Era comunión: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.comunion" name="comunion" #comunion="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="confirmacion">Confirmación: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.confirmacion" name="confirmacion" #confirmacion="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group"  [ngClass]="{'col-lg-6':(dataEstudiante.alergica === 'Si' && dataEstudiante.enfermedad !== 'Si') || (dataEstudiante.alergica !== 'Si' && dataEstudiante.enfermedad === 'Si')}">
+        <label for="repitiente">Repitiente: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.repitiente" name="repitiente" #repitiente="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+
+      <div class="col-md-4 col-lg-6 form-group" >
+        <label for="procedencia">Procedencia: *</label>
+        <input required type="text" [(ngModel)]="dataEstudiante.procedencia" name="procedencia" #procedencia="ngModel" class="form-control" placeholder="Ej: U.E.P. Santa Marta">
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="tipo_institucion">Tipo de procedencia: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.tipo_institucion" name="tipo_institucion" #tipo_institucion="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option *ngFor="let tipo of tipoinstitucion" [value]="tipo">{{tipo}}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="solvencia">N° de Solvencia administrativa: *</label>
+        <input required type="text" [(ngModel)]="dataEstudiante.solvencia" name="solvencia" #solvencia="ngModel" class="form-control" placeholder="Indique la solvencia">
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="canaima">Tiene Canaima: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.canaima" name="canaima" #canaima="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="serial">Serial: </label>
+        <input  type="text" [(ngModel)]="dataEstudiante.serial" name="serial" #serial="ngModel" class="form-control" placeholder="Indique el serial">
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="serial">Goza de beca?: *</label>
+        <select required type="text" [(ngModel)]="dataEstudiante.beca" name="beca" #beca="ngModel" class="form-control">
+          <option value="" selected disabled>Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 col-lg-3 form-group" >
+        <label for="mensualidad">Monto que pagaba Bs: </label>
+        <input  type="number" [(ngModel)]="dataEstudiante.mensualidad" name="mensualidad" #mensualidad="ngModel" class="form-control" placeholder="Indique el monto que pagaba">
+      </div>
+
+
+
+
+      <div class="col-12" >
+        <div class="alert alert-danger alertFixed" *ngIf="formularioData.invalid && formularioData.touched">
+
+          <small class="d-block" *ngIf="ubicacion.invalid && ubicacion.touched">
+            {{sharedSvc.validarCampos(ubicacion, 'La ubicación es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="zona.invalid && zona.touched">
+            {{sharedSvc.validarCampos(zona, 'La zona de ubicación es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="sector.invalid && sector.touched">
+            {{sharedSvc.validarCampos(sector, 'La urbanización / sector es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="municipio.invalid && municipio.touched">
+            {{sharedSvc.validarCampos(municipio, 'El Municipio es requerido')}}
+          </small>
+
+          <small class="d-block" *ngIf="parroquia.invalid && parroquia.touched">
+            {{sharedSvc.validarCampos(parroquia, 'La parroquia es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="enfermedad.invalid && enfermedad.touched">
+            {{sharedSvc.validarCampos(enfermedad, 'Seleccione si padece alguna enfermedad')}}
+          </small>
+
+          <small class="d-block" *ngIf="alergica.invalid && alergica.touched">
+            {{sharedSvc.validarCampos(alergica, 'Seleccione si es alergica')}}
+          </small>
+
+          <small class="d-block" *ngIf="bautizo.invalid && bautizo.touched">
+            {{sharedSvc.validarCampos(bautizo, 'Seleccione si se ha bautizado')}}
+          </small>
+
+          <small class="d-block" *ngIf="confirmacion.invalid && confirmacion.touched">
+            {{sharedSvc.validarCampos(confirmacion, 'Seleccione si se ha realizado la confirmación')}}
+          </small>
+
+          <small class="d-block" *ngIf="comunion.invalid && comunion.touched">
+            {{sharedSvc.validarCampos(comunion, 'Seleccione si ha realizado la primera comunion')}}
+          </small>
+
+          <small class="d-block" *ngIf="repitiente.invalid && repitiente.touched">
+            {{sharedSvc.validarCampos(repitiente, 'Seleccione si es repitiente')}}
+          </small>
+
+          <small class="d-block" *ngIf="procedencia.invalid && procedencia.touched">
+            {{sharedSvc.validarCampos(procedencia, 'La procedencia es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="tipo_institucion.invalid && tipo_institucion.touched">
+            {{sharedSvc.validarCampos(tipo_institucion, 'Seleccione el tipo de institución')}}
+          </small>
+
+          <small class="d-block" *ngIf="solvencia.invalid && solvencia.touched">
+            {{sharedSvc.validarCampos(solvencia, 'La solvencia es requerida')}}
+          </small>
+
+          <small class="d-block" *ngIf="canaima.invalid && canaima.touched">
+            {{sharedSvc.validarCampos(canaima, 'Seleccione si posée canaima')}}
+          </small>
+
+
+        </div>
+      </div>
+
+
+
+
+      <div class="text-center col-12 my-3">
+        <button type="submit" class="btn btn-primary">
+          Guardar y continuar
+        </button>
+      </div>
+
+    </div>
+  </fieldset>
+
+
+
+</form>

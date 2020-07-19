@@ -1,0 +1,61 @@
+<section class="menuPrincipal">
+  <div class="container">
+    <nav class="navbarPrincipal">
+      <ul class="navbarPrincipal__lista">
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/inicio']"
+          routerLinkActive="menuActivo"
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Inicio</a>
+        </li>
+
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/formularios']"
+          routerLinkActive="menuActivo"
+
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Formularios</a>
+        </li>
+
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/registro']"
+          routerLinkActive="menuActivo"
+
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Registro</a>
+        </li>
+
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/login']"
+          routerLinkActive="menuActivo"
+
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Login</a>
+        </li>
+
+        <li class="navbarPrincipal__item"
+        (click)="cerrarSession()"
+        >
+          <a class="text-decoration-none navbarPrincipal__link"
+            >Cerrar Sesión</a
+          >
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="stepPagina">
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12">
+        <h2 class="m-0 display-5">{{ paginaActual }}</h2>
+      </div>
+    </div>
+  </div>
+</section>

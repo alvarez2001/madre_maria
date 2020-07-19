@@ -1,0 +1,75 @@
+<form #formularioData="ngForm" class="was-validated" (ngSubmit)="guardarData(formularioData.form)">
+  <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
+  <fieldset>
+    <legend>Hermanas que estudian en el plantel</legend>
+    <div class="row">
+
+      <div class="col-12 col-sm-6 col-md-3 form-group" >
+        <label for="grado">Grado / Año: </label>
+        <select name="grado" #grado="ngModel" [(ngModel)]="hermanas.grado" class="form-control">
+          <option value="" disabled selected>Seleccione el grado</option>
+          <option *ngFor="let grad of grados" [value]="grad">{{grad}}</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-9 form-group"  >
+        <label for="fullname">Apellidos y Nombres: </label>
+        <input type="text" [(ngModel)]="hermanas.fullname" #fullname="ngModel" name="fullname"  class="form-control" placeholder="Ej: Lopez Hernandez Daniela de los Angeles">
+      </div>
+
+      <div class="form-group col-12 text-center">
+        <button type="button" class="btn btn-success px-3" (click)="anadirData(fullname.value,grado.value)">
+          Añadir
+        </button>
+      </div>
+
+
+      <div class="col-12 table-responsive">
+        <table class="table text-center table-striped">
+          <thead >
+            <th>Grado</th>
+            <th>Hermanas</th>
+            <th>Acciones</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dato of DatosEnviar; let i = index">
+              <td>{{dato.grado}}</td>
+              <td>{{dato.fullname}}</td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="eliminarData(i)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+      <!-- <div class="col-12" >
+        <div class="alert alert-danger alertFixed" *ngIf="formularioData.invalid && formularioData.touched">
+
+          <small class="d-block" *ngIf="ubicacion.invalid && ubicacion.touched">
+            {{sharedSvc.validarCampos(ubicacion, 'La ubicación es requerida')}}
+          </small>
+
+
+
+        </div>
+      </div> -->
+
+
+
+
+      <div class="text-center col-12 my-3">
+        <button type="submit" class="btn btn-primary">
+          Guardar y continuar
+        </button>
+      </div>
+
+    </div>
+  </fieldset>
+
+
+
+</form>
