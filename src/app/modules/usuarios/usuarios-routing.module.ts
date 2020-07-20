@@ -4,18 +4,20 @@ import { RegistroEstudianteComponent } from 'src/app/components/usuarios/registr
 import { LoginComponent } from 'src/app/components/usuarios/login/login.component';
 import { Formulario1Component } from 'src/app/components/usuarios/formulario1/formulario1.component';
 import { FormulariosComponent } from 'src/app/components/usuarios/formularios/formularios.component';
+import { HomeComponent } from 'src/app/components/usuarios/home/home.component';
+
 
 const routes: Routes = [
+  {
+    path:'',
+    component:HomeComponent,
+    data:{pagina:'Inicio'}
+  },
   {
     path:'formularios',
     loadChildren:()=>import('src/app/modules/formularios/formulario/formulario.module').then( m => m.FormularioModule),
     component:FormulariosComponent,
-    data:{pagina:'Procesos Académicos'}
-  },
-  {
-    path:'formularios/1',
-    component:Formulario1Component,
-    data:{pagina:'Formulario 1era parte'}
+    data:{pagina:'Procesos de Solicitud'}
   },
   {
     path: 'login',

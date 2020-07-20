@@ -7,8 +7,8 @@ import { RegistroEstudianteComponent } from 'src/app/components/usuarios/registr
 import { LoginComponent } from '../../components/usuarios/login/login.component';
 
 import { SharedModule } from '../shared/shared/shared.module';
-import { Formulario1Component } from '../../components/usuarios/formulario1/formulario1.component';
 import { FormulariosComponent } from '../../components/usuarios/formularios/formularios.component';
+import { HomeComponent } from '../../components/usuarios/home/home.component';
 
 
 
@@ -18,8 +18,8 @@ import { FormulariosComponent } from '../../components/usuarios/formularios/form
   declarations: [
     RegistroEstudianteComponent,
     LoginComponent,
-    Formulario1Component,
     FormulariosComponent,
+    HomeComponent,
 
 
   ],

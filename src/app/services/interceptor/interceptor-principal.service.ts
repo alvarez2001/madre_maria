@@ -9,6 +9,7 @@ import { throwError, Observable, from } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SharedService } from '../shared/shared.service';
 import { LoginService } from '../login/login.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class InterceptorPrimary implements HttpInterceptor {
@@ -43,6 +44,20 @@ export class InterceptorPrimary implements HttpInterceptor {
     } else if (err.status === 401) {
       console.log('error 401 ->', err);
       return throwError(`no estas autentificado`);
+    }
+    else if (err.status === 0){
+      Swal.fire({
+        title:'Ha ocurrido un error fatal',
+        text:'No se ha podido establecer conexión con el servidor, revise la conexión de internet.',
+        icon:'error'
+      });
+    }
+    else if(err.status === 500){
+      Swal.fire({
+        title:'Ha ocurrido un error inesperado',
+        text:'Comuniquese por email con el soporte tecnico',
+        icon:'error'
+      })
     }
     return throwError(err);
   }

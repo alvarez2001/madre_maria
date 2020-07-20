@@ -37,7 +37,7 @@
         <select [(ngModel)]="dataEstudiante.parroquia" name="parroquia" #parroquia="ngModel" required class="form-control">
           <option value="" selected disabled>Seleccione una parroquia</option>
           <ng-container *ngFor="let parroquia of parroquias; let i = index" >
-            <optgroup [label]="'Parroquia '+municipios[i]">
+            <optgroup [label]="'Municipio '+municipios[i]">
               <option *ngFor="let oneParroquia of parroquia" [value]="oneParroquia">{{oneParroquia}}</option>
             </optgroup>
           </ng-container>

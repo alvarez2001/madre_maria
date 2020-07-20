@@ -71,7 +71,6 @@ export class DatosPadreComponent implements OnInit {
     if(form.valid){
       this.incripSvc.asignarPadre(this.datosPadre).subscribe(res => {
         this.route.navigate(['/formularios']);
-        console.log(res)
         this.sharedSvc.mensajeSuccessAlerta(res)
       })
     }

@@ -173,3 +173,11 @@ z-index: 1000!important;
     padding: 10px 0;
   }
 }
+
+
+.imagenContenedor{
+  max-height: 25rem;
+  & .carousel-item img{
+    max-height: 25rem;
+  }
+}

@@ -4,8 +4,8 @@
       <ul class="navbarPrincipal__lista">
         <li
           class="navbarPrincipal__item"
-          [routerLink]="['/inicio']"
-          routerLinkActive="menuActivo"
+          [routerLink]="['/']"
+
         >
           <a class="text-decoration-none navbarPrincipal__link">Inicio</a>
         </li>
@@ -14,7 +14,7 @@
           class="navbarPrincipal__item"
           [routerLink]="['/formularios']"
           routerLinkActive="menuActivo"
-
+          *ngIf="existeUsuario"
         >
           <a class="text-decoration-none navbarPrincipal__link">Inscripción</a>
         </li>
@@ -23,7 +23,7 @@
           class="navbarPrincipal__item"
           [routerLink]="['/registro']"
           routerLinkActive="menuActivo"
-
+          *ngIf="!existeUsuario"
         >
           <a class="text-decoration-none navbarPrincipal__link">Registro</a>
         </li>
@@ -32,13 +32,14 @@
           class="navbarPrincipal__item"
           [routerLink]="['/login']"
           routerLinkActive="menuActivo"
-
+          *ngIf="!existeUsuario"
         >
           <a class="text-decoration-none navbarPrincipal__link">Login</a>
         </li>
 
         <li class="navbarPrincipal__item"
         (click)="cerrarSession()"
+        *ngIf="existeUsuario"
         >
           <a class="text-decoration-none navbarPrincipal__link"
             >Cerrar Sesión</a

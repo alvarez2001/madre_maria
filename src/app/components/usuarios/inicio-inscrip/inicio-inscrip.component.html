@@ -1,36 +1,64 @@
 <h2 class="text-center">
-  Proceso academico actual
+  Proceso de planilla actual
 </h2>
 
 <div class="row py-4">
   <div class="col-12 col-md-8">
     <div class="list-group">
-      <a [routerLink]="['datos-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action ">
+      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 1, 'disabled': current !== 1}">
+        Datos del representante
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 1,
+          'badge-info':current === 1,
+          'badge-success': current > 1
+        }">{{textoCurrent(1)}}</span>
+      </a>
+      <a [routerLink]="['datos-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action " [ngClass]="{'active': current === 2, 'disabled': current !== 2}">
         Datos de la estudiante
-        <span class="badge badge-success badge-pill">Completado</span>
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 2,
+          'badge-info':current === 2,
+          'badge-success': current > 2
+        }">{{textoCurrent(2)}}</span>
       </a>
-      <a [routerLink]="['datos-padre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+      <a [routerLink]="['datos-padre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 3, 'disabled': current !== 3}">
         Datos del padre
-        <span class="badge badge-success badge-pill">Completado</span>
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 3,
+          'badge-info':current === 3,
+          'badge-success': current > 3
+        }">{{textoCurrent(3)}}</span>
       </a>
-      <a [routerLink]="['datos-madre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+      <a [routerLink]="['datos-madre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 4, 'disabled': current !== 4}">
         Datos de la madre
-        <span class="badge badge-success badge-pill">Completado</span>
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 4,
+          'badge-info':current === 4,
+          'badge-success': current > 4
+        }">{{textoCurrent(4)}}</span>
       </a>
-      <a [routerLink]="['hermanas-plantel']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action active" >
-        Hermanas en el plantel
-        <span class="badge badge-info badge-pill">Ingresar información</span>
+      <a [routerLink]="['hermanas-plantel']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"  [ngClass]="{'active': current === 5, 'disabled': current !== 5}">
+        Hermanas en el plantel - Estructura familiar
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 5,
+          'badge-info':current === 5,
+          'badge-success': current > 5
+        }">{{textoCurrent(5)}}</span>
       </a>
 
-      <a [routerLink]="['direcciones-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" >
+      <a [routerLink]="['direcciones-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 6, 'disabled': current !== 6}">
         Caso de emergencia - tipo de vivienda - medio de transporte
-        <span class="badge badge-warning badge-pill">Pendiente</span>
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 6,
+          'badge-info':current === 6,
+          'badge-success': current > 6
+        }">{{textoCurrent(6)}}</span>
       </a>
     </div>
   </div>
   <div class="col-12 col-md-4 text-center m-auto">
     <circle-progress
-    [percent]="current"
+    [percent]="porcentaje"
     [backgroundStrokeWidth]="1"
     [backgroundStroke]="'#000'"
     [maxPercent]="100"

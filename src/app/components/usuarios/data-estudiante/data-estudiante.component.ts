@@ -4,6 +4,7 @@ import { ubicacion, municipios, parroquias, tipoInstitucion } from 'src/app/cons
 import { FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-estudiante',
@@ -17,7 +18,7 @@ export class DataEstudianteComponent implements OnInit {
   municipios:string[];
   parroquias:any[];
   tipoinstitucion : string[];
-  constructor(public sharedSvc:SharedService, private incripSvc:IncripcionService) {
+  constructor(public sharedSvc:SharedService, private incripSvc:IncripcionService, private router:Router) {
     this.zonaUbicacion = ubicacion;
     this.municipios = municipios;
     this.parroquias = parroquias;
@@ -54,7 +55,7 @@ export class DataEstudianteComponent implements OnInit {
     if(form.valid){
       this.sharedSvc.lanzarCarga(true)
       this.incripSvc.IdentificacionEstudiante(this.dataEstudiante).subscribe(
-        res => this.sharedSvc.lanzarCarga(false),
+        res => {this.sharedSvc.lanzarCarga(false), this.router.navigate(['/formularios'])},
         err => this.sharedSvc.lanzarCarga(false)
       )
     }

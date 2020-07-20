@@ -11,6 +11,7 @@ import { HermanaModel, EstructuraClass } from 'src/app/models';
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
 import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-datos-hermanas',
@@ -25,7 +26,7 @@ export class DatosHermanasComponent implements OnInit {
   segundoFormGroup: FormGroup;
   firstFormGroup: FormGroup;
   terceroFormGroup: FormGroup;
-  constructor(private route:Router,private fb: FormBuilder, private incripSvc:IncripcionService) {
+  constructor(private route:Router,private fb: FormBuilder, private incripSvc:IncripcionService, private sharedSvc:SharedService) {
     /* INICIOS VARIABLES */
     this.parentesco = parentesco;
     this.grados = Grados;
@@ -80,8 +81,8 @@ export class DatosHermanasComponent implements OnInit {
     const datosTransform = EstructuraFamiliarClass.EstructuraFamiliarObj(datos);
     console.log(datosTransform);
     this.incripSvc.registrarDatosFamiliares(datosTransform).subscribe(res => {
-      console.log(res)
-      //this.route.navigate(['/formularios']);
+      this.sharedSvc.mensajeSuccessAlerta(res)
+      this.route.navigate(['/formularios']);
     })
   }
 

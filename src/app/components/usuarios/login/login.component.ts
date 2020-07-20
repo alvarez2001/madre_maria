@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { FormGroup } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -15,11 +15,13 @@ export class LoginComponent implements OnInit {
 
   formLogin:LoginModel;
 
-  constructor(private route:ActivatedRoute, private sharedSvc:SharedService, private loginSvc:LoginService) {
+
+  constructor(private route:ActivatedRoute,private router:Router, private sharedSvc:SharedService, private loginSvc:LoginService) {
     this.formLogin = {
       cedula:'',
       password:''
     }
+
    }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.sharedSvc.lanzarCarga(true);
       this.loginSvc.loginEstudiante(this.formLogin).subscribe(res => {
+        this.router.navigate(['/formularios'])
         this.sharedSvc.lanzarCarga(false);
       },err => {this.sharedSvc.lanzarCarga(false)})
     }

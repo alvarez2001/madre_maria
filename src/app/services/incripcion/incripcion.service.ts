@@ -9,6 +9,7 @@ import { SharedService } from '../shared/shared.service';
 import { CedulaModel } from './cedula.model';
 import Swal from 'sweetalert2';
 import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
+import { PasoSolicitud } from 'src/app/models';
 
 @Injectable()
 export class IncripcionService {
@@ -30,13 +31,19 @@ export class IncripcionService {
     return this.http.post(this.url+'add/datos/estructura/familiar/'+this.idEstudiante,data).pipe(
       map(data => {
         this.sharedSvc.lanzarCarga(false);
-        console.log(data)
         return data
       })
     )
   }
 
 
+  /* VERIFICAR PASO DE LA SOLICITUD DEL ESTUDIANTE */
+
+  procesoSolicitud():Observable<PasoSolicitud>{
+    return this.http.get<PasoSolicitud>(this.url+'consulta/paso/solicitud/'+this.idEstudiante).pipe(
+      map(paso => PasoSolicitud.pasoSolicitudObj(paso))
+    )
+  }
 
 
   /* PASOS 1 Y 2 CREO ( OJO ) */
