@@ -1,75 +1,310 @@
-<form #formularioData="ngForm" class="was-validated" (ngSubmit)="guardarData(formularioData.form)">
-  <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
-  <fieldset>
-    <legend>Hermanas que estudian en el plantel</legend>
-    <div class="row">
+<div>
+  <small class="text-danger col-12"
+    >Los campos marcados con ( * ) son requeridos</small
+  >
 
-      <div class="col-12 col-sm-6 col-md-3 form-group" >
-        <label for="grado">Grado / Año: </label>
-        <select name="grado" #grado="ngModel" [(ngModel)]="hermanas.grado" class="form-control">
-          <option value="" disabled selected>Seleccione el grado</option>
-          <option *ngFor="let grad of grados" [value]="grad">{{grad}}</option>
-        </select>
-      </div>
+  <!-- ESTRUCTURA FAMILIAR ( OTRAS PERSONAS QUE RESIDEN EN EL HOGAR ) -->
 
-      <div class="col-12 col-sm-6 col-md-9 form-group"  >
-        <label for="fullname">Apellidos y Nombres: </label>
-        <input type="text" [(ngModel)]="hermanas.fullname" #fullname="ngModel" name="fullname"  class="form-control" placeholder="Ej: Lopez Hernandez Daniela de los Angeles">
-      </div>
+  <mat-horizontal-stepper linear #linear>
+    <!-- HERMANAS QUE ESTUDIAN EN EL PLANTEL -->
+    <mat-step [stepControl]="firstFormGroup" optional>
+      <form   [formGroup]="firstFormGroup" class="was-validated" (ngSubmit)="anadirData(firstFormGroup.value.fullname,firstFormGroup.value.grado)">
+        <ng-template matStepLabel
+          >Hermanas que estudian en el plantel</ng-template
+        >
 
-      <div class="form-group col-12 text-center">
-        <button type="button" class="btn btn-success px-3" (click)="anadirData(fullname.value,grado.value)">
-          Añadir
-        </button>
-      </div>
+        <!-- HERMANAS QUE ESTUDIAN EN EL PLANTEL -->
 
+        <fieldset>
+          <legend>Hermanas que estudian en el plantel</legend>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3 form-group">
+              <label for="grado">Grado / Año: </label>
+              <select
+                formControlName="grado"
+                class="form-control"
+              >
+                <option value="" disabled selected>Seleccione el grado</option>
+                <option *ngFor="let grad of grados" [value]="grad">{{
+                  grad
+                }}</option>
+              </select>
+            </div>
 
-      <div class="col-12 table-responsive">
-        <table class="table text-center table-striped">
-          <thead >
-            <th>Grado</th>
-            <th>Hermanas</th>
-            <th>Acciones</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dato of DatosEnviar; let i = index">
-              <td>{{dato.grado}}</td>
-              <td>{{dato.fullname}}</td>
-              <td>
-                <button type="button" class="btn btn-danger" (click)="eliminarData(i)">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <div class="col-12 col-sm-6 col-md-9 form-group">
+              <label for="fullname">Apellidos y Nombres: </label>
+              <input
+                type="text"
+                formControlName="fullname"
+                name="fullname"
+                class="form-control"
+                placeholder="Ej: Lopez Hernandez Daniela de los Angeles"
+              />
+            </div>
 
+            <div class="form-group col-12 text-center">
+              <button
+                type="submit"
+                class="btn btn-success px-3"
+              >
+                Añadir hermana
+              </button>
+            </div>
 
+            <div class="col-12 table-responsive">
+              <table class="table text-center table-striped">
+                <thead>
+                  <th>Grado</th>
+                  <th>Hermanas</th>
+                  <th>Acciones</th>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let dato of Hermanas.value; let i = index">
+                    <td>{{ dato.grado }}</td>
+                    <td>{{ dato.fullname }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="eliminarData(i)"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
+            <div class="col-12 text-center pt-3">
+              <button type="button" class="btn btn-secondary px-3" matStepperNext>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
 
-      <!-- <div class="col-12" >
-        <div class="alert alert-danger alertFixed" *ngIf="formularioData.invalid && formularioData.touched">
+    <!-- ESTRUCTURA FAMILIAR -->
 
-          <small class="d-block" *ngIf="ubicacion.invalid && ubicacion.touched">
-            {{sharedSvc.validarCampos(ubicacion, 'La ubicación es requerida')}}
-          </small>
+    <mat-step [stepControl]="segundoFormGroup">
+      <form [formGroup]="segundoFormGroup" class="was-validated" (ngSubmit)="anadirDataEstructura()">
+        <ng-template matStepLabel>Estructura familiar</ng-template>
+        <fieldset>
+          <legend>
+            Estructura familiar (Otras personas que residen en el hogar)
+          </legend>
+          <div class="row pb-2">
+            <div class="col-12 col-md-4 form-group">
+              <label for="nombre">Apellidos y Nombres: *</label>
+              <input
+                [required]="segundoFormGroup.value.estructura_familiar.length <= 0"
+                type="text"
+                class="form-control"
+                formControlName="nombres"
+                placeholder="Ej: Lopez Hernandez Daniela de los Angeles"
+              />
+            </div>
 
+            <div class="col-12 col-md-4 form-group">
+              <label for="parentesc">Parentesco: *</label>
+              <select [required]="segundoFormGroup.value.estructura_familiar.length <= 0" class="form-control" name="parentesc" formControlName="parentesco">
+                <option value="" selected disabled
+                  >Seleccione un parentesco</option
+                >
+                <option *ngFor="let paren of parentesco" [value]="paren">{{
+                  paren
+                }}</option>
+              </select>
+            </div>
 
+            <div class="col-12 col-md-4 form-group">
+              <label for="edad">Edad: *</label>
+              <input
+              [required]="segundoFormGroup.value.estructura_familiar.length <= 0"
+                type="text"
+                class="form-control"
+                name="edad"
+                min="0"
+                max="100"
+                pattern="[0-9]+"
+                maxlength="2"
+                placeholder="Ej: 03 ( 3 meses ) | 1 ( 1 Año )"
+                formControlName="edad"
+              />
+            </div>
 
-        </div>
-      </div> -->
+            <div class="col-12 col-md-4 form-group">
+              <label for="ocupacion">Ocupación: </label>
+              <input
+                type="text"
+                class="form-control"
+                name="ocupacion"
+                placeholder="Ej: Enfermero"
+                formControlName="ocupacion"
+              />
+            </div>
 
+            <div class="col-12 col-md-4 form-group">
+              <label for="ingresoSueldo">Ingreso o Sueldo: </label>
+              <input
+                formateadorMiles
+                type="text"
+                class="form-control"
+                name="ingresoSueldo"
+                placeholder="Ej: 3000000.12"
+                formControlName="ingreso"
+              />
+            </div>
 
+            <div class="col-12 col-md-4 form-group">
+              <label for="nivelGrado">Nivel o Grado: </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nivel"
+                name="nivelGrado"
+                placeholder="Ej: Primaria"
+              />
+            </div>
 
+            <div class="col-12 col-md-6 form-group">
+              <label for="institucion">Institución Educativa: </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="instituto"
+                name="instituto"
+                placeholder="Ej: U.E.I.A Madre María"
+              />
+            </div>
 
-      <div class="text-center col-12 my-3">
-        <button type="submit" class="btn btn-primary">
-          Guardar y continuar
-        </button>
-      </div>
+            <div class="col-12 col-md-6 form-group">
+              <label for="PagoMensualidad">Pago de Mensualidad: </label>
+              <input
+                formateadorMiles
+                type="text"
+                formControlName="mensualidad"
+                class="form-control"
+                name="PagoMensualidad"
+                placeholder="Ej: 3000000.12"
+              />
+            </div>
 
-    </div>
-  </fieldset>
+            <div class="form-group col-12 text-center">
+              <button type="submit" class="btn btn-success px-3">
+                Añadir familiar
+              </button>
+            </div>
 
+            <div class="col-12 table-responsive">
+              <table class="table text-center table-striped">
+                <thead>
+                  <th style="min-width: 200px;">Apellidos y Nombres</th>
+                  <th style="min-width: 90px;">Parentesco</th>
+                  <th style="min-width: 50px;">Edad</th>
+                  <th style="min-width: 150px;">Ocupación</th>
+                  <th style="min-width: 10px;">Ingreso o sueldo</th>
+                  <th style="min-width: 150px;">Nivel o grado</th>
+                  <th style="min-width: 200px;">Institución Educativa</th>
+                  <th style="min-width: 150px;">Pago de Mensualidad</th>
+                  <th style="min-width: 150px;">Acciones</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dato of EstructuraFamiliar.value; let i = index">
+                    <td>{{dato.nombres}}</td>
+                    <td>{{dato.parentesco}}</td>
+                    <td>{{dato.edad}}</td>
+                    <td>{{dato.ocupacion}}</td>
+                    <td>{{dato.ingreso | currency: 'Bs '}}</td>
+                    <td>{{dato.nivel }}</td>
+                    <td>{{dato.instituto }}</td>
+                    <td>{{dato.mensualidad | currency: 'Bs '}}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="eliminarDataEstructura(i)"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
+            <div class="col-12 text-center pt-3">
+              <button class="btn btn-secondary px-3 mx-1" matStepperPrevious type="button">
+                Anterior
+              </button>
+              <button class="btn btn-secondary px-3 mx-1" matStepperNext type="button">
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
 
-</form>
+    <!-- NUMERO DE HERMANOS -->
+
+    <mat-step [stepControl]="terceroFormGroup">
+      <ng-template matStepLabel>Número de hermanos</ng-template>
+      <form [formGroup]="terceroFormGroup" class="was-validated" (ngSubmit)="guardarData()">
+        <fieldset>
+          <legend>Numero de hermanos(a)</legend>
+          <div class="row">
+            <div class="col-12 col-md-4 form-group">
+              <label for="numeroHermanos">Varones: *</label>
+              <input
+                type="text"
+                required
+                formControlName="hermanos"
+                class="form-control"
+                placeholder="Ej: 3"
+                pattern="[0-9]+"
+              />
+            </div>
+
+            <div class="col-12 col-md-4 form-group">
+              <label for="numeroHermanas">Hembras: *</label>
+              <input
+                type="text"
+                required
+                name="numeroHermanas"
+                formControlName="nro_hermanas"
+                class="form-control"
+                placeholder="Ej: 2"
+                pattern="[0-9]+"
+              />
+            </div>
+
+            <div class="col-12 col-md-4 form-group">
+              <label for="cuantosViven">Cuántos viven con ella? *</label>
+              <input
+                type="text"
+                required
+                formControlName="viven"
+                name="cuantosViven"
+                class="form-control"
+                placeholder="Ej: 5"
+                pattern="[0-9]+"
+              />
+            </div>
+
+            <div class="col-12 text-center pt-3">
+              <button class="btn btn-secondary px-3 mx-1" matStepperPrevious type="button">
+                Anterior
+              </button>
+              <button class="btn btn-success px-3 mx-1" [disabled]="firstFormGroup.invalid || segundoFormGroup.invalid || terceroFormGroup.invalid" type="submit" >
+                Guardar y continuar
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

@@ -208,3 +208,17 @@ export const frecuenciaViaje = [
   'Nunca'
 ]
 
+export const parentesco = [
+  'Padre',
+  'Padrastro',
+  'Madre',
+  'Madrastra',
+  'Abuelo',
+  'Abuela',
+  'Hermano',
+  'Hermana',
+  'Padrino',
+  'Madrina',
+  'Otros'
+];
+

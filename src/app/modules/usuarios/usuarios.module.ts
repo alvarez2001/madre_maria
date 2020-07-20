@@ -13,6 +13,7 @@ import { FormulariosComponent } from '../../components/usuarios/formularios/form
 
 
 
+
 @NgModule({
   declarations: [
     RegistroEstudianteComponent,
@@ -22,6 +23,6 @@ import { FormulariosComponent } from '../../components/usuarios/formularios/form
 
 
   ],
-  imports: [CommonModule, UsuariosRoutingModule, SharedModule]
+  imports: [CommonModule, UsuariosRoutingModule, SharedModule,]
 })
 export class UsuariosModule {}

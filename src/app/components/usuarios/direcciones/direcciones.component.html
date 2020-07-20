@@ -1,0 +1,33 @@
+<div>
+  <small class="text-danger col-12"
+    >Los campos marcados con ( * ) son requeridos</small
+  >
+
+  <mat-horizontal-stepper linear #linear>
+    <mat-step>
+
+      <form class="was-validated">
+        <ng-template matStepLabel
+        >Dirección en caso de emergencia</ng-template
+      >
+
+      <fieldset>
+        <legend>Dirección en caso de emergencia</legend>
+
+
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <label for="apellidosNombres">Apellidos y Nombres: *</label>
+            <input type="text" required name="apellidosNombres"  class="form-control">
+          </div>
+        </div>
+
+      </fieldset>
+
+
+
+      </form>
+
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

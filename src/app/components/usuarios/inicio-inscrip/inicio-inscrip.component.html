@@ -1,0 +1,55 @@
+<h2 class="text-center">
+  Proceso academico actual
+</h2>
+
+<div class="row py-4">
+  <div class="col-12 col-md-8">
+    <div class="list-group">
+      <a [routerLink]="['datos-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action ">
+        Datos de la estudiante
+        <span class="badge badge-success badge-pill">Completado</span>
+      </a>
+      <a [routerLink]="['datos-padre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Datos del padre
+        <span class="badge badge-success badge-pill">Completado</span>
+      </a>
+      <a [routerLink]="['datos-madre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Datos de la madre
+        <span class="badge badge-success badge-pill">Completado</span>
+      </a>
+      <a [routerLink]="['hermanas-plantel']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action active" >
+        Hermanas en el plantel
+        <span class="badge badge-info badge-pill">Ingresar información</span>
+      </a>
+
+      <a [routerLink]="['direcciones-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" >
+        Caso de emergencia - tipo de vivienda - medio de transporte
+        <span class="badge badge-warning badge-pill">Pendiente</span>
+      </a>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 text-center m-auto">
+    <circle-progress
+    [percent]="current"
+    [backgroundStrokeWidth]="1"
+    [backgroundStroke]="'#000'"
+    [maxPercent]="100"
+    [radius]="100"
+    [outerStrokeWidth]="8"
+    [innerStrokeWidth]="2"
+    [innerStrokeColor]="'#e7be64'"
+    [outerStrokeColor]="'#007bff'"
+    [subtitle]="'Tu progreso actual'"
+    [titleColor]="'#000'"
+    [subtitleColor]="'#000'"
+    [subtitleFontWeight]="'400'"
+    [subtitleFontSize]="'15'"
+    [animation]="true"
+    [animationDuration]="300"
+    [renderOnClick]="false"
+    [backgroundOpacity]=".5"
+    [unitsFontSize]="'16'"
+    [backgroundColor]="'#e0dedc'"
+    ></circle-progress>
+  </div>
+</div>

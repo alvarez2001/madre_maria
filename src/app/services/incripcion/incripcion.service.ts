@@ -8,6 +8,7 @@ import { LoginService } from '../login/login.service';
 import { SharedService } from '../shared/shared.service';
 import { CedulaModel } from './cedula.model';
 import Swal from 'sweetalert2';
+import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
 
 @Injectable()
 export class IncripcionService {
@@ -22,6 +23,23 @@ export class IncripcionService {
     this.url = Global.url;
     this.idEstudiante = this.loginSvc.regresarEstudiante();
   }
+
+
+  registrarDatosFamiliares(data:EstructuraFamiliarClass):Observable<any>{
+    this.sharedSvc.lanzarCarga(true)
+    return this.http.post(this.url+'add/datos/estructura/familiar/'+this.idEstudiante,data).pipe(
+      map(data => {
+        this.sharedSvc.lanzarCarga(false);
+        console.log(data)
+        return data
+      })
+    )
+  }
+
+
+
+
+  /* PASOS 1 Y 2 CREO ( OJO ) */
 
   IdentificacionEstudiante(data: dataEstudiante): Observable<any> {
     return this.http

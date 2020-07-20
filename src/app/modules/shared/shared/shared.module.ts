@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CedulaDirective } from 'src/app/directivas/validacionesAsincronas/cedula.directive';
+import { MilesDirective } from 'src/app/directivas/formateadores/miles.directive';
 
 @NgModule({
-  declarations: [CedulaDirective],
+  declarations: [CedulaDirective,MilesDirective,],
   imports: [
-    CommonModule,ReactiveFormsModule,FormsModule,
+    CommonModule,ReactiveFormsModule,FormsModule
 
-  ],exports:[ReactiveFormsModule, FormsModule, CedulaDirective]
+  ],exports:[ReactiveFormsModule, FormsModule, CedulaDirective,MilesDirective]
 })
 export class SharedModule { }

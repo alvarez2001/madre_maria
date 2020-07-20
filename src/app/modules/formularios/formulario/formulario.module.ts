@@ -8,14 +8,31 @@ import { InfoFormularioComponent } from '../../../components/usuarios/info-formu
 import { DatosHermanasComponent } from '../../../components/usuarios/datos-hermanas/datos-hermanas.component';
 import { DatosPadreComponent } from '../../../components/usuarios/datos-padre/datos-padre.component';
 import { DatosMadreComponent } from '../../../components/usuarios/datos-madre/datos-madre.component';
+import {RoundProgressModule, ROUND_PROGRESS_DEFAULTS} from 'angular-svg-round-progressbar';
+import { InicioInscripComponent } from 'src/app/components/usuarios/inicio-inscrip/inicio-inscrip.component';
 
+import { MaterialModule } from 'src/app/modules/shared/material/material.module';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { DireccionesComponent } from '../../../components/usuarios/direcciones/direcciones.component';
 
 @NgModule({
-  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent],
+  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent],
   imports: [
     CommonModule,
+    RoundProgressModule,
+    NgCircleProgressModule.forRoot({}),
     SharedModule,
-    FormularioRoutingModule
+    FormularioRoutingModule,
+    MaterialModule
+  ],
+  providers:[
+    {
+      provide: ROUND_PROGRESS_DEFAULTS,
+      useValue: {
+        color: '#f00',
+        background: '#0f0'
+      }
+    }
   ]
 })
 export class FormularioModule { }

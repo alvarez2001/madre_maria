@@ -5,11 +5,13 @@ import { InfoFormularioComponent } from 'src/app/components/usuarios/info-formul
 import { DatosHermanasComponent } from 'src/app/components/usuarios/datos-hermanas/datos-hermanas.component';
 import { DatosPadreComponent } from 'src/app/components/usuarios/datos-padre/datos-padre.component';
 import { DatosMadreComponent } from 'src/app/components/usuarios/datos-madre/datos-madre.component';
+import { InicioInscripComponent } from 'src/app/components/usuarios/inicio-inscrip/inicio-inscrip.component';
+import { DireccionesComponent } from 'src/app/components/usuarios/direcciones/direcciones.component';
 
 const routes: Routes = [
   {
-    path:'info-formulario',
-    component: InfoFormularioComponent
+    path:'',
+    component:InicioInscripComponent
   },
   {
     path:'datos-estudiante',
@@ -26,6 +28,10 @@ const routes: Routes = [
   {
     path:'datos-madre',
     component:DatosMadreComponent
+  },
+  {
+    path:'direcciones-estudiante',
+    component:DireccionesComponent
   }
 ];
 

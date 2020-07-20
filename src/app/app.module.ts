@@ -14,6 +14,7 @@ import { InterceptorPrimary } from './services/interceptor/interceptor-principal
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,8 +23,10 @@ import { LoginService } from './services/login/login.service';
     MenuUsuarioComponent,
     FooterUsuarioComponent,
 
+
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule,
+  ],
   providers: [
     SharedService,
     LoginService,

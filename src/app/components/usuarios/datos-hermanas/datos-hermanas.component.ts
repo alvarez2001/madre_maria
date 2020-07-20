@@ -1,47 +1,137 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
-import { HermanasPlantel } from './hermanas-plantel';
-import { Grados } from 'src/app/constantes/grados';
+import {
+  FormGroup,
+  FormArray,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { Grados, parentesco } from 'src/app/constantes/grados';
+import { HermanaModel, EstructuraClass } from 'src/app/models';
+import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
+import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-hermanas',
   templateUrl: './datos-hermanas.component.html',
   styles: [],
+  providers:[IncripcionService]
 })
 export class DatosHermanasComponent implements OnInit {
-  hermanas: HermanasPlantel;
-  DatosEnviar: HermanasPlantel[];
-  grados:any[];
-  constructor(private fb: FormBuilder) {
-    this.grados = Grados
-    this.hermanas = {
-      grado: '',
-      fullname: '',
-    };
+  grados: string[];
+  parentesco: string[];
 
-    this.DatosEnviar = []
+  segundoFormGroup: FormGroup;
+  firstFormGroup: FormGroup;
+  terceroFormGroup: FormGroup;
+  constructor(private route:Router,private fb: FormBuilder, private incripSvc:IncripcionService) {
+    /* INICIOS VARIABLES */
+    this.parentesco = parentesco;
+    this.grados = Grados;
+
+    /* INICIOS FORM */
+    this.firstFormGroup = this.fb.group({
+      hermanas: this.fb.array([], []),
+      grado: new FormControl(''),
+      fullname: new FormControl(''),
+    });
+
+    this.segundoFormGroup = this.fb.group({
+      estructura_familiar: this.fb.array(
+        [],
+        [Validators.required, Validators.min(1)]
+      ),
+      nombres: new FormControl(''),
+      parentesco: new FormControl(''),
+      edad: new FormControl(''),
+      ocupacion: new FormControl(''),
+      ingreso: new FormControl(''),
+      nivel: new FormControl(''),
+      instituto: new FormControl(''),
+      mensualidad: new FormControl(''),
+    });
+    this.terceroFormGroup = this.fb.group({
+      hermanos:new FormControl('', [Validators.required, Validators.min(0)]),
+      nro_hermanas:new FormControl('', [Validators.required, Validators.min(0)]),
+      viven:new FormControl('', [Validators.required, Validators.min(0)]),
+    });
   }
 
   ngOnInit(): void {
+
   }
 
-  guardarData(form: FormGroup) {
-    console.log(this.DatosEnviar)
+  guardarData() {
+    const { hermanas } = this.firstFormGroup.value;
+    const { estructura_familiar } = this.segundoFormGroup.value;
+    const { hermanos, nro_hermanas, viven } = this.terceroFormGroup.value;
+
+
+    const datos = {
+      hermanas,
+      estructura_familiar,
+      hermanos,
+      nro_hermanas,
+      viven
+    };
+
+
+    const datosTransform = EstructuraFamiliarClass.EstructuraFamiliarObj(datos);
+    console.log(datosTransform);
+    this.incripSvc.registrarDatosFamiliares(datosTransform).subscribe(res => {
+      console.log(res)
+      //this.route.navigate(['/formularios']);
+    })
   }
 
-  eliminarData(i:number){
-    this.DatosEnviar.splice(i,1);
+  /* ESTRUCTURA FAMILIAR  */
+
+  eliminarDataEstructura(i: number) {
+    this.EstructuraFamiliar.removeAt(i);
   }
 
-  anadirData(fullname:string,grado:string){
-    if(fullname !== '' && grado !== ''){
-      const data:HermanasPlantel = {
-        fullname:fullname.trim(),
-        grado:grado.trim()
+  anadirDataEstructura() {
+    const datos = this.segundoFormGroup.value;
+    if (datos.nombres !== '' && datos.edad !== '' && datos.parentesco !== '')
+      this.EstructuraFamiliar.push(
+        this.fb.control(
+          EstructuraClass.EstructuraObj(this.segundoFormGroup.value)
+        )
+      );
+
+      for (const key in this.segundoFormGroup.controls) {
+        if(key !== 'estructura_familiar'){
+          this.segundoFormGroup.controls[key].setValue('')
+        }
       }
-      this.DatosEnviar.push(data)
-      this.hermanas.fullname = '';
-      this.hermanas.grado = '';
+  }
+
+  get EstructuraFamiliar() {
+    return <FormArray>this.segundoFormGroup.controls.estructura_familiar;
+  }
+
+  /* HERMANAS QUE ESTUDIAN EN EL PLANTEL */
+
+  eliminarData(i: number) {
+    this.Hermanas.removeAt(i);
+  }
+
+  anadirData(fullname: string, grado: string) {
+
+    if (fullname !== '' && grado !== '') {
+      this.Hermanas.push(
+        this.fb.control(HermanaModel.hermanaObj(this.firstFormGroup.value))
+      );
+      for (const key in this.firstFormGroup.controls) {
+        if(key !== 'hermanas'){
+          this.firstFormGroup.controls[key].setValue('')
+        }
+      }
     }
+  }
+
+  get Hermanas() {
+    return <FormArray>this.firstFormGroup.controls.hermanas;
   }
 }
