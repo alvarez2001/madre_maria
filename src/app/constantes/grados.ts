@@ -222,3 +222,44 @@ export const parentesco = [
   'Otros'
 ];
 
+export const tipoVivienda = [
+  'Casa de Bloque',
+  'Casa Vecindad',
+  'Rancho',
+  'Urbano',
+  'Refugio',
+  'Improvisado',
+  'Aparto-Quinta',
+  'Apartamento',
+];
+
+export const tenenciaVivienda = [
+  'Al cuido',
+  'Propia',
+  'Alquilada',
+  'Residencia',
+];
+export const techoVivienda = [
+  'Zinc',
+  'Platabanda',
+  'Otros'
+];
+
+export const pisoVivienda = [
+  'Cemento',
+  'Granito',
+  'Cerámica',
+  'Tierra',
+  'Otros'
+];
+
+
+export const tipoTransporte = [
+  'Público',
+  'Particular',
+  'Taxi',
+  'Transporte Escolar',
+  'Moto',
+  'A pie',
+  'Bicicleta'
+];

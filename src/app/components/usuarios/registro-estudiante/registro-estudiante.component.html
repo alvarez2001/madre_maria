@@ -13,7 +13,7 @@
             <option value="" selected disabled>Seleccione un registro</option>
             <option value="Nuevo ingreso">Nuevo ingreso</option>
             <option value="Ratificación">Ratificación</option>
-            <option value="Prescolar">Prescolar</option>
+            <option value="Preescolar">Preescolar</option>
 
           </select>
         </div>
@@ -125,9 +125,9 @@
           </select>
         </div>
 
-        <div class="col-md-4 col-sm-6 form-group" *ngIf="formModel.tipo_solicitud === 'Prescolar'">
+        <div class="col-md-4 col-sm-6 form-group" *ngIf="formModel.tipo_solicitud === 'Preescolar'">
           <label for="guarderia">Guarderia: </label>
-          <input type="text" name="guarderia" class="form-control" #guarderia="ngModel" placeholder="" [(ngModel)]="formModel.guarderia" [disabled]="existeEstudiante">
+          <input type="text" [required]="formModel.tipo_solicitud === 'Preescolar'" name="guarderia" class="form-control" #guarderia="ngModel" placeholder="" [(ngModel)]="formModel.guarderia" [disabled]="existeEstudiante">
         </div>
 
       </div>

@@ -129,7 +129,7 @@ export class RegistroEstudianteComponent implements OnInit {
     form.reset();
   }
   cambiado(event: any) {
-    if (event === 'Prescolar') {
+    if (event === 'Preescolar') {
       this.formModel.grado_solicitud = Grados[0];
     } else {
       this.formModel.grado_solicitud = '';
@@ -137,7 +137,7 @@ export class RegistroEstudianteComponent implements OnInit {
   }
 
   evitarCambiado(event: any) {
-    if (this.formModel.tipo_solicitud == 'Prescolar' && event !== Grados[0]) {
+    if (this.formModel.tipo_solicitud == 'Preescolar' && event !== Grados[0]) {
       this.formModel.grado_solicitud = '';
     }
   }

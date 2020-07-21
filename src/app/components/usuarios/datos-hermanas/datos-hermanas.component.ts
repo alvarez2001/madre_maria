@@ -68,7 +68,6 @@ export class DatosHermanasComponent implements OnInit {
     const { estructura_familiar } = this.segundoFormGroup.value;
     const { hermanos, nro_hermanas, viven } = this.terceroFormGroup.value;
 
-
     const datos = {
       hermanas,
       estructura_familiar,

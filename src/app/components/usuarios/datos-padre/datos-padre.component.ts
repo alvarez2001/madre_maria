@@ -93,7 +93,7 @@ export class DatosPadreComponent implements OnInit {
                   this.sharedSvc.mensajeSuccessAlerta(res)
                 })
               }else{
-                this.blockDatos = false;
+                this.blockDatos = true;
               }
             }
           )

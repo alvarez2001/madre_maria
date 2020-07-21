@@ -1,39 +1,381 @@
-<!-- <div>
+<div>
   <small class="text-danger col-12"
     >Los campos marcados con ( * ) son requeridos</small
   >
 
   <mat-horizontal-stepper linear #linear>
-    <mat-step>
+    <mat-step [stepControl]="formCasoEmergencia">
+      <form class="was-validated" [formGroup]="formCasoEmergencia">
+        <ng-template matStepLabel>Dirección en caso de emergencia</ng-template>
 
-      <form class="was-validated">
-        <ng-template matStepLabel
-        >Dirección en caso de emergencia</ng-template
-      >
+        <fieldset>
+          <legend>Dirección en caso de emergencia</legend>
 
-      <fieldset>
-        <legend>Dirección en caso de emergencia</legend>
+          <div class="row">
+            <div class="col-12 col-md-6 form-group">
+              <label for="nombres">Nombres: *</label>
+              <input
+                type="text"
+                formControlName="nombres"
+                required
+                name="nombres"
+                class="form-control"
+                placeholder="Ej: Jose Miguel"
+              />
+            </div>
 
+            <div class="col-12 col-md-6 form-group">
+              <label for="apellidos">Apellidos: *</label>
+              <input
+                type="text"
+                name="apellidos"
+                formControlName="apellidos"
+                class="form-control"
+                required
+                placeholder="Ej: Martinez Hernandez"
+              />
+            </div>
 
-        <div class="row">
-          <div class="col-12 col-md-4">
-            <label for="apellidosNombres">Apellidos y Nombres: *</label>
-            <input type="text" required name="apellidosNombres"  class="form-control">
+            <div
+              class="col-12 col-md-4 form-group"
+              [ngClass]="{
+                'col-md-3': otroParentesco === 'Otros',
+                'col-md-4': otroParentesco !== 'Otros'
+              }"
+            >
+              <label for="parentesco">Parentesco: *</label>
+              <select
+                formControlName="parentesco"
+                required
+                name="parentesco"
+                class="form-control"
+              >
+                <option value="">Seleccione el parentesco</option>
+                <option *ngFor="let paren of parentesco" [value]="paren">{{
+                  paren
+                }}</option>
+              </select>
+            </div>
+
+            <!-- MEJORAR -->
+            <div
+              class="col-12 form-group"
+              *ngIf="otroParentesco === 'Otros'"
+              [ngClass]="{
+                'col-md-3': otroParentesco === 'Otros',
+                'col-md-4': otroParentesco !== 'Otros'
+              }"
+            >
+              <label for="nuevoParentesco">Quien? *</label>
+              <input
+                name="nuevoParentesco"
+                [required]="otroParentesco === 'Otros'"
+                type="text"
+                placeholder="Ej: Tio"
+                class="form-control"
+              />
+            </div>
+
+            <div
+              class="col-12 form-group"
+              [ngClass]="{
+                'col-md-3': otroParentesco === 'Otros',
+                'col-md-4': otroParentesco !== 'Otros'
+              }"
+            >
+              <label for="telefono">Telf Local:</label>
+              <input
+                name="telefono"
+                type="text"
+                maxlength="11"
+                formControlName="telefono"
+                placeholder="Ej: 0293000000"
+                pattern="[0-9]+"
+                class="form-control"
+              />
+            </div>
+
+            <div
+              class="col-12 form-group"
+              [ngClass]="{
+                'col-md-3': otroParentesco === 'Otros',
+                'col-md-4': otroParentesco !== 'Otros'
+              }"
+            >
+              <label for="celular">Celular: *</label>
+              <input
+              name="celular"
+                required
+                maxlength="11"
+                type="text"
+                placeholder="Ej: 0416000000"
+                pattern="[0-9]+"
+                formControlName="celular"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-12 form-group text-center pt-3" >
+              <button type="button" matStepperNext class="btn btn-secondary">Siguiente</button>
+            </div>
           </div>
-        </div>
-
-      </fieldset>
 
 
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="formTipoVivienda">
+      <form class="was-validated" [formGroup]="formTipoVivienda">
+        <ng-template matStepLabel>Detalles de la Vivienda</ng-template>
+
+        <fieldset >
+          <legend>Detalles de la Vivienda</legend>
+
+
+
+          <div class="row">
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['piso'].value !== 'Otros', 'col-md-3':formTipoVivienda.controls['piso'].value === 'Otros'}">
+              <label for="tipo_vivienda">Tipo de vivienda: *</label>
+              <select class="form-control" required formControlName="tipo_vivienda">
+                <option value="" selected disabled>Seleccione</option>
+                <option *ngFor="let vivienda of tipovivienda" [value]="vivienda">{{vivienda}}</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['piso'].value !== 'Otros', 'col-md-3':formTipoVivienda.controls['piso'].value === 'Otros'}">
+              <label for="tenencia">Tenencia: *</label>
+              <select class="form-control" required formControlName="tenencia">
+                <option value="" selected disabled>Seleccione</option>
+                <option *ngFor="let tene of tenencia" [value]="tene">{{tene}}</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group" [ngClass]="{'col-md-4':formTipoVivienda.controls['piso'].value !== 'Otros', 'col-md-3':formTipoVivienda.controls['piso'].value === 'Otros'}">
+              <label for="piso">Piso: *</label>
+              <select class="form-control" required formControlName="piso">
+                <option value="" selected disabled>Seleccione</option>
+                <option *ngFor="let piso of pisoVivienda" [value]="piso">{{piso}}</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['piso'].value !== 'Otros', 'col-md-3':formTipoVivienda.controls['piso'].value === 'Otros'}"*ngIf="formTipoVivienda.controls['piso'].value === 'Otros'">
+              <label for="otroPiso">Cual?</label>
+              <input
+                name="otroPiso"
+                type="text"
+                [required]="formTipoVivienda.controls['piso'].value === 'Otros'"
+                placeholder="Ej: Piedra"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="techo">Techo: *</label>
+              <select class="form-control" required formControlName="techo">
+                <option value="" selected disabled>Seleccione</option>
+                <option *ngFor="let techo of techoVivienda" [value]="techo">{{techo}}</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4" *ngIf="formTipoVivienda.controls['techo'].value === 'Otros'">
+              <label for="otroTecho">Cual?: *</label>
+              <input
+                name="otroTecho"
+                type="text"
+                [required]="formTipoVivienda.controls['techo'].value === 'Otros'"
+                placeholder="Ej: Madera"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="agua">Dispone de agua? *</label>
+              <select formControlName="agua" name="agua" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
+              <label for="electricidad">Dispone de electricidad? *</label>
+              <select formControlName="electricidad" name="electricidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group" [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
+              <label for="cloacas">Dispone de cloacas? *</label>
+              <select formControlName="cloacas" name="cloacas" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
+              <label for="gas">Dispone de gas? *</label>
+              <select formControlName="gas" name="gas" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
+              <label for="aseo">Dispone de aseo? *</label>
+              <select formControlName="aseo" name="aseo" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="telefono_vivienda">Dispone de teléfono?</label>
+              <select formControlName="telefono_vivienda" name="telefono_vivienda" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="celular_vivienda">Dispone de celular?</label>
+              <select formControlName="celular_vivienda" name="celular_vivienda" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="tvcable_vivienda">Dispone de TV por cable?</label>
+              <select formControlName="tvcable_vivienda" name="tvcable_vivienda" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="internet_vivienda">Dispone de internet?</label>
+              <select formControlName="internet_vivienda" name="internet_vivienda" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="computador">Dispone de computador?</label>
+              <select formControlName="computador" name="computador" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="otros">Otros:</label>
+              <input type="text" formControlName="otros" name="otros"  class="form-control" placeholder="Ej: ">
+            </div>
+
+            <div class="col-12 form-group text-center pt-3">
+              <button type="button" class="btn btn-secondary mx-1 " >Anterior</button>
+              <button type="button" class="btn btn-secondary mx-1" matStepperNext>Siguiente</button>
+            </div>
+
+          </div>
+
+        </fieldset>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="formMedioTransporte">
+      <form class="was-validated" [formGroup]="formMedioTransporte" (ngSubmit)="guardarDatos()">
+        <ng-template matStepLabel>Medio de transporte</ng-template>
+
+
+        <fieldset>
+          <legend>¿Qué utiliza su representada para asistir al Colegio?</legend>
+
+          <div class="row">
+
+            <div class="col-12 form-group">
+              <label for="tipo_transporte">Medio de transporte: *</label>
+              <select formControlName="tipo_transporte" required name="tipo_transporte" class="form-control" >
+                <option value="" selected disabled>Seleccione</option>
+                <option *ngFor="let transporte of medioTransporte" [value]="transporte"> {{transporte}} </option>
+              </select>
+            </div>
+
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="marca_vehiculo">Marca:</label>
+              <input type="text" class="form-control" formControlName="marca_vehiculo" name="marca_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" placeholder="Ej: Ford">
+            </div>
+
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="ano_vehiculo">Año:</label>
+              <input type="number" min="0" max="2025" name="ano_vehiculo" formControlName="ano_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]"class="form-control"  placeholder="Ej: 2015">
+            </div>
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="modelo_vehiculo">Modelo:</label>
+              <input type="text"  name="modelo_vehiculo" formControlName="modelo_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Fiesta">
+            </div>
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="placa_vehiculo">Placa:</label>
+              <input type="text"  name="placa_vehiculo" formControlName="placa_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: aCb-231">
+            </div>
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="color">Color:</label>
+              <input type="text"  name="color" formControlName="color" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Azul">
+            </div>
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="responsable_vehiculo">Responsable:</label>
+              <input type="text"  name="responsable_vehiculo" formControlName="responsable_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Jesus Jose Hernandez Suarez">
+            </div>
+
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="cedula_transporte">Cedula</label>
+              <input type="text" pattern="[0-9]+" maxlength="11"  name="cedula_transporte" formControlName="cedula_transporte" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: 0000000">
+            </div>
+
+            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+              <label for="celular_transporte">Celular</label>
+              <input pattern="[0-9]+" maxlength="11" type="text"  name="celular_transporte" formControlName="celular_transporte" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: 04160000000">
+            </div>
+
+
+            <div class="col-12 form-group text-center pt-3">
+              <button type="button" class="btn btn-secondary mx-1" matStepperPrevious>
+                Anterior
+              </button>
+
+              <button type="submit" [disabled]="formCasoEmergencia.invalid || formTipoVivienda.invalid || formMedioTransporte.invalid" class="btn btn-success mx-1" matStepperNext>
+                Guardar y continuar
+              </button>
+            </div>
+
+          </div>
+
+        </fieldset>
 
       </form>
-
     </mat-step>
+
+
   </mat-horizontal-stepper>
 </div>
- -->
-
-
-
-
- <h2 class="text-center pb-4 m-0">Sitio en construcción</h2>

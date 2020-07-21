@@ -35,6 +35,13 @@ export class EstructuraClass {
 
 export class EstructuraFamiliarClass {
   static EstructuraFamiliarObj(obj: any) {
+
+
+    if(obj['hermanas'].length <= 0){
+      obj['hermanas'] = [];
+    }
+
+
     return new EstructuraFamiliarClass(
       obj['hermanas'],
       obj['estructura_familiar'],
