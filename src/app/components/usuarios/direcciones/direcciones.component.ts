@@ -5,37 +5,49 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { parentesco, tipoVivienda, tenenciaVivienda, techoVivienda, pisoVivienda, tipoTransporte } from 'src/app/constantes/grados';
+import {
+  parentesco,
+  tipoVivienda,
+  tenenciaVivienda,
+  techoVivienda,
+  pisoVivienda,
+  tipoTransporte,
+} from 'src/app/constantes/grados';
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
 import { Direcciones } from 'src/app/models';
+import { SharedService } from 'src/app/services/shared/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-direcciones',
   templateUrl: './direcciones.component.html',
-  providers:[IncripcionService]
+  providers: [IncripcionService],
 })
 export class DireccionesComponent implements OnInit {
-  formCasoEmergencia: FormGroup ;
-  formTipoVivienda: FormGroup ;
-  formMedioTransporte: FormGroup ;
-  parentesco:Array<string> = [];
+  formCasoEmergencia: FormGroup;
+  formTipoVivienda: FormGroup;
+  formMedioTransporte: FormGroup;
+  parentesco: Array<string> = [];
 
-
-
-  tipovivienda:string[] = tipoVivienda;
-  tenencia:string[] = tenenciaVivienda;
-  techoVivienda:string[] = techoVivienda;
+  tipovivienda: string[] = tipoVivienda;
+  tenencia: string[] = tenenciaVivienda;
+  techoVivienda: string[] = techoVivienda;
   pisoVivienda: string[] = pisoVivienda;
-  medioTransporte:string[] = tipoTransporte;
+  medioTransporte: string[] = tipoTransporte;
 
+  nuevoPiso: string = '';
+  nuevoTecho: string = '';
 
+  Nuevoparentesco: string = '';
+  otroParentesco: string = '';
 
-  Nuevoparentesco:string = '';
-  otroParentesco:string = '';
-
-  constructor(private fb: FormBuilder, private incrip:IncripcionService) {
-    this.parentesco = parentesco
-
+  constructor(
+    private fb: FormBuilder,
+    private incrip: IncripcionService,
+    private sharedSvc: SharedService,
+    private router: Router
+  ) {
+    this.parentesco = parentesco;
 
     this.formMedioTransporte = this.fb.group({
       /* DATOS MEDIO DE TRANSPORTE */
@@ -49,8 +61,6 @@ export class DireccionesComponent implements OnInit {
       cedula_transporte: new FormControl(''),
       celular_transporte: new FormControl(''),
     });
-
-
 
     this.formTipoVivienda = this.fb.group({
       /* TIPO DE VIVIENDA */
@@ -71,8 +81,6 @@ export class DireccionesComponent implements OnInit {
       otros: new FormControl(''),
     });
 
-
-
     this.formCasoEmergencia = this.fb.group({
       /* EMERGENCIA */
       nombres: new FormControl('', [Validators.required]),
@@ -81,37 +89,53 @@ export class DireccionesComponent implements OnInit {
       telefono: new FormControl(''),
       celular: new FormControl('', [Validators.required]),
     });
-
-
   }
 
   ngOnInit(): void {
     this.valoresCambiantes();
   }
 
-  guardarDatos(){
-    console.log('Form 1 ->', this.formCasoEmergencia.value)
-    console.log('Form 2 ->', this.formTipoVivienda.value)
-    console.log('Form 3 ->', this.formMedioTransporte.value)
+  guardarDatos() {
+    const form1 = this.formCasoEmergencia.value;
+    const form2 = this.formTipoVivienda.value;
+    const form3 = this.formMedioTransporte.value;
+    if (
+      this.formTipoVivienda.valid &&
+      this.formMedioTransporte.valid &&
+      this.formCasoEmergencia.valid
+    ) {
+      if (form1.parentesco === parentesco[10]) {
+        form1.parentesco = this.Nuevoparentesco;
+      }
+      if (form2.piso === pisoVivienda[4]) {
+        form2.piso = this.nuevoPiso;
+      }
+      if (form2.techo === techoVivienda[2]) {
+        form2.techo = this.nuevoTecho;
+      }
+      /* console.log('Form 1 ->', form1);
+      console.log('Form 2 ->', form2);
+      console.log('Form 3 ->', form3); */
 
-    const datosIngresar = {};
-    Object.assign(datosIngresar, this.formCasoEmergencia.value, this.formTipoVivienda.value,this.formMedioTransporte.value)
+      const datosIngresar = {};
+      Object.assign(datosIngresar, form1, form2, form3);
 
+      const datosModel = Direcciones.DireccionesObj(datosIngresar);
 
-    const datosModel = Direcciones.DireccionesObj(datosIngresar);
+      /* console.log('datos Model ->', datosModel); */
 
-    console.log('datos Model ->', datosModel)
-    this.incrip.addEmergencia(datosModel).subscribe(res => {
-      console.log(res)
-    })
-
+      this.incrip.addEmergencia(datosModel).subscribe(res => {
+          this.sharedSvc.mensajeSuccessAlerta(res);
+          this.router.navigate(['/formularios'])
+        })
+    }
   }
 
-
-  valoresCambiantes(){
-    this.formCasoEmergencia.controls['parentesco'].valueChanges.subscribe(parentesco => {
-      this.otroParentesco = parentesco;
-    });
-
+  valoresCambiantes() {
+    this.formCasoEmergencia.controls['parentesco'].valueChanges.subscribe(
+      (parentesco) => {
+        this.otroParentesco = parentesco;
+      }
+    );
   }
 }

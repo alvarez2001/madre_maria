@@ -7,6 +7,8 @@ import { DatosPadreComponent } from 'src/app/components/usuarios/datos-padre/dat
 import { DatosMadreComponent } from 'src/app/components/usuarios/datos-madre/datos-madre.component';
 import { InicioInscripComponent } from 'src/app/components/usuarios/inicio-inscrip/inicio-inscrip.component';
 import { DireccionesComponent } from 'src/app/components/usuarios/direcciones/direcciones.component';
+import { PlantelesComponent } from 'src/app/components/usuarios/planteles/planteles.component';
+import { BalancesComponent } from 'src/app/components/usuarios/balances/balances.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,16 @@ const routes: Routes = [
   {
     path:'direcciones-estudiante',
     component:DireccionesComponent
+  },
+  {
+    path:'planteles',
+    component:PlantelesComponent
+  },
+  {
+    path:'balances',
+    component:BalancesComponent
   }
+
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import { SharedService } from '../shared/shared.service';
 import { CedulaModel } from './cedula.model';
 import Swal from 'sweetalert2';
 import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
-import { PasoSolicitud, Direcciones } from 'src/app/models';
+import { PasoSolicitud, Direcciones, PlantelesEstudiantes } from 'src/app/models';
 
 @Injectable()
 export class IncripcionService {
@@ -58,6 +58,33 @@ export class IncripcionService {
       map(data => {
         this.sharedSvc.lanzarCarga(false)
         return data
+      })
+    )
+  }
+
+
+  /* PASO 7 REGISTRAR PLANTELES */
+
+
+  addPlanteles(data:{informacion:PlantelesEstudiantes[]}):Observable<any>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post(this.url+'add/datos/planteles/cursados/'+this.idEstudiante,data).pipe(
+      map(data =>{
+        this.sharedSvc.lanzarCarga(false);
+        return data
+      })
+    )
+  }
+
+  /* PASO 8 RELACIONES DE EGRESO */
+
+
+  addBalances(data:any) : Observable<any>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post(this.url+'add/datos/balances/razones/'+this.idEstudiante, data).pipe(
+      map(dato => {
+        this.sharedSvc.lanzarCarga(false)
+        return dato
       })
     )
   }

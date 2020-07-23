@@ -13,7 +13,7 @@ const routes: Routes = [
     component:HomeComponent,
     data:{pagina:'Inicio'}
   },
-  {
+ /*  {
     path:'formularios',
     loadChildren:()=>import('src/app/modules/formularios/formulario/formulario.module').then( m => m.FormularioModule),
     component:FormulariosComponent,
@@ -28,7 +28,7 @@ const routes: Routes = [
     path: 'registro',
     component: RegistroEstudianteComponent,
     data: { pagina: 'Registro estudiante' },
-  },
+  }, */
 ];
 
 @NgModule({

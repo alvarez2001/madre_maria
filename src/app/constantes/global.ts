@@ -1,3 +1,3 @@
 export const Global = {
-  url:'http://192.168.1.5/software/public/api/'
+  url:'http://192.168.43.116/software/public/api/'
 };

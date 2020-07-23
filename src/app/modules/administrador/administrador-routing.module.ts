@@ -6,7 +6,8 @@ import { InicioComponent } from 'src/app/components/administrador/inicio/inicio.
 const routes: Routes = [
   {
     path:'',
-    component:InicioComponent
+    component:InicioComponent,
+    loadChildren:()=>import('src/app/modules/admin/admin.module').then( m => m.AdminModule)
   }
 ];
 

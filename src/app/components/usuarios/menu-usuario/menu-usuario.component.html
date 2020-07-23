@@ -14,9 +14,18 @@
           class="navbarPrincipal__item"
           [routerLink]="['/formularios']"
           routerLinkActive="menuActivo"
-          *ngIf="existeUsuario"
+          *ngIf="tipoUsuario !== 'Administrador' && existeUsuario"
         >
           <a class="text-decoration-none navbarPrincipal__link">Inscripción</a>
+        </li>
+
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/administrador']"
+          routerLinkActive="menuActivo"
+          *ngIf="tipoUsuario === 'Administrador' && existeUsuario"
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Administración</a>
         </li>
 
         <li
@@ -24,6 +33,7 @@
           [routerLink]="['/registro']"
           routerLinkActive="menuActivo"
           *ngIf="!existeUsuario"
+          data-toggle="modal" data-target="#exampleModal"
         >
           <a class="text-decoration-none navbarPrincipal__link">Registro</a>
         </li>
@@ -33,8 +43,9 @@
           [routerLink]="['/login']"
           routerLinkActive="menuActivo"
           *ngIf="!existeUsuario"
+          data-toggle="modal" data-target="#exampleModal"
         >
-          <a class="text-decoration-none navbarPrincipal__link">Login</a>
+          <a class="text-decoration-none navbarPrincipal__link">Acceder al sistema</a>
         </li>
 
         <li class="navbarPrincipal__item"
@@ -60,3 +71,24 @@
     </div>
   </div>
 </section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title  mx-auto text-uppercase" id="exampleModalLabel">Sistema inhabilitado</h5>
+      </div>
+      <div class="modal-body text-center">
+
+        <img src="./assets/imgs/madre/6.png" class="w-75 mx-auto d-block h-50"  alt="madre maria">
+
+        <p class="font-weight-bold text-center text-uppercase">Muy pronto estará disponible el sistema online</p>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

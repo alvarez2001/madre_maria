@@ -1,0 +1,85 @@
+<div>
+  <small class="text-danger col-12"
+    >Los campos marcados con ( * ) son requeridos</small
+  >
+
+
+  <form class="was-validated" [formGroup]="plantelesCursados">
+    <fieldset>
+      <legend>Planteles donde ha cursado la estudiante (Obligatorio)</legend>
+
+      <div class="row">
+        <div class="col-12 form-group col-md-3 ">
+          <label for="ano">Año:</label>
+          <select type="text" name="ano" required formControlName="ano" class="form-control" >
+            <option value="">Seleccione un año escolar</option>
+            <option *ngFor="let ano of anosEscolares" [value]="ano">{{ano}}</option>
+          </select>
+        </div>
+
+        <div class="col-12 form-group col-md-6">
+          <label for="plantel">Nombre del plantel</label>
+          <input type="text" name="plantel" required class="form-control" formControlName="plantel" placeholder="Ej: U.E.I.A MADRE MARIA">
+        </div>
+
+        <div class="col-12 form-group col-md-3">
+          <label for="estado">Estado</label>
+          <input type="text" name="estado" required class="form-control" placeholder="Ej: Sucre" formControlName="estado">
+        </div>
+
+        <div class="col-12 form-group col-md-6">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" name="ciudad" required class="form-control" placeholder="Ej: Cumana" formControlName="ciudad">
+        </div>
+
+        <div class="col-12 form-group col-md-6">
+          <label for="calificacion">Calificación</label>
+          <input type="number" name="calificacion"  required class="form-control" placeholder="Ej: 7.5 | 12.32 | 19.45 | 7"  step=".01" min="0" max="20" formControlName="calificacion">
+        </div>
+
+        <div class="col-12 form-group text-center py-3">
+          <button type="button" class="btn btn-success" (click)="agregarInformacion()">
+            Agregar Plantel
+          </button>
+        </div>
+
+
+        <section class="col-12 table-responsive">
+          <table class="table table-striped table-hover text-center">
+            <thead>
+              <th style="min-width: 100px;">Año</th>
+              <th style="min-width: 150px;">Nombre del Plantel</th>
+              <th style="min-width: 120px;">Estado</th>
+              <th style="min-width: 120px;">Ciudad</th>
+              <th style="min-width: 180px;">Calificación</th>
+              <th style="min-width: 100px;">Acciones</th>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let plantel of plantelesEstudiantes.value; let i = index">
+                <td>{{plantel.ano}}</td>
+                <td>{{plantel.plantel}}</td>
+                <td>{{plantel.estado}}</td>
+                <td>{{plantel.ciudad}}</td>
+                <td>{{plantel.calificacion}}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="eliminar(i)">Eliminar</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+
+        <div class="col-12 form-group py-2 text-center">
+          <button class="btn btn-primary" [disabled]="plantelesEstudiantes.value < 1" type="button" (click)="enviarInfo()">Guardar y continuar</button>
+        </div>
+
+      </div>
+
+    </fieldset>
+  </form>
+
+
+
+</div>

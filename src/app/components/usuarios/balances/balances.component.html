@@ -1,0 +1,246 @@
+<div>
+  <div class="row col-12">
+      <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
+      <small class="text-danger col-12">Ojo los decimales se separan con ( . ) </small>
+  </div>
+
+  <mat-horizontal-stepper linear #linear>
+    <!-- RELACION INGRESOS -->
+
+    <mat-step [stepControl]="relacionIngresos" >
+
+      <form [formGroup]="relacionIngresos" class="was-validated">
+        <ng-template matStepLabel>Relación Ingresos</ng-template>
+        <fieldset>
+          <legend>Relación de Ingresos ( mensuales )</legend>
+
+          <div class="row">
+
+            <div class="col-12 form-group col-md-4">
+              <label for="portador">Portador *</label>
+              <select [required]="relacionIngresos.value.balance.length <= 2" formControlName="portador"  name="portador" placeholder="Ej: 30000.12" class="form-control">
+                <option value="" selected disabled>Seleccione un portador</option>
+                <option *ngFor="let porta of portador" [value]="porta"> {{porta}} </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="sueldo">Sueldo *</label>
+              <input type="text" name="sueldo" formControlName="sueldo" placeholder="Ej: 30000.12" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="alimentacion">Cesta ticket *</label>
+              <input type="text" name="alimentacion" formControlName="alimentacion" placeholder="Ej: 30000.12" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="pension">Pensión IVSS *</label>
+              <input type="text" name="pension" placeholder="Ej: 30000.12" formControlName="pension" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="eventuales">Trabajos Eventuales *</label>
+              <input type="text" name="eventuales" placeholder="Ej: 30000.12" formControlName="eventuales" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="sociales" >Programa Sociales: <small>Ayudas del estado</small> *</label>
+              <input type="text" formControlName="sociales" name="sociales" placeholder="Ej: 30000.12" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="informal" >Economía informal *</label>
+              <input type="text" formControlName="informal" name="informal" placeholder="Ej: 30000.12" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="ayuda_familiar" >Ayudas de Familiares: *</label>
+              <input type="text" name="ayuda_familiar" formControlName="ayuda_familiar" placeholder="Ej: 30000.12" formateadorMiles class="form-control" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="remesas" >Otros: <small>(Remesas)</small> *</label>
+              <input type="text" name="remesas" placeholder="Ej: 30000.12" formateadorMiles class="form-control" formControlName="remesas" [required]="relacionIngresos.value.balance.length <= 2">
+            </div>
+
+            <div class="col-12 text-center form-group py-3">
+              <button class="btn btn-success" type="button" (click)="agregarRelacionIngresos()">Agregar Relación</button>
+            </div>
+
+            <div class="col-12 form-group table-responsive">
+              <table class="table table-striped table-hover text-center">
+                <thead>
+                  <th style="min-width: 120px;">Portador</th>
+                  <th style="min-width: 120px;">Sueldo</th>
+                  <th style="min-width: 120px;">Cesta Ticket</th>
+                  <th style="min-width: 120px;">Pensión IVSS</th>
+                  <th style="min-width: 120px;">Trabajos Eventuales</th>
+                  <th style="min-width: 120px;">Programa Sociales</th>
+                  <th style="min-width: 120px;">Ayudas de Familiares</th>
+                  <th style="min-width: 120px;">Informal</th>
+                  <th style="min-width: 120px;">Otros (Remesas) </th>
+                  <th style="min-width: 80px;">Acciones</th>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let relacion of RelacionIngresos.value; let i = index">
+                    <td> {{relacion.portador}} </td>
+                    <td> {{relacion.sueldo | currency: 'Bs '}} </td>
+                    <td> {{relacion.alimentacion | currency: 'Bs '}} </td>
+                    <td> {{relacion.pension | currency: 'Bs '}} </td>
+                    <td> {{relacion.eventuales | currency: 'Bs '}} </td>
+                    <td> {{relacion.sociales | currency: 'Bs '}} </td>
+                    <td> {{relacion.ayuda_familiar | currency: 'Bs '}} </td>
+                    <td> {{relacion.informal | currency: 'Bs '}} </td>
+                    <td> {{relacion.remesas | currency: 'Bs '}} </td>
+                    <td>
+                      <button class="btn btn-danger" (click)="removerIngreso(i)">Eliminar</button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12 text-center form-group py-3">
+              <button class="btn btn-secondary mx-1" type="button"  matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-secondary mx-1" type="button"  matStepperNext>
+                Siguiente
+              </button>
+            </div>
+
+          </div>
+
+
+        </fieldset>
+      </form>
+
+    </mat-step>
+
+
+
+
+    <!-- RELACION EGRESOS -->
+
+
+    <mat-step [stepControl]="relacionEgresos" >
+
+      <form [formGroup]="relacionEgresos" class="was-validated">
+        <ng-template matStepLabel>Relación Egresos</ng-template>
+        <fieldset>
+          <legend>Relación de Egresos ( mensuales )</legend>
+
+          <div class="row">
+
+            <div class="col-12 form-group col-md-3">
+              <label for="alimentacion">Alimentacion *</label>
+              <input required formControlName="alimentacion"  name="alimentacion" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="vivienda">Vivienda *</label>
+              <input required formControlName="vivienda"  name="vivienda" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="luz">Luz *</label>
+              <input required formControlName="luz"  name="luz" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="agua">Agua *</label>
+              <input required formControlName="agua"  name="agua" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="telefono">Teléfono *</label>
+              <input required formControlName="telefono"  name="telefono" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="medicina">Medicina *</label>
+              <input required formControlName="medicina"  name="medicina" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="transporte">Transporte *</label>
+              <input required formControlName="transporte"  name="transporte" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="gas">Gas *</label>
+              <input required formControlName="gas"  name="gas" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="educacion">Educación *</label>
+              <input required formControlName="educacion"  name="educacion" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="tv">TV por cable *</label>
+              <input required formControlName="tv"  name="tv" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="internet">Internet *</label>
+              <input required formControlName="internet"  name="internet" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <div class="col-12 form-group col-md-3">
+              <label for="otros">Otros *</label>
+              <input required formControlName="otros"  name="otros" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
+            </div>
+
+            <small class="col-12 form-group">Indique las razones que le han motivado a solicitar cupo en este plantel, enumere, en orden de preferencia ( 1er, 2do, 3er )</small>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="razon1">Razon 1 *</label>
+              <select required formControlName="razon1"  name="razon1" placeholder="Ej: 30000.12" class="form-control" >
+                <option value="" selected disabled>Seleccione la razon1</option>
+                <option *ngFor="let razo of razon" [value]="razo"> {{razo}} </option>
+              </select>
+            </div>
+
+
+            <div class="col-12 form-group col-md-4">
+              <label for="razon2">Razon 2 *</label>
+              <select required formControlName="razon2"  name="razon2" placeholder="Ej: 30000.12" class="form-control" >
+                <option value="" selected disabled>Seleccione la razon2</option>
+                <option *ngFor="let razo of razon" [value]="razo"> {{razo}} </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="razon3">Razon 3 *</label>
+              <select required formControlName="razon3"  name="razon3" placeholder="Ej: 30000.12" class="form-control"  >
+                <option value="" selected disabled>Seleccione la razon3</option>
+                <option *ngFor="let razo of razon" [value]="razo"> {{razo}} </option>
+              </select>
+            </div>
+
+
+
+
+            <div class="col-12 text-center form-group py-3">
+              <button class="btn btn-secondary mx-1" type="button"  matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-success mx-1" [disabled]="relacionEgresos.invalid" type="button"  (click)="guardarData()">
+                Guardar y continuar
+              </button>
+            </div>
+
+          </div>
+
+
+        </fieldset>
+      </form>
+
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>

@@ -12,6 +12,7 @@ export class MenuUsuarioComponent implements OnInit , DoCheck {
 
   public paginaActual:string = '';
   existeUsuario:boolean = false;
+  tipoUsuario:string = '';
 
   constructor(private sharedSvc:SharedService, public loginSvc:LoginService, private router:Router) { }
 
@@ -25,9 +26,12 @@ export class MenuUsuarioComponent implements OnInit , DoCheck {
   }
 
   private comprueba(){
-    if(this.loginSvc.regresarUsuario()){
+    const usuario:any = this.loginSvc.regresarUsuario()
+    if(usuario){
       this.existeUsuario = true;
+      this.tipoUsuario = usuario.tipo
     }else{
+      this.tipoUsuario = '';
       this.existeUsuario = false
     }
   }

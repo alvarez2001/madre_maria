@@ -14,9 +14,10 @@ import { InicioInscripComponent } from 'src/app/components/usuarios/inicio-inscr
 import { MaterialModule } from 'src/app/modules/shared/material/material.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DireccionesComponent } from '../../../components/usuarios/direcciones/direcciones.component';
+import { BalancesComponent } from 'src/app/components/usuarios/balances/balances.component';
 
 @NgModule({
-  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent],
+  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent, BalancesComponent],
   imports: [
     CommonModule,
     RoundProgressModule,

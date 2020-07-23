@@ -9,8 +9,7 @@ import { LoginComponent } from '../../components/usuarios/login/login.component'
 import { SharedModule } from '../shared/shared/shared.module';
 import { FormulariosComponent } from '../../components/usuarios/formularios/formularios.component';
 import { HomeComponent } from '../../components/usuarios/home/home.component';
-
-
+import { PlantelesComponent } from '../../components/usuarios/planteles/planteles.component';
 
 
 
@@ -20,6 +19,7 @@ import { HomeComponent } from '../../components/usuarios/home/home.component';
     LoginComponent,
     FormulariosComponent,
     HomeComponent,
+    PlantelesComponent,
 
 
   ],

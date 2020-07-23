@@ -16,7 +16,8 @@
     position: absolute;
     height: 100%;
     z-index: -10;
-    background-color: black;
+    /* background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(17,0,255,1) 55%, rgba(17,0,255,1) 100%); */
+    background: #0424c2;
     right: 0px;
     top: 0;
     width: 50%;
@@ -38,7 +39,11 @@
     transform: skewX(-40deg);
     width: 40%;
     z-index: -1;
-    background-color: #000;
+    /* background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(17,0,255,1) 55%, rgba(17,0,255,1) 100%); */
+    background: -o-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: -ms-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: linear-gradient(to right, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+
   }
 }
 .borderBottomDorado{
@@ -93,7 +98,7 @@ z-index: 1000!important;
   &__item{
     align-items: center;
     display: flex;
-    flex: 0 1 200px;
+    flex: 0 1 201px;
     position: relative;
     cursor: pointer;
 
@@ -143,7 +148,9 @@ z-index: 1000!important;
 
 
 .stepPagina{
-  background: linear-gradient(to right,#e7be64 0%,#000000 100%);
+  /* background: linear-gradient(to right,#e7be64 0%,#000000 100%); */
+  background-color: rgba(133, 133, 133, 0.644);
+
   width: 100%;
   height: 100px;
   color: white;
@@ -155,6 +162,11 @@ z-index: 1000!important;
 
 @media (max-width: 767px) {
   .headerUsuario {
+    &::before{
+      background: -o-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: -ms-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: linear-gradient(to right, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+    }
     &::after {
       display: none;
     }
@@ -169,7 +181,9 @@ z-index: 1000!important;
     }
   }
   .fondoNegroSm {
-    background-color: black;
+    background: -o-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: -ms-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: linear-gradient(to right, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
     padding: 10px 0;
   }
 }
@@ -179,5 +193,121 @@ z-index: 1000!important;
   max-height: 25rem;
   & .carousel-item img{
     max-height: 25rem;
+  }
+}
+
+.form-group{
+  label{
+    font-size: 0.875em;
+  }
+}
+
+.imageCard{
+  height: 200px;
+}
+
+.adminCard{
+
+  transition: transform .5s;
+  cursor: pointer;
+  &:hover{
+    transform: translateX(10px) skew(2deg);
+    box-shadow: -4px 5px 10px black;
+    animation-name: boxshadowEfect;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+
+
+  }
+}
+
+.efectoBoxShadow{
+  &:hover{
+    box-shadow: -2px 2px 5px black;
+    animation-name: boxshadowEfectButton;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+  }
+}
+
+
+@keyframes boxshadowEfectButton{
+  0%{
+    box-shadow: 0 0 0 transparent;
+  }
+  75%{
+    box-shadow: -2px 2px 5px black;
+  }
+}
+
+
+@keyframes boxshadowEfect{
+  0%{
+    box-shadow: 0 0 0 transparent;
+  }
+  75%{
+    box-shadow: -4px 5px 10px black;
+  }
+}
+
+
+
+.imagenesMedio{
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 0;
+  img{
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.imagenesMedio2{
+  @extend .imagenesMedio;
+  left: 0;
+  right: auto;
+}
+
+.zmax{
+  z-index: 10;
+}
+
+@media (max-width:991px){
+  .imagenesMedio{
+    top: 70px;
+  }
+}
+
+@media (max-width:767px){
+  .headerUsuario{
+    &::before{
+      background: -o-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: -ms-linear-gradient(left, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+background: linear-gradient(to right, rgba(168,183,255,1) 0%, rgba(4,36,194,1) 100%);
+    }
+  }
+  .imagenesMedio{
+    top: 10px;
+  }
+}
+
+
+@media (max-width:575px){
+  .imagenesMedio{
+    top: 38px;
+  }
+}
+
+@media (max-width:450px){
+  .imagenesMedio{
+    top: 15px;
+    z-index: 1;
+  }
+}
+
+@media (max-width:341px){
+  .imagenesMedio{
+    top: 30px;
   }
 }

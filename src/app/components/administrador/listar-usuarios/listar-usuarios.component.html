@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12 table-responsive ">
+    <table class="table text-center table-striped table-hover">
+
+      <thead>
+        <th>Apellido y Nombre</th>
+        <th>Cedula</th>
+        <th>Año / Grado</th>
+        <th>Acciones</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="data.length === 0 && existeMayor">
+          <td colspan="4">Buscando Datos...</td>
+        </tr>
+        <tr *ngIf="data.length === 0 && !existeMayor">
+          <td colspan="4">No hay estudiantes inactivos</td>
+        </tr>
+        <tr *ngFor="let usuario of data">
+          <td> {{usuario.nombreCompleto}} </td>
+          <td> {{usuario.cedula}} </td>
+          <td>  </td>
+          <td>
+            <button class="btn btn-info efectoBoxShadow" (click)="openDialog(usuario.id)">
+              <img src="./assets/icons/searchIcon.svg" class="iconoButton" alt="Buscador">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

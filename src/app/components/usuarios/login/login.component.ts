@@ -32,7 +32,13 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.sharedSvc.lanzarCarga(true);
       this.loginSvc.loginEstudiante(this.formLogin).subscribe(res => {
-        this.router.navigate(['/formularios'])
+
+        if(res.usuario.tipo === 'Administrador'){
+          this.router.navigate(['/administrador'])
+        }
+        else{
+          this.router.navigate(['/formularios'])
+        }
         this.sharedSvc.lanzarCarga(false);
       },err => {this.sharedSvc.lanzarCarga(false)})
     }

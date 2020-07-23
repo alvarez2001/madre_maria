@@ -13,6 +13,8 @@ import { SharedService } from './services/shared/shared.service';
 import { InterceptorPrimary } from './services/interceptor/interceptor-principal.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
+import { MaterialModule } from './modules/shared/material/material.module';
+import { MensajeModalComponent } from './mensaje-modal/mensaje-modal.component';
 
 
 @NgModule({
@@ -22,10 +24,12 @@ import { LoginService } from './services/login/login.service';
     HeaderUsuarioComponent,
     MenuUsuarioComponent,
     FooterUsuarioComponent,
+    MensajeModalComponent,
 
 
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule,
+    MaterialModule
   ],
   providers: [
     SharedService,

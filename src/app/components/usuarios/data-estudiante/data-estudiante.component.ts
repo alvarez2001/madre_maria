@@ -53,8 +53,16 @@ export class DataEstudianteComponent implements OnInit {
 
   guardarData(form:FormGroup){
     if(form.valid){
+
+      const data:any = this.dataEstudiante;
+      for (const propName in data) {
+        if (data[propName] === null || data[propName] === undefined || data[propName] === '') {
+          delete data[propName];
+        }
+      }
+
       this.sharedSvc.lanzarCarga(true)
-      this.incripSvc.IdentificacionEstudiante(this.dataEstudiante).subscribe(
+      this.incripSvc.IdentificacionEstudiante(data).subscribe(
         res => {this.sharedSvc.lanzarCarga(false), this.router.navigate(['/formularios'])},
         err => this.sharedSvc.lanzarCarga(false)
       )

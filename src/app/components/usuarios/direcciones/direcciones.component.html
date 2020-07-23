@@ -70,6 +70,8 @@
               <input
                 name="nuevoParentesco"
                 [required]="otroParentesco === 'Otros'"
+                [(ngModel)]="Nuevoparentesco"
+                [ngModelOptions]="{standalone: true}"
                 type="text"
                 placeholder="Ej: Tio"
                 class="form-control"
@@ -165,6 +167,8 @@
               <input
                 name="otroPiso"
                 type="text"
+                [(ngModel)]="nuevoPiso"
+                [ngModelOptions]="{standalone: true}"
                 [required]="formTipoVivienda.controls['piso'].value === 'Otros'"
                 placeholder="Ej: Piedra"
                 class="form-control"
@@ -185,6 +189,8 @@
                 name="otroTecho"
                 type="text"
                 [required]="formTipoVivienda.controls['techo'].value === 'Otros'"
+                [(ngModel)]="nuevoTecho"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="Ej: Madera"
                 class="form-control"
               />
@@ -364,7 +370,7 @@
                 Anterior
               </button>
 
-              <button type="submit" [disabled]="formCasoEmergencia.invalid || formTipoVivienda.invalid || formMedioTransporte.invalid" class="btn btn-success mx-1" matStepperNext>
+              <button type="submit"  class="btn btn-success mx-1" matStepperNext>
                 Guardar y continuar
               </button>
             </div>

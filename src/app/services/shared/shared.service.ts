@@ -39,11 +39,11 @@ export class SharedService {
   }
 
 
-  mostrarAlertaError(err:HttpErrorResponse) {
+  mostrarAlertaError(err:any) {
     const datos = document.createElement('ul');
     datos.classList.add('listaErrores');
 
-    if(err.error instanceof Object){
+    if(err?.error instanceof Object){
       for (const prop in err.error) {
 
         const li = document.createElement('li');
@@ -53,9 +53,15 @@ export class SharedService {
         datos.appendChild(li);
       }
     }else{
-      const li = document.createElement('li');
+        const li = document.createElement('li');
         li.classList.add('listaErrores__item');
-        const text = document.createTextNode(err.error);
+        let text:any;
+        if(err.error){
+           text = document.createTextNode(err.error);
+        }else{
+          text = document.createTextNode(err)
+        }
+
         li.appendChild(text);
         datos.appendChild(li);
     }

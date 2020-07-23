@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { RegistroEstudiante } from 'src/app/components/usuarios/registro-estudiante/registroEstudiante';
 import { LoginModel } from 'src/app/components/usuarios/login/login.model';
 import { map } from 'rxjs/operators';
+import { Usuario } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class LoginService {
   regresarEstudiante():any{
     return sessionStorage.getItem('estudiante')
   }
-  regresarUsuario():object | null{
+  regresarUsuario():any | null{
     const data:any = sessionStorage.getItem('usuario');
-    const datos:object | null = JSON.parse(data)
+    const datos:Usuario | null = JSON.parse(data)
     return datos
   }
 
@@ -37,8 +38,12 @@ export class LoginService {
   loginEstudiante(data:LoginModel):Observable<any>{
     return this.http.post(this.url+'login',data).pipe(
       map((datos:any) => {
+        console.log(datos)
         sessionStorage.setItem('token',datos.access_token);
-        sessionStorage.setItem('estudiante', datos.estudiante.id);
+        if(datos.estudiante){
+          sessionStorage.setItem('estudiante', datos.estudiante.id);
+        }
+
         sessionStorage.setItem('usuario', JSON.stringify(datos.usuario))
         return datos
       })
