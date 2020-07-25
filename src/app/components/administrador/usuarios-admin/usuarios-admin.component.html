@@ -3,16 +3,31 @@
   <div class="col-12 col-md-3">
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action" routerLinkActive="active" [routerLink]="['agregar']" >
-        Agregar
+        Agregar administrador
       </a>
       <a class="list-group-item list-group-item-action" routerLinkActive="active" [routerLink]="['listar']">
-        Listar
+        Listar estudiantes <small>(Inactivos)</small>
       </a>
+
+      <a class="list-group-item list-group-item-action" [routerLink]="['listar-activos']" routerLinkActive="active" >
+        Listar estudiantes <small>(Activos)</small>
+      </a>
+
+      <a class="list-group-item list-group-item-action" [routerLink]="['consultar-usuario']" routerLinkActive="active" >
+        Consultar usuario
+      </a>
+
     </div>
+
   </div>
 
 
   <div class="col-12 col-md-9">
+
+    <div class="col-12 pb-3">
+      <h2 class="text-center text-uppercase">Usuarios</h2>
+    </div>
+
     <div class="tab-content" id="nav-tabContent">
       <router-outlet></router-outlet>
     </div>

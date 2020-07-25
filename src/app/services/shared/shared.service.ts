@@ -80,7 +80,9 @@ export class SharedService {
   private mensajeAlerta(datos: DocumentAndElementEventHandlers) {
     return Swal.fire({
       title: 'Error',
-      icon: 'error',
+      imageUrl: 'assets/imgs/madre/errores.png',
+      imageWidth: 200,
+      imageHeight: 200,
       html: datos,
     });
   }

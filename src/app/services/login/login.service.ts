@@ -6,6 +6,8 @@ import { RegistroEstudiante } from 'src/app/components/usuarios/registro-estudia
 import { LoginModel } from 'src/app/components/usuarios/login/login.model';
 import { map } from 'rxjs/operators';
 import { Usuario } from 'src/app/models';
+import { SharedService } from '../shared/shared.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ import { Usuario } from 'src/app/models';
 export class LoginService {
 
   private url:string
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private sharedSvc:SharedService, private route:Router) {
     this.url = Global.url;
    }
 
@@ -23,7 +25,9 @@ export class LoginService {
     return token;
   }
   regresarEstudiante():any{
-    return sessionStorage.getItem('estudiante')
+    const devuelve:any = sessionStorage.getItem('estudiante');
+    const decodificar = atob(devuelve)
+    return decodificar;
   }
   regresarUsuario():any | null{
     const data:any = sessionStorage.getItem('usuario');
@@ -32,16 +36,33 @@ export class LoginService {
   }
 
 
+  /* logout */
+
+  logoutUsuario():Observable<any>{
+    this.sharedSvc.lanzarCarga(true)
+    return this.http.get(this.url+'logout').pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false)
+        return result
+      })
+    )
+  }
+
+  borrarDatos(res:string){
+    sessionStorage.clear();
+    this.sharedSvc.mensajeSuccessAlerta(res)
+    this.route.navigate(['/'])
+  }
 
 
 
   loginEstudiante(data:LoginModel):Observable<any>{
     return this.http.post(this.url+'login',data).pipe(
       map((datos:any) => {
-        console.log(datos)
         sessionStorage.setItem('token',datos.access_token);
         if(datos.estudiante){
-          sessionStorage.setItem('estudiante', datos.estudiante.id);
+          const estudiante = btoa(datos.estudiante.id)
+          sessionStorage.setItem('estudiante', estudiante);
         }
 
         sessionStorage.setItem('usuario', JSON.stringify(datos.usuario))

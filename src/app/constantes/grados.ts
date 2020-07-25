@@ -43,9 +43,9 @@ export const ubicacion = [
 
 
 export const tipoInstitucion = [
-  'Publico',
+  'Público',
   'Privado',
-  'Subvencionado'
+  'Subvencionado (AVEC)'
 ]
 
 export const municipios = [

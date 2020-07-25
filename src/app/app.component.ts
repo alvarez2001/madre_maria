@@ -14,9 +14,7 @@ export class AppComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.dialog.open(MensajeModalComponent, {
       maxHeight:'100vh',
-      width:'500px',
-
-
+      width:'450px',
     });
   }
   ngAfterViewInit(){

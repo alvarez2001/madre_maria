@@ -1,59 +1,104 @@
 <h2 mat-dialog-title class="text-center">Detalle de la estudiante</h2>
 <mat-dialog-content >
 
-  <div class="row" *ngIf="usuario">
-    <div class="col-12 form-group  col-md-8">
-      <label for="usuario">Apellidos y Nombres:</label>
-      <input type="text" name="usuario" [title]="usuario.nombreCompleto" disabled [ngModel]="usuario.nombreCompleto" class="form-control">
-    </div>
+  <fieldset *ngIf="usuario">
 
-    <div class="col-12 form-group  col-md-4">
-      <label for="cedula">Cedula:</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text"> {{usuario.nacionalidad}} </span>
+    <legend>Datos de la estudiante</legend>
+
+    <div class="row">
+      <div class="col-12 form-group  col-md-8">
+        <label for="usuario">Apellidos y Nombres:</label>
+        <input type="text" name="usuario" [title]="usuario.nombreCompleto" disabled [ngModel]="usuario.nombreCompleto" class="form-control">
+      </div>
+
+      <div class="col-12 form-group  col-md-4">
+        <label for="cedula">Cédula:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> {{usuario.nacionalidad}} </span>
+          </div>
+          <input type="text" name="cedula" readonly [title]="usuario.cedula" [ngModel]="usuario.cedula" class="form-control">
         </div>
-        <input type="text" name="cedula" readonly [title]="usuario.cedula" [(ngModel)]="usuario.cedula" class="form-control">
+      </div>
+
+      <div class="col-12 form-group  col-md-4">
+        <label for="casa_hogar">¿Pertenece a la casa hogar?:</label>
+        <input type="text" name="casa_hogar" [title]="usuario.casa_hogar" readonly [ngModel]="usuario.casa_hogar" class="form-control">
+      </div>
+
+      <div class="col-12 form-group  col-md-4">
+        <label for="tipo">Tipo de solicitud:</label>
+        <input type="text" name="tipo" [title]="usuario.cupo.tipo" readonly [ngModel]="usuario.cupo.tipo" class="form-control">
+      </div>
+
+      <div class="col-12 form-group col-md-4">
+        <label for="grado">Año / Grado</label>
+        <input type="text" name="grado" [title]="usuario.cupo.grado" [ngModel]="usuario.cupo.grado" readonly class="form-control">
+      </div>
+
+      <div class="col-12 form-group col-md-8 ">
+        <label for="email">Email del estudiante:</label>
+        <input type="text" name="email" [title]="usuario.email" readonly [ngModel]="usuario.email" class="form-control">
+      </div>
+
+      <div class="col-12 form-group col-md-4" *ngIf="usuario.guarderia">
+        <label for="guarderia">Guardería</label>
+        <input type="text" name="guarderia" [title]="usuario.guarderia" [ngModel]="usuario.guarderia" readonly class="form-control">
       </div>
     </div>
 
-    <div class="col-12 form-group  col-md-4">
-      <label for="celular">Celular:</label>
-      <input type="text" name="celular" [title]="usuario.celular" readonly [(ngModel)]="usuario.celular" class="form-control">
+    <legend>Datos del representante</legend>
+
+    <div class="row">
+      <div class="col-12 form-group col-md-8">
+        <label for="">Apellidos y Nombres</label>
+        <input type="text" readonly [ngModel]="nombresApellidos" class="form-control" [title]="nombresApellidos">
+      </div>
+
+
+      <div class="col-12 form-group  col-md-4">
+        <label for="cedula">Cédula:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> {{usuario.representante.nacionalidad}} </span>
+          </div>
+          <input type="text" name="cedula" readonly [title]="usuario.representante.cedula" [ngModel]="usuario.representante.cedula" class="form-control">
+        </div>
+      </div>
+
+      <div class="col-12 form-group col-md-8">
+        <label for="">Email</label>
+        <input type="text" class="form-control" readonly [ngModel]="usuario.representante.email" [title]="usuario.representante.email">
+      </div>
+
+      <div class="col-12 form-group col-md-4">
+        <label for="">Parentesco</label>
+        <input type="text" class="form-control" readonly [ngModel]="usuario.representante.parentesco" [title]="usuario.representante.parentesco">
+      </div>
+
+      <div class="col-12 form-group col-md-4">
+        <label for="">Celular</label>
+        <input type="text" class="form-control" readonly [ngModel]="usuario.representante.celular" [title]="usuario.representante.celular">
+      </div>
+
+      <div class="col-12 form-group col-md-4">
+        <label for="">Ocupación</label>
+        <input type="text" class="form-control" readonly [ngModel]="usuario.representante.ocupacion" [title]="usuario.representante.ocupacion">
+      </div>
+
+
+
+
     </div>
 
-    <div class="col-12 form-group  col-md-4">
-      <label for="status">Status:</label>
-      <input type="text" name="status" [title]="usuario.status" readonly [(ngModel)]="usuario.status" class="form-control">
-    </div>
+  </fieldset>
 
-    <div class="col-12 form-group  col-md-4">
-      <label for="tipo">Tipo de usuario:</label>
-      <input type="text" name="tipo" [title]="usuario.tipo" readonly [(ngModel)]="usuario.tipo" class="form-control">
-    </div>
-
-    <div class="col-12 form-group col-md-8 ">
-      <label for="email">Email del usuario:</label>
-      <input type="text" name="email" [title]="usuario.email" readonly [(ngModel)]="usuario.email" class="form-control">
-    </div>
-
-    <div class="col-12 form-group col-md-4">
-      <label for="grado">Año / Grado</label>
-      <input type="text" name="grado" [title]="" readonly class="form-control">
-    </div>
-
-
-
-
-
-
-
-
-  </div>
 
 
 </mat-dialog-content>
 <mat-dialog-actions class="justify-content-end">
   <button class="btn btn-danger  mx-1" mat-dialog-close>Cerrar</button>
-  <button class="btn btn-success mx-1" (click)="activarUsuario()">Activar</button>
+  <button class="btn btn-success mx-1" (click)="activarUsuario()" *ngIf="data.aceptar">Activar</button>
+
+  <button class="btn btn-warning mx-1" (click)="desactivarUsuario()" *ngIf="!data.aceptar">Desactivar</button>
 </mat-dialog-actions>

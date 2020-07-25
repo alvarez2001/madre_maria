@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="text-center">Detalle del usuario</h2>
+<mat-dialog-content >
+<div class="row">
+  <div class="col-12 col-md-8 form-group">
+    <label for="nombres">Apellidos y Nombre</label>
+    <input type="text" name="nombres" readonly [title]="datos.nombreCompleto" [ngModel]="datos.nombreCompleto" class="form-control">
+  </div>
+
+  <div class="col-12 form-group  col-md-4">
+    <label for="cedula">Cédula:</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> {{datos.nacionalidad}} </span>
+      </div>
+      <input type="text" name="cedula" readonly [title]="datos.cedula" [ngModel]="datos.cedula" class="form-control">
+    </div>
+  </div>
+
+  <div class="col-12 form-group col-md-3">
+    <label for="status">Status</label>
+    <input type="text" readonly name="status" class="form-control" [ngModel]="datos.status" [title]="datos.status">
+  </div>
+
+  <div class="col-12 form-group col-md-3">
+    <label for="tipo">Tipo de usuario</label>
+    <input type="text" readonly name="tipo" class="form-control" [ngModel]="datos.tipo" [title]="datos.tipo">
+  </div>
+
+  <div class="col-12 form-group col-md-6">
+    <label for="email">Email</label>
+    <input type="text" readonly name="email" class="form-control" [ngModel]="datos.email" [title]="datos.email">
+  </div>
+
+  <div class="col-12 form-group" *ngIf="datos.celular">
+    <label for="celular">Celular</label>
+    <input type="text" class="form-control" name="celular" [ngModel]="datos.celular" [title]="datos.celular" >
+  </div>
+
+</div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions class="justify-content-end">
+  <button class="btn btn-danger  mx-1" mat-dialog-close>Cerrar</button>
+  <button class="btn btn-info mx-1" (click)="restablecerContrasena(datos.id)">Reestablecer contraseña</button>
+
+  <button class="btn btn-success mx-1" (click)="activarUsuario(datos.id)" *ngIf="datos.status !== 'Activo'">Activar</button>
+
+  <button class="btn btn-warning mx-1" (click)="desactivarUsuario(datos.id)" *ngIf="datos.status === 'Activo'">Desactivar</button>
+</mat-dialog-actions>

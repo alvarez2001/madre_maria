@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="text-center"> Registro de números de referencias </h2>
+<mat-dialog-content >
+  <form class="was-validated" #formulario="ngForm">
+    <div class="row">
+
+      <div class="col-md-4 col-12 form-group">
+        <label for="">Transferencia inscripción</label>
+        <input type="text" required pattern="[0-9]+" [(ngModel)]="inscripcion" name="inscripcion" class="form-control">
+      </div>
+
+      <div class="col-md-4 col-12 form-group">
+        <label for="">Transferencia mensualidad</label>
+        <input type="text" [(ngModel)]="mensualidad" name="mensualidad" required pattern="[0-9]+" class="form-control">
+      </div>
+
+      <div class="col-md-4 col-12 form-group">
+        <label for="">Transferencia consejo educativo</label>
+        <input type="text" required pattern="[0-9]+" [(ngModel)]="consejo" name="consejo" class="form-control">
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end">
+  <button class="btn btn-danger mx-1" [mat-dialog-close]="true">Cerrar</button>
+  <button class="btn btn-success mx-1" (click)="guardarInfo(formulario.form)">Guardar</button>
+</mat-dialog-actions>

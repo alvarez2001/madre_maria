@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -11,10 +12,12 @@ const routes: Routes = [
     path:'',
     loadChildren:()=>import('src/app/modules/usuarios/usuarios.module').then( m => m.UsuariosModule )
   },
-  /* {
+  {
     path:'administrador',
-    loadChildren:()=>import('src/app/modules/administrador/administrador.module').then( m => m.AdministradorModule)
-  }, */
+    loadChildren:()=>import('src/app/modules/administrador/administrador.module').then( m => m.AdministradorModule),
+    data:{pagina:'Procesos de Solicitud',tipoUsuario:'Administrador'},
+    canActivate:[AuthGuard]
+  },
   {
     path:'**',
     redirectTo:''

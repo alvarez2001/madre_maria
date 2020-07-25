@@ -1,10 +1,10 @@
 <form #formularioData="ngForm" class="was-validated" (ngSubmit)="guardarData(formularioData.form)">
-  <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
+  <app-textos-repetido class="col-12"></app-textos-repetido>
   <fieldset>
-    <legend>Datos de identificación de la madre</legend>
+    <legend>Datos de identificación {{title}}</legend>
     <div class="row">
 
-      <div class="col-md-6  form-group">
+      <div class="col-md-4 col-12  form-group">
         <label for="nacionalidad">Nacionalidad: *</label>
         <select required [(ngModel)]="datosPadre.nacionalidad" name="nacionalidad" #naciona="ngModel"  class="form-control">
           <option value="">Seleccione la nacionalidad</option>
@@ -12,14 +12,23 @@
         </select>
       </div>
 
-      <div class="col-md-6  form-group">
-        <label for="cedula">Cedula: *</label>
-        <input type="text" required [readOnly]="datosPadre.nacionalidad === ''" name="cedula" #cedula="ngModel" (blur)="verificarCedula($event)" class="form-control" [(ngModel)]="datosPadre.cedula" placeholder="Ej: 000000000" maxlength="11" pattern="[0-9]+">
+      <div class="col-md-4 col-12  form-group">
+        <label for="cedula">Cédula: *</label>
+        <input type="text" required [readOnly]="datosPadre.nacionalidad === ''" name="cedula" #cedula="ngModel" (keyup)="verificarCedula(cedula)" class="form-control" [(ngModel)]="datosPadre.cedula" placeholder="Ej: 000000000" maxlength="11" pattern="[0-9]+">
+      </div>
+
+      <div class="col-md-4 col-12  form-group">
+        <label for="vive">¿Vive?: *</label>
+        <select required [disabled]="blockDatos" (change)="dataVive(vive)" [(ngModel)]="datosPadre.vive" name="vive" #vive="ngModel"  class="form-control">
+          <option value="">Seleccione </option>
+          <option value="1">Vivo</option>
+          <option value="0">Fallecido</option>
+        </select>
       </div>
 
       <div class="col-md-4 col-lg-4 form-group">
         <label for="nombres">Nombres: *</label>
-        <input type="text" [readOnly]="blockDatos" required name="nombres" #nombres="ngModel" class="form-control" [(ngModel)]="datosPadre.nombres" placeholder="Ej: Angela del Carmen">
+        <input type="text" [readOnly]="blockDatos" required name="nombres" #nombres="ngModel" class="form-control" [(ngModel)]="datosPadre.nombres" placeholder="Ej: Joel Jose">
       </div>
 
       <div class="col-md-4 col-lg-4 form-group">
@@ -37,27 +46,27 @@
         <input type="date" [readOnly]="blockDatos" required name="fecha_nacimiento" #fecha_nacimiento="ngModel" class="form-control" [(ngModel)]="datosPadre.fecha_nacimiento" placeholder="Ej: DD/MM/YYYY">
       </div>
 
-      <div class="col-md-4 col-lg-6 form-group">
+      <div class="col-md-4 col-lg-6 form-group" *ngIf="viveofallecido" >
         <label for="direccion">Dirección de Hab: *</label>
         <input type="text" [readOnly]="blockDatos" required name="direccion" #direccion="ngModel" class="form-control" [(ngModel)]="datosPadre.direccion" placeholder="Ej: Avenida principal">
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group">
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="viveofallecido">
         <label for="celular">Celular:</label>
         <input type="text"  [readOnly]="blockDatos" name="celular" #celular="ngModel" class="form-control" [(ngModel)]="datosPadre.celular" placeholder="Ej: 04120000000" pattern="[0-9]+">
       </div>
 
-      <div class="col-md-4 col-lg-4 form-group">
+      <div class="col-md-4 col-lg-4 form-group" *ngIf="viveofallecido">
         <label for="email">Email: </label>
         <input type="text" [readOnly]="blockDatos" name="email" #email="ngModel" class="form-control" [(ngModel)]="datosPadre.email" placeholder="Ej: ejemplo@ejemplo.com" [pattern]="patronE">
       </div>
 
-      <div class="col-md-4 col-lg-4 form-group">
+      <div class="col-md-4 col-lg-4 form-group" *ngIf="viveofallecido">
         <label for="tlf_local">Teléfono Local:</label>
         <input type="text" [readOnly]="blockDatos" name="tlf_local" #tlf_local="ngModel" class="form-control" [(ngModel)]="datosPadre.tlf_local" placeholder="Ej: 02930000000" pattern="[0-9]+">
       </div>
 
-      <div class="col-md-4 col-lg-4 form-group">
+      <div class="col-md-4 col-lg-4 form-group" *ngIf="viveofallecido">
         <label for="estado_civil">Estado civil: *</label>
         <select required [disabled]="blockDatos" name="estado_civil" #estado_civil="ngModel" class="form-control" [(ngModel)]="datosPadre.estado_civil" >
           <option value="">Seleccione su estado civil</option>
@@ -68,15 +77,15 @@
 
       <!-- INFORMACION RELIGIOSA -->
 
-      <div class="col-md-4 col-lg-3 form-group">
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="viveofallecido">
         <label for="religion">Religión: * </label>
         <input type="text" required [readOnly]="blockDatos" name="religion" #religion="ngModel" class="form-control" [(ngModel)]="datosPadre.religion" placeholder="Ej: Católica" >
       </div>
 
 
 
-      <div class="col-md-4 col-lg-6 form-group">
-        <label for="reconciliacion">Frecuenta sacramento de reconciliación: *</label>
+      <div class="col-md-4 col-lg-6 form-group" *ngIf="viveofallecido">
+        <label for="reconciliacion">¿Frecuenta sacramento de reconciliación?: *</label>
         <select [disabled]="blockDatos" required name="reconciliacion" #reconciliacion="ngModel" class="form-control" [(ngModel)]="datosPadre.reconciliacion" >
           <option value="" selected disabled>Seleccione</option>
           <option value="Si">Si</option>
@@ -84,8 +93,8 @@
         </select>
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group">
-        <label for="va_misa">Asiste los domingos a misa: *</label>
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="viveofallecido">
+        <label for="va_misa">¿Asiste los domingos a misa?: *</label>
         <select required [disabled]="blockDatos" type="text" name="va_misa" #va_misa="ngModel" class="form-control" [(ngModel)]="datosPadre.va_misa" >
           <option value="" disabled selected>Seleccione</option>
           <option value="Si">Si</option>
@@ -93,8 +102,8 @@
           </select>
       </div>
 
-      <div class="col-md-4 col-lg-6 form-group">
-        <label for="grupo_apostolico">Pertenece a un grupo apostólico dentro de la iglesia católica: *</label>
+      <div class="col-md-4 col-lg-6 form-group" *ngIf="viveofallecido">
+        <label for="grupo_apostolico">¿Pertenece a un grupo apostólico dentro de la iglesia católica? *</label>
         <select [disabled]="blockDatos" required name="grupo_apostolico" #grupo_apostolico="ngModel" class="form-control" [(ngModel)]="datosPadre.grupo_apostolico" >
           <option value="" selected disabled>Seleccione</option>
           <option value="Si">Si</option>
@@ -103,16 +112,16 @@
       </div>
 
       <div class="col-md-4 col-lg-3 form-group" *ngIf="datosPadre.grupo_apostolico === 'Si'">
-        <label for="nombre_grupo">Cual?:</label>
+        <label for="nombre_grupo">¿Cuál?:</label>
         <input [readOnly]="blockDatos" [required]="datosPadre.grupo_apostolico === 'Si'" type="text" name="nombre_grupo" #nombre_grupo="ngModel" class="form-control" [(ngModel)]="datosPadre.nombre_grupo" placeholder="Ej: ">
       </div>
 
       <div class="col-md-4 col-lg-3 form-group" *ngIf="datosPadre.grupo_apostolico === 'Si'">
-        <label for="parroquia">En que parroquia?:</label>
+        <label for="parroquia">¿En que parroquia?:</label>
         <input [readOnly]="blockDatos" [required]="datosPadre.grupo_apostolico === 'Si'" type="text" name="parroquia" #parroquia="ngModel" class="form-control" [(ngModel)]="datosPadre.parroquia" placeholder="Ej: Santisima trinidad" >
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group">
+      <div class="col-md-4 col-lg-3 form-group" *ngIf="viveofallecido">
         <label for="nivel_academico">Nivel académico: *</label>
         <select required [disabled]="blockDatos" name="nivel_academico" #nivel_academico="ngModel" class="form-control" [(ngModel)]="datosPadre.nivel_academico" >
           <option value="" selected disabled>Seleccione</option>
@@ -120,8 +129,8 @@
         </select>
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-6': datosPadre.grupo_apostolico  === 'Si'}">
-        <label for="jubilado">Jubilado?: *</label>
+      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-6': datosPadre.grupo_apostolico  === 'Si'}" *ngIf="viveofallecido">
+        <label for="jubilado">¿Jubilado?: *</label>
         <select required [disabled]="blockDatos" name="jubilado" #jubilado="ngModel" class="form-control" [(ngModel)]="datosPadre.jubilado" >
           <option value="" selected disabled>Seleccione</option>
           <option value="Si">Si</option>
@@ -129,18 +138,18 @@
         </select>
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si'}">
-        <label for="profesion">Profesión?: *</label>
+      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si'}" *ngIf="viveofallecido">
+        <label for="profesion">¿Profesión?: *</label>
         <input required [readOnly]="blockDatos" type="text" name="profesion" #profesion="ngModel" class="form-control" [(ngModel)]="datosPadre.profesion" placeholder="Ej: Electricista" >
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si', 'col-lg-6': datosPadre.grupo_apostolico === 'Si'}">
-        <label for="ocupacion">Ocupación?: *</label>
+      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si', 'col-lg-6': datosPadre.grupo_apostolico === 'Si'}" *ngIf="viveofallecido">
+        <label for="ocupacion">¿Ocupación?: *</label>
         <input [readOnly]="blockDatos" required type="text" name="ocupacion" #ocupacion="ngModel" class="form-control" [(ngModel)]="datosPadre.ocupacion" placeholder="Ej: Profesor" >
       </div>
 
-      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si', 'col-lg-6': datosPadre.grupo_apostolico === 'Si'}">
-        <label for="trabaja">Trabaja actualmente?: *</label>
+      <div class="col-md-4 col-lg-3 form-group" [ngClass]="{'col-lg-4': datosPadre.grupo_apostolico  !== 'Si', 'col-lg-6': datosPadre.grupo_apostolico === 'Si'}" *ngIf="viveofallecido">
+        <label for="trabaja">¿Trabaja actualmente?: *</label>
         <select required [disabled]="blockDatos" name="trabaja" #trabaja="ngModel" class="form-control" [(ngModel)]="datosPadre.trabaja" >
           <option value="" selected disabled>Seleccione</option>
           <option value="Si">Si</option>
@@ -160,7 +169,7 @@
       </div>
 
       <div class="col-md-4 col-lg-3 form-group" *ngIf="datosPadre.trabaja === 'Si'">
-        <label for="empresa">¿Donde?: </label>
+        <label for="empresa">¿Dónde?: </label>
         <input [readOnly]="blockDatos" [required]="datosPadre.trabaja  === 'Si'" type="text" name="empresa" #empresa="ngModel" class="form-control" [(ngModel)]="datosPadre.empresa" placeholder="Ej: Cervecería Polar C.A." >
       </div>
 
@@ -171,7 +180,7 @@
 
 
       <div class="col-md-4 col-lg-6 form-group" *ngIf="datosPadre.trabaja === 'Si'">
-        <label for="viaja">Frecuencia que viaja fuera del país por trabajo: </label>
+        <label for="viaja">con qué frecuencia que viaja fuera del país por trabajo: </label>
         <select [disabled]="blockDatos" [required]="datosPadre.trabaja === 'Si'" type="text" name="viaja" #viaja="ngModel" class="form-control" [(ngModel)]="datosPadre.viaja" >
           <option value="" selected disabled>Seleccione</option>
           <option *ngFor="let via of frecuenciaVia" [value]="via">{{via}}</option>

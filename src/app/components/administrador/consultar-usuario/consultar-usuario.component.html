@@ -1,0 +1,25 @@
+<form>
+  <fieldset>
+    <div class="row">
+      <div class="col-12 col-md-6 mx-auto">
+        <label for="">Cédula del usuario</label>
+
+        <div class="input-group ">
+          <input type="text" name="informacion" [(ngModel)]="cedulaInformacion" class="form-control" placeholder="Ej: 0000000">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="informacionUsuario()">
+              <img
+              src="./assets/icons/searchIcon.svg"
+              alt="Búsqueda"
+              style="height: 20px;"
+            />
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </fieldset>
+</form>

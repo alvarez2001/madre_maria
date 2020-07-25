@@ -1,17 +1,15 @@
 <div>
-  <small class="text-danger col-12"
-    >Los campos marcados con ( * ) son requeridos</small
-  >
+  <app-textos-repetido class="col-12"></app-textos-repetido>
 
 
   <form class="was-validated" [formGroup]="plantelesCursados">
     <fieldset>
-      <legend>Planteles donde ha cursado la estudiante (Obligatorio)</legend>
+      <legend>Planteles dónde ha cursado la estudiante (Obligatorio)</legend>
 
       <div class="row">
         <div class="col-12 form-group col-md-3 ">
           <label for="ano">Año:</label>
-          <select type="text" name="ano" required formControlName="ano" class="form-control" >
+          <select type="text" name="ano" [required]="plantelesArray.controls['informacion'].value.length < 1" formControlName="ano" class="form-control" >
             <option value="">Seleccione un año escolar</option>
             <option *ngFor="let ano of anosEscolares" [value]="ano">{{ano}}</option>
           </select>
@@ -19,22 +17,32 @@
 
         <div class="col-12 form-group col-md-6">
           <label for="plantel">Nombre del plantel</label>
-          <input type="text" name="plantel" required class="form-control" formControlName="plantel" placeholder="Ej: U.E.I.A MADRE MARIA">
+          <input type="text" name="plantel" [required]="plantelesArray.controls['informacion'].value.length < 1" class="form-control" formControlName="plantel" placeholder="Ej: U.E.I.A MADRE MARIA">
         </div>
 
         <div class="col-12 form-group col-md-3">
           <label for="estado">Estado</label>
-          <input type="text" name="estado" required class="form-control" placeholder="Ej: Sucre" formControlName="estado">
+          <input type="text" name="estado" [required]="plantelesArray.controls['informacion'].value.length < 1" class="form-control" placeholder="Ej: Sucre" formControlName="estado">
         </div>
 
-        <div class="col-12 form-group col-md-6">
+
+        <div class="col-12 form-group col-md-4">
           <label for="ciudad">Ciudad</label>
-          <input type="text" name="ciudad" required class="form-control" placeholder="Ej: Cumana" formControlName="ciudad">
+          <input type="text" name="ciudad" [required]="plantelesArray.controls['informacion'].value.length < 1" class="form-control" placeholder="Ej: Cumana" formControlName="ciudad">
         </div>
 
-        <div class="col-12 form-group col-md-6">
-          <label for="calificacion">Calificación</label>
-          <input type="number" name="calificacion"  required class="form-control" placeholder="Ej: 7.5 | 12.32 | 19.45 | 7"  step=".01" min="0" max="20" formControlName="calificacion">
+        <div class="col-12 form-group col-md-4">
+          <label for="grado">Grado</label>
+          <select formControlName="grado" [required]="plantelesArray.controls['informacion'].value.length < 1" class="form-control">
+            <option value="">Seleccione</option>
+            <option value="2do grupo ( desde los 4 años )">2do grupo ( desde los 4 años )</option>
+            <option *ngFor="let grado of grados" [value]="grado"> {{grado}} </option>
+          </select>
+        </div>
+
+        <div class="col-12 form-group col-md-4">
+          <label for="calificacion">Literal</label>
+          <input type="text" name="calificacion"  [required]="plantelesArray.controls['informacion'].value.length < 1" class="form-control" placeholder="Ej: 7.5 | A | 19.5 | B"   formControlName="calificacion">
         </div>
 
         <div class="col-12 form-group text-center py-3">

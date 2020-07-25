@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-12 pb-4">
+    <h2 class="text-center">Búsqueda de planillas</h2>
+  </div>
+
+  <div class="col-12 form-group mx-auto pb-3 col-md-5">
+    <label for="">Buscar planilla por cédula</label>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="cedulaElegida"
+        placeholder="Ej: 00000000"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" (click)="generarPDF()">
+          <img
+            src="./assets/icons/searchIcon.svg"
+            alt="Búsqueda"
+            style="height: 20px;"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8 mx-auto row justify-content-between text-center" *ngIf="mostrar">
+
+      <a
+        [href]="url + 'planilla/socio/economica/' + idEstudiante"
+        target="_blank"
+        class="btn btn-primary mr-auto"
+        >Planilla socio-económico <strong>Descargar</strong></a
+      >
+
+
+      <a
+        [href]="url + 'planilla/inscripcion/' + idEstudiante"
+        target="_blank"
+        class="btn btn-primary ml-auto"
+        *ngIf="solicitud !== 'Preescolar'"
+        >Planilla {{ solicitud }} <strong>Descargar</strong></a
+      >
+
+      <a
+        [href]="url + 'planilla/inscripcion/preescolar/' + idEstudiante"
+        target="_blank"
+        class="btn btn-primary mx-1"
+        *ngIf="solicitud === 'Preescolar'"
+        >Planilla {{ solicitud }} <strong>Descargar</strong></a
+      >
+  </div>
+</div>

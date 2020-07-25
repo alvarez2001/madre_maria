@@ -1,7 +1,5 @@
 <div>
-  <small class="text-danger col-12"
-    >Los campos marcados con ( * ) son requeridos</small
-  >
+<app-textos-repetido class="col-12"></app-textos-repetido>
 
   <!-- ESTRUCTURA FAMILIAR ( OTRAS PERSONAS QUE RESIDEN EN EL HOGAR ) -->
 
@@ -49,6 +47,7 @@
               >
                 Añadir hermana
               </button>
+              .
             </div>
 
             <div class="col-12 table-responsive">
@@ -76,11 +75,17 @@
               </table>
             </div>
 
+
+            <div class="col-12 text-center">
+              <small class="text-danger">En caso de no poseer hermanas en la institución presione siguiente</small>
+            </div>
+
             <div class="col-12 text-center pt-3">
               <button type="button" class="btn btn-secondary px-3" matStepperNext>
                 Siguiente
               </button>
             </div>
+
           </div>
         </fieldset>
       </form>
@@ -93,7 +98,7 @@
         <ng-template matStepLabel>Estructura familiar</ng-template>
         <fieldset>
           <legend>
-            Estructura familiar (Otras personas que residen en el hogar)
+            Estructura Socio-económica
           </legend>
           <div class="row pb-2">
             <div class="col-12 col-md-4 form-group">
@@ -254,7 +259,7 @@
       <ng-template matStepLabel>Número de hermanos</ng-template>
       <form [formGroup]="terceroFormGroup" class="was-validated" (ngSubmit)="guardarData()">
         <fieldset>
-          <legend>Numero de hermanos(a)</legend>
+          <legend>Número de hermanos(a)</legend>
           <div class="row">
             <div class="col-12 col-md-4 form-group">
               <label for="numeroHermanos">Varones: *</label>
@@ -282,7 +287,7 @@
             </div>
 
             <div class="col-12 col-md-4 form-group">
-              <label for="cuantosViven">Cuántos viven con ella? *</label>
+              <label for="cuantosViven">¿Cuántos viven con ella? *</label>
               <input
                 type="text"
                 required

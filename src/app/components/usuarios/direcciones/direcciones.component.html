@@ -1,7 +1,5 @@
 <div>
-  <small class="text-danger col-12"
-    >Los campos marcados con ( * ) son requeridos</small
-  >
+  <app-textos-repetido class="col-12"></app-textos-repetido>
 
   <mat-horizontal-stepper linear #linear>
     <mat-step [stepControl]="formCasoEmergencia">
@@ -66,7 +64,7 @@
                 'col-md-4': otroParentesco !== 'Otros'
               }"
             >
-              <label for="nuevoParentesco">Quien? *</label>
+              <label for="nuevoParentesco">¿Quién? *</label>
               <input
                 name="nuevoParentesco"
                 [required]="otroParentesco === 'Otros'"
@@ -163,7 +161,7 @@
             </div>
 
             <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['piso'].value !== 'Otros', 'col-md-3':formTipoVivienda.controls['piso'].value === 'Otros'}"*ngIf="formTipoVivienda.controls['piso'].value === 'Otros'">
-              <label for="otroPiso">Cual?</label>
+              <label for="otroPiso">¿Cuál?</label>
               <input
                 name="otroPiso"
                 type="text"
@@ -184,7 +182,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4" *ngIf="formTipoVivienda.controls['techo'].value === 'Otros'">
-              <label for="otroTecho">Cual?: *</label>
+              <label for="otroTecho">¿Cuál?: *</label>
               <input
                 name="otroTecho"
                 type="text"
@@ -197,7 +195,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="agua">Dispone de agua? *</label>
+              <label for="agua">¿Dispone de agua? *</label>
               <select formControlName="agua" name="agua" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -206,7 +204,7 @@
             </div>
 
             <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
-              <label for="electricidad">Dispone de electricidad? *</label>
+              <label for="electricidad">¿Dispone de electricidad? *</label>
               <select formControlName="electricidad" name="electricidad" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -215,7 +213,7 @@
             </div>
 
             <div class="col-12 form-group" [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
-              <label for="cloacas">Dispone de cloacas? *</label>
+              <label for="cloacas">¿Dispone de cloacas? *</label>
               <select formControlName="cloacas" name="cloacas" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -224,7 +222,7 @@
             </div>
 
             <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
-              <label for="gas">Dispone de gas? *</label>
+              <label for="gas">¿Dispone de gas? *</label>
               <select formControlName="gas" name="gas" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -233,7 +231,7 @@
             </div>
 
             <div class="col-12 form-group " [ngClass]="{'col-md-4':formTipoVivienda.controls['techo'].value !== 'Otros', 'col-md-3': formTipoVivienda.controls['techo'].value === 'Otros'}">
-              <label for="aseo">Dispone de aseo? *</label>
+              <label for="aseo">¿Dispone de aseo? *</label>
               <select formControlName="aseo" name="aseo" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -242,7 +240,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="telefono_vivienda">Dispone de teléfono?</label>
+              <label for="telefono_vivienda">¿Dispone de teléfono?</label>
               <select formControlName="telefono_vivienda" name="telefono_vivienda" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -251,7 +249,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="celular_vivienda">Dispone de celular?</label>
+              <label for="celular_vivienda">¿Dispone de celular?</label>
               <select formControlName="celular_vivienda" name="celular_vivienda" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -260,7 +258,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="tvcable_vivienda">Dispone de TV por cable?</label>
+              <label for="tvcable_vivienda">¿Dispone de TV por cable?</label>
               <select formControlName="tvcable_vivienda" name="tvcable_vivienda" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -269,7 +267,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="internet_vivienda">Dispone de internet?</label>
+              <label for="internet_vivienda">¿Dispone de internet?</label>
               <select formControlName="internet_vivienda" name="internet_vivienda" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -278,7 +276,7 @@
             </div>
 
             <div class="col-12 form-group col-md-4">
-              <label for="computador">Dispone de computador?</label>
+              <label for="computador">¿Dispone de computador?</label>
               <select formControlName="computador" name="computador" required class="form-control">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Si">Si</option>
@@ -322,46 +320,46 @@
             </div>
 
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="marca_vehiculo">Marca:</label>
-              <input type="text" class="form-control" formControlName="marca_vehiculo" name="marca_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" placeholder="Ej: Ford">
+              <input type="text" class="form-control" formControlName="marca_vehiculo" name="marca_vehiculo"  placeholder="Ej: Ford">
             </div>
 
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="ano_vehiculo">Año:</label>
-              <input type="number" min="0" max="2025" name="ano_vehiculo" formControlName="ano_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]"class="form-control"  placeholder="Ej: 2015">
+              <input type="number" min="0" max="2025" name="ano_vehiculo" formControlName="ano_vehiculo" class="form-control"  placeholder="Ej: 2015">
             </div>
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="modelo_vehiculo">Modelo:</label>
-              <input type="text"  name="modelo_vehiculo" formControlName="modelo_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Fiesta">
+              <input type="text"  name="modelo_vehiculo" formControlName="modelo_vehiculo"  class="form-control" placeholder="Ej: Fiesta">
             </div>
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="placa_vehiculo">Placa:</label>
-              <input type="text"  name="placa_vehiculo" formControlName="placa_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: aCb-231">
+              <input type="text"  name="placa_vehiculo" formControlName="placa_vehiculo"  class="form-control" placeholder="Ej: aCb-231">
             </div>
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="color">Color:</label>
-              <input type="text"  name="color" formControlName="color" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Azul">
+              <input type="text"  name="color" formControlName="color"  class="form-control" placeholder="Ej: Azul">
             </div>
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="responsable_vehiculo">Responsable:</label>
-              <input type="text"  name="responsable_vehiculo" formControlName="responsable_vehiculo" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: Jesus Jose Hernandez Suarez">
+              <input type="text"  name="responsable_vehiculo" formControlName="responsable_vehiculo"  class="form-control" placeholder="Ej: Jesus Jose Hernandez Suarez">
             </div>
 
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
-              <label for="cedula_transporte">Cedula</label>
-              <input type="text" pattern="[0-9]+" maxlength="11"  name="cedula_transporte" formControlName="cedula_transporte" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: 0000000">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
+              <label for="cedula_transporte">Cédula</label>
+              <input type="text" pattern="[0-9]+" maxlength="11"  name="cedula_transporte" formControlName="cedula_transporte"  class="form-control" placeholder="Ej: 0000000">
             </div>
 
-            <div class="col-12 form-group col-md-3" *ngIf="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]">
+            <div class="col-12 form-group col-md-3" *ngIf="disponeTransporte">
               <label for="celular_transporte">Celular</label>
-              <input pattern="[0-9]+" maxlength="11" type="text"  name="celular_transporte" formControlName="celular_transporte" [required]="formMedioTransporte.controls['tipo_transporte'].value === medioTransporte[3]" class="form-control" placeholder="Ej: 04160000000">
+              <input pattern="[0-9]+" maxlength="11" type="text"  name="celular_transporte" formControlName="celular_transporte"  class="form-control" placeholder="Ej: 04160000000">
             </div>
 
 

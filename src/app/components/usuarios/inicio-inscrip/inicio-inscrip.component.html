@@ -13,7 +13,7 @@
     </div>
 
     <div class="list-group">
-      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 1, 'disabled': current !== 1}">
+      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 1 , 'disabled': current !== 1 }">
         Datos del representante
         <span class="badge  badge-pill" [ngClass]="{
           'badge-warning':current < 1,
@@ -21,7 +21,7 @@
           'badge-success': current > 1
         }">{{textoCurrent(1)}}</span>
       </a>
-      <a [routerLink]="['datos-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action " [ngClass]="{'active': current === 2, 'disabled': current !== 2}">
+      <a [routerLink]="['datos-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action " [ngClass]="{'active': current === 2 && !bloquear, 'disabled': current !== 2 || bloquear}">
         Datos de la estudiante
         <span class="badge  badge-pill" [ngClass]="{
           'badge-warning':current < 2,
@@ -29,7 +29,7 @@
           'badge-success': current > 2
         }">{{textoCurrent(2)}}</span>
       </a>
-      <a [routerLink]="['datos-padre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 3, 'disabled': current !== 3}">
+      <a [routerLink]="['datos-padre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 3, 'disabled': current !== 3 }">
         Datos del padre
         <span class="badge  badge-pill" [ngClass]="{
           'badge-warning':current < 3,
@@ -37,7 +37,7 @@
           'badge-success': current > 3
         }">{{textoCurrent(3)}}</span>
       </a>
-      <a [routerLink]="['datos-madre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 4, 'disabled': current !== 4}">
+      <a [routerLink]="['datos-madre']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 4, 'disabled': current !== 4 }">
         Datos de la madre
         <span class="badge  badge-pill" [ngClass]="{
           'badge-warning':current < 4,
@@ -45,7 +45,7 @@
           'badge-success': current > 4
         }">{{textoCurrent(4)}}</span>
       </a>
-      <a [routerLink]="['hermanas-plantel']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"  [ngClass]="{'active': current === 5, 'disabled': current !== 5}">
+      <a [routerLink]="['hermanas-plantel']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"  [ngClass]="{'active': current === 5, 'disabled': current !== 5 }">
 
         Hermanas en el plantel - Estructura familiar
         <span class="badge  badge-pill" [ngClass]="{
@@ -55,7 +55,7 @@
         }">{{textoCurrent(5)}}</span>
       </a>
 
-      <a [routerLink]="['direcciones-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 6, 'disabled': current !== 6}">
+      <a [routerLink]="['direcciones-estudiante']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 6, 'disabled': current !== 6 }">
         Caso de emergencia - tipo de vivienda - medio de transporte
         <span class="badge  badge-pill" [ngClass]="{
           'badge-warning':current < 6,
@@ -64,7 +64,7 @@
         }">{{textoCurrent(6)}}</span>
       </a>
 
-      <a [routerLink]="['planteles']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 7, 'disabled': current !== 7}">
+      <a [routerLink]="['planteles']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 7, 'disabled': current !== 7 }">
 
         Planteles donde ha cursado
         <span class="badge  badge-pill" [ngClass]="{
@@ -74,7 +74,7 @@
         }">{{textoCurrent(7)}}</span>
       </a>
 
-      <a [routerLink]="['balances']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 8, 'disabled': current !== 8}">
+      <a [routerLink]="['balances']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 8, 'disabled': current !== 8 }">
 
         Balances
         <span class="badge  badge-pill" [ngClass]="{
@@ -83,11 +83,45 @@
           'badge-success': current > 8
         }">{{textoCurrent(8)}}</span>
       </a>
+
+      <a [routerLink]="['distribucion']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 9, 'disabled': current !== 9 }" *ngIf="solicitud === 'Preescolar'">
+
+        Distribución ( Preescolar )
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 9,
+          'badge-info':current === 9,
+          'badge-success': current > 9
+        }">{{textoCurrent(9)}}</span>
+      </a>
+
+      <a [routerLink]="['antecedentes']" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" [ngClass]="{'active': current === 10, 'disabled': current !== 10 }" *ngIf="solicitud === 'Preescolar'">
+
+        Antecedentes ( Preescolar )
+        <span class="badge  badge-pill" [ngClass]="{
+          'badge-warning':current < 10,
+          'badge-info':current === 10,
+          'badge-success': current > 10
+        }">{{textoCurrent(10)}}</span>
+      </a>
     </div>
 
-    <div class="d-block pt-3" *ngIf="porcentaje === 100">
-      <a [href]="url+'planilla/socio/economica/'+idEstudiante" target="_blank" class="btn btn-primary">Planilla socio-económico <strong>Descargar</strong></a>
+    <div class=" pt-3 row text-center" *ngIf="porcentaje === 100">
+      <div class="col-12 col-md-6">
+        <a  [href]="url+'planilla/socio/economica/'+idEstudiante" target="_blank" class="btn btn-primary">Planilla socio-económico <strong>Descargar</strong></a>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <a [href]="url+'planilla/inscripcion/'+idEstudiante" target="_blank" class="btn btn-primary" *ngIf="solicitud !== 'Preescolar'">Planilla {{solicitud}} <strong>Descargar</strong></a>
+
+        <a [href]="url+'planilla/inscripcion/preescolar/'+idEstudiante" target="_blank" class="btn btn-primary" *ngIf="solicitud === 'Preescolar'">Planilla {{solicitud}} <strong>Descargar</strong></a>
+      </div>
+
+
+
     </div>
+
+
+
 
   </div>
 

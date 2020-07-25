@@ -1,0 +1,25 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item " [ngClass]="{
+      'disabled':paginate.current_page <= 1
+    }"
+
+    >
+      <button class="page-link" type="button" (click)="paginacionUrl(paginate.prev_page_url)"  tabindex="-1" >Anterior</button>
+    </li>
+
+
+
+    <li class="page-item">
+      <button class="page-link" type="button" >{{paginate.current_page}}</button>
+    </li>
+
+
+
+    <li  class="page-item" [ngClass]="{
+      'disabled':paginate.current_page >= paginate.last_page
+    }">
+      <button type="button" class="page-link" (click)="paginacionUrl(paginate.next_page_url)">Siguiente</button>
+    </li>
+  </ul>
+</nav>

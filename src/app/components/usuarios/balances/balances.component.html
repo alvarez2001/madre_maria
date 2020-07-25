@@ -1,7 +1,9 @@
 <div>
   <div class="row col-12">
-      <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
-      <small class="text-danger col-12">Ojo los decimales se separan con ( . ) </small>
+    <app-textos-repetido class="col-12"></app-textos-repetido>
+      <div class="col-12">
+        <small class="text-danger col-12">Ojo los decimales se separan con ( . ) </small>
+      </div>
   </div>
 
   <mat-horizontal-stepper linear #linear>
@@ -18,7 +20,7 @@
 
             <div class="col-12 form-group col-md-4">
               <label for="portador">Portador *</label>
-              <select [required]="relacionIngresos.value.balance.length <= 2" formControlName="portador"  name="portador" placeholder="Ej: 30000.12" class="form-control">
+              <select [required]="relacionIngresos.value.balance.length < 1" formControlName="portador"  name="portador" placeholder="Ej: 30000.12" class="form-control">
                 <option value="" selected disabled>Seleccione un portador</option>
                 <option *ngFor="let porta of portador" [value]="porta"> {{porta}} </option>
               </select>
@@ -136,7 +138,7 @@
           <div class="row">
 
             <div class="col-12 form-group col-md-3">
-              <label for="alimentacion">Alimentacion *</label>
+              <label for="alimentacion">Alimentación *</label>
               <input required formControlName="alimentacion"  name="alimentacion" placeholder="Ej: 30000.12" class="form-control" type="text" formateadorMiles>
             </div>
 

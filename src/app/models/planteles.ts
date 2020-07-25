@@ -6,6 +6,7 @@ export class PlantelesEstudiantes{
       obj['plantel'],
       obj['estado'],
       obj['ciudad'],
+      obj['grado'],
       obj['calificacion'],
     )
   }
@@ -15,6 +16,7 @@ export class PlantelesEstudiantes{
     public plantel:string,
     public estado:string,
     public ciudad:string,
+    public grado:string,
     public calificacion:number,
   ){}
 }

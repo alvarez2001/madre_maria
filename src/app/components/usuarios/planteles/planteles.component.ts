@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { anosEscolares } from 'src/app/constantes/grados';
+import { anosEscolares, Grados } from 'src/app/constantes/grados';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { PlantelesEstudiantes } from "src/app/models";
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
@@ -16,12 +16,16 @@ export class PlantelesComponent implements OnInit {
   anosEscolares:string[] = anosEscolares;
   plantelesCursados:FormGroup = new FormGroup({});
   plantelesArray:FormGroup = new FormGroup({});
+
+  grados:string[] = Grados;
+
   constructor(private fb : FormBuilder, private incripSvc:IncripcionService, private sharedSvc:SharedService, private router:Router) {
     this.plantelesCursados = this.fb.group({
       ano:new FormControl(''),
       plantel:new FormControl(''),
       estado:new FormControl(''),
       ciudad:new FormControl(''),
+      grado:new FormControl(''),
       calificacion:new FormControl(''),
     });
     this.plantelesArray = this.fb.group({
@@ -48,7 +52,7 @@ export class PlantelesComponent implements OnInit {
 
   agregarInformacion(){
     const valor = this.plantelesCursados.value;
-    if(valor.ano !== '' && valor.plantel !== '' && valor.estado !== '' && valor.ciudad !== '' && valor.calificacion !== ''){
+    if(valor.ano !== '' && valor.plantel !== '' && valor.estado !== '' && valor.ciudad !== '' && valor.calificacion !== '' && valor.grado !== ''){
       this.plantelesEstudiantes.push(
         this.fb.control(
           PlantelesEstudiantes.PlantelesObj(valor)

@@ -7,10 +7,14 @@ import { ListarUsuariosComponent } from '../../components/administrador/listar-u
 import { MaterialModule } from '../shared/material/material.module';
 import { DetalleUsuarioComponent } from '../../components/administrador/detalle-usuario/detalle-usuario.component';
 import { SharedModule } from '../shared/shared/shared.module';
+import { PaginacionComponent } from '../../components/administrador/paginacion/paginacion.component';
+import { ListarActivosEstudiantesComponent } from '../../components/administrador/listar-activos-estudiantes/listar-activos-estudiantes.component';
+import { ConsultarUsuarioComponent } from '../../components/administrador/consultar-usuario/consultar-usuario.component';
+import { DetalleUsuarioPersonalizadoComponent } from '../../components/administrador/detalle-usuario-personalizado/detalle-usuario-personalizado.component';
 
 
 @NgModule({
-  declarations: [InicioUsuarioAdminComponent, ListarUsuariosComponent,DetalleUsuarioComponent],
+  declarations: [InicioUsuarioAdminComponent, ListarUsuariosComponent,DetalleUsuarioComponent, PaginacionComponent, ListarActivosEstudiantesComponent, ConsultarUsuarioComponent, DetalleUsuarioPersonalizadoComponent],
   imports: [
     CommonModule,
     MaterialModule,

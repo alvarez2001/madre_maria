@@ -13,7 +13,8 @@ export class ListarUsuariosComponent implements OnInit {
 
   public data:Usuario[] = [];
   public existeMayor:boolean = true;
-  public paginacion?:Paginacion;
+  public paginacion!:Paginacion;
+  public estado:string = 'inactivos';
 
   constructor(private dialog: MatDialog, private usuarioSvc:UsuariosService) {}
 
@@ -23,10 +24,10 @@ export class ListarUsuariosComponent implements OnInit {
 
 
 
-  openDialog(id:number) {
+  openDialog(cedula:string,idEstudiante:number) {
     const dialogRef = this.dialog.open(DetalleUsuarioComponent,
       {
-        data:id,
+        data:{cedula, aceptar:true,idEstudiante},
         width:'1200px',
       });
 
@@ -35,12 +36,19 @@ export class ListarUsuariosComponent implements OnInit {
     });
   }
 
+  recibirPaginacion(paginate:Paginacion){
+
+    this.paginacion = paginate;
+    this.data = paginate.data.map( result => Usuario.UsuarioObj(result));
+  }
+
 
   private buscarUsuarios(){
     this.usuarioSvc.buscarTodosEstudiantesInactivos().subscribe(res => {
       if( res.data.length === 0){
         this.existeMayor = false;
       }
+
       this.data = res.data.map( value => Usuario.UsuarioObj(value))
       this.paginacion = res
     })

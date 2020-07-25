@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Nacionalidad, PatronEmail, estadoCivil, nivelAca, frecuenciaViaje } from 'src/app/constantes/grados';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, NgModel } from '@angular/forms';
 import { datosPadre } from './datos-padre';
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
 import { CedulaModel } from 'src/app/services/incripcion/cedula.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
+import { distinctUntilChanged, debounceTime, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-datos-padre',
@@ -14,7 +15,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styles: [],
   providers:[IncripcionService]
 })
-export class DatosPadreComponent implements OnInit {
+export class DatosPadreComponent implements OnInit,AfterViewInit {
   nacionalidad: any[];
   datosPadre: datosPadre;
   patronE:string;
@@ -22,6 +23,50 @@ export class DatosPadreComponent implements OnInit {
   NivelA:string[];
   frecuenciaVia:string[];
   blockDatos:boolean = true;
+  viveofallecido:boolean = false;
+  title:string = 'del padre';
+
+
+
+
+  @ViewChild('cedula')
+  children!: NgModel;
+
+  ngAfterViewInit(){
+    this.children.valueChanges?.pipe(
+      debounceTime(1500),
+      distinctUntilChanged(),
+      map(result => result !== '' ? result.trim(): '')
+    )
+    .subscribe(res => {
+      if(res.length > 6){
+        const dataCedula:CedulaModel = {
+          cedula:res
+        }
+        this.incripSvc.verificarCedulaPadre(dataCedula).subscribe(datos =>{
+          const estudiante = this.loginSvc.regresarUsuario();
+          if(typeof datos === 'object'){
+            this.incripSvc.mostrarMensajeConfirm(datos,estudiante).then(
+              (result:any) => {
+                if(result.value){
+                  this.incripSvc.asignarPadreExistente(datos.id).subscribe((res:any) => {
+                    this.route.navigate(['/formularios']);
+                    this.sharedSvc.mensajeSuccessAlerta(res)
+                  })
+                }else{
+                  this.blockDatos = true;
+                }
+              }
+            )
+          }else{
+            this.blockDatos = false;
+          }
+        })
+      }
+    })
+  }
+
+
 
 
   constructor(private incripSvc:IncripcionService, private loginSvc:LoginService, private route:Router, private sharedSvc:SharedService) {
@@ -31,6 +76,7 @@ export class DatosPadreComponent implements OnInit {
     this.Ecivil = estadoCivil;
     this.nacionalidad = Nacionalidad;
     this.datosPadre = {
+      vive:'',
       apellidos: '',
       nombres: '',
       nacionalidad: '',
@@ -65,10 +111,26 @@ export class DatosPadreComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
+
+  dataVive(vive:NgModel){
+    if(vive.value === "1"){
+      this.viveofallecido = true
+    }else{
+      this.viveofallecido = false;
+    }
+  }
 
   guardarData(form: FormGroup) {
-    if(form.valid){
+    if(form){
+      const data:any = this.datosPadre;
+      for (const propName in data) {
+        if (data[propName] === null || data[propName] === undefined || data[propName] === '') {
+          delete data[propName];
+        }
+      }
       this.incripSvc.asignarPadre(this.datosPadre).subscribe(res => {
         this.route.navigate(['/formularios']);
         this.sharedSvc.mensajeSuccessAlerta(res)
@@ -76,33 +138,6 @@ export class DatosPadreComponent implements OnInit {
     }
   }
 
-  verificarCedula(e:any){
-    const event = e.target.value
-    if(event.length > 6){
-      const datos:CedulaModel = {
-        cedula:event
-      }
-      this.incripSvc.verificarCedulaPadre(datos).subscribe(datos =>{
-        const estudiante = this.loginSvc.regresarUsuario();
-        if(typeof datos === 'object'){
-          this.incripSvc.mostrarMensajeConfirm(datos,estudiante).then(
-            (result:any) => {
-              if(result.value){
-                this.incripSvc.asignarPadreExistente(datos.id).subscribe((res:any) => {
-                  this.route.navigate(['/formularios']);
-                  this.sharedSvc.mensajeSuccessAlerta(res)
-                })
-              }else{
-                this.blockDatos = true;
-              }
-            }
-          )
-        }else{
-          this.blockDatos = false;
-        }
-      })
-    }
 
-  }
 
 }

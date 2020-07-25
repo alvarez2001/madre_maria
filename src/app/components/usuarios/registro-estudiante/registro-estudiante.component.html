@@ -1,4 +1,4 @@
-<div class="container login pt-4 mt-3">
+<div class="container animate__animated  animate__fadeInLeft login pt-4 mt-3">
   <form class="was-validated" (ngSubmit)="formRegistro()" [formGroup]="form">
     <small class="text-danger col-12">Los campos marcados con ( * ) son requeridos</small>
     <fieldset>
@@ -110,6 +110,23 @@
         </div>
 
         <div class="col-md-4 col-sm-6 form-group">
+          <label for="sangre_estudiante">Tipo de sangre: *</label>
+          <select name="sangre_estudiante" required class="form-control" formControlName="sangre_estudiante" >
+            <option value="">Seleccione tipo de sangre</option>
+            <option *ngFor="let sangre of tipoSangre" [value]="sangre">{{sangre}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-6 form-group">
+          <label for="factor_rh">Factor Rh: *</label>
+          <select formControlName="factor_rh" required name="factor_rh" class="form-control" >
+            <option value="" selected>Seleccione un Factor Rh</option>
+            <option *ngFor="let factor of factorRH" [value]="factor"> {{factor}}</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-4 col-sm-6 form-group">
           <label for="email_estudiante">Email:</label>
           <input autocomplete="off" type="email" class="form-control" name="email_estudiante" placeholder="Ej: ejemplo@ejempo.com"  formControlName="email_estudiante" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" />
         </div>
@@ -120,25 +137,17 @@
         </div>
 
 
-        <div class="col-md-4 col-sm-6 form-group">
-          <label for="sangre_estudiante">Tipo de sangre: *</label>
-          <select name="sangre_estudiante" class="form-control" formControlName="sangre_estudiante" >
-            <option value="">Seleccione tipo de sangre</option>
-            <option *ngFor="let sangre of tipoSangre" [value]="sangre">{{sangre}}</option>
-          </select>
-        </div>
 
-        <div class="col-md-4 col-sm-6 form-group">
-          <label for="factor_rh">Factor Rh: *</label>
-          <select formControlName="factor_rh" name="factor_rh" class="form-control" >
-            <option value="" selected>Seleccione un Factor Rh</option>
-            <option *ngFor="let factor of factorRH" [value]="factor"> {{factor}}</option>
-          </select>
-        </div>
 
         <div class="col-md-4 col-sm-6 form-group" *ngIf="getControls('tipo_solicitud').value === 'Preescolar'">
           <label for="guarderia">Guardería: </label>
-          <input type="text" name="guarderia" class="form-control"  placeholder="" formControlName="guarderia" [required]="getControls('guarderia').hasError('required')" >
+          <select type="text" name="guarderia" class="form-control"   formControlName="guarderia" [required]="getControls('guarderia').hasError('required')"
+
+          >
+          <option value="">Seleccione</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
         </div>
 
       </div>
@@ -202,6 +211,11 @@
         <div class="col-md-4 col-sm-6 form-group">
           <label for="tlf_representante">Teléfono: *</label>
           <input autocomplete="off" type="text" required class="form-control" name="tlf_representante"  placeholder="Ej: 0243000000" formControlName="tlf_representante"  pattern="[0-9]+"  maxlength="11"/>
+        </div>
+
+
+        <div class="col-12 form-group">
+          <small class="text-danger"> El email del representante sera el medio de comunicación entre la institución y usted </small>
         </div>
 
       </div>

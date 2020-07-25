@@ -1,0 +1,301 @@
+<div>
+  <app-textos-repetido class="col-12"></app-textos-repetido>
+
+  <mat-horizontal-stepper linear #linear>
+    <!-- HERMANAS QUE ESTUDIAN EN EL PLANTEL -->
+    <mat-step [stepControl]="formOne">
+      <form class="was-validated" [formGroup]="formOne">
+        <ng-template matStepLabel>¿Con qué frecuencia visita?</ng-template>
+
+        <fieldset>
+          <legend>¿Con qué frecuencia visita?</legend>
+
+          <div class="row" *ngIf="cargado">
+            <div class="col-12 col-md-4 form-group" *ngFor="let item of datos">
+              <label for="{{ item.control }}"
+                >{{ item.value | titlecase }} *</label
+              >
+              <select
+                required
+                [formControlName]="item.control"
+                class="form-control"
+              >
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let frecuen of frecuencia" [value]="frecuen">
+                  {{ frecuen | titlecase }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group text-center mt-4">
+              <button class="btn btn-secondary" matStepperNext>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- step2 -->
+    <mat-step [stepControl]="formTwo">
+      <form class="was-validated" [formGroup]="formTwo">
+        <ng-template matStepLabel>¿Con quién juega?</ng-template>
+
+        <fieldset>
+          <legend>¿Con quién juega?</legend>
+
+          <div class="row">
+            <div class="col-12 form-group col-md-4" *ngFor="let item of datos2">
+              <label for="{{ item.control }}">{{
+                item.value | titlecase
+              }}</label>
+              <select
+                required
+                class="form-control"
+                [formControlName]="item.control"
+              >
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let frecuen of frecuencia" [value]="frecuen">
+                  {{ frecuen | titlecase }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 mt-4 text-center">
+              <button class="btn btn-secondary mx-1" matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-secondary mx-1" matStepperNext>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+    <!-- STEP 3 -->
+
+    <mat-step [stepControl]="formThree">
+      <form class="was-validated" [formGroup]="formThree">
+        <ng-template matStepLabel
+          >¿Ha asistido alguna vez a consulta?</ng-template
+        >
+
+        <fieldset>
+          <legend>¿Ha asistido alguna vez a consulta con?:</legend>
+
+          <div class="row">
+            <div class="col-12 form-group col-md-6">
+              <label for="especialista">Especialista</label>
+              <select
+                required
+                class="form-control"
+                formControlName="especialista"
+              >
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let especialista of especialistas"
+                  [value]="especialista.control"
+                  >{{ especialista.value }}</option
+                >
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-6">
+              <label for="otro">¿Cuál?</label>
+              <input
+                type="text"
+                formControlName="otro"
+                class="form-control"
+                placeholder="Ej: Psicólogo"
+              />
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="porque">¿Por qué?</label>
+              <input
+                type="text"
+                required
+                formControlName="motivos"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-12 mt-4 text-center">
+              <button class="btn btn-secondary mx-1" matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-secondary mx-1" matStepperNext>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- step 4 -->
+
+    <mat-step [stepControl]="formFour">
+      <form class="was-validated" [formGroup]="formFour">
+        <ng-template matStepLabel>Antecedentes prenatales</ng-template>
+
+        <fieldset>
+          <legend>Antecedentes prenatales</legend>
+
+          <div class="row">
+            <div class="col-12 form-group col-md-4">
+              <label for="embarazo_prenatales">Embarazo</label>
+              <select
+                formControlName="embarazo_prenatales"
+                class="form-control"
+                required
+              >
+                <option value="" selected>Seleccione</option>
+                <option value="planificado">Planificado</option>
+                <option value="no planifiado">No planificado</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="enfermedad_embarazo"
+                >Enfermedades durante el embarazo</label
+              >
+              <select
+                formControlName="enfermedad_prenatales"
+                class="form-control"
+              >
+                <option value="" selected>Seleccione</option>
+                <option
+                  *ngFor="let enfermedad of enfermedades"
+                  [value]="enfermedad.control"
+                >
+                  {{ enfermedad.value | titlecase }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="">¿Trabajo la madre durante el embarazo?</label>
+              <select
+                class="form-control"
+                required
+                formControlName="trabajo_embarazo"
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="">Tipo de trabajo</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ej: "
+                formControlName="tipo_trabajo"
+              />
+            </div>
+
+            <div class="col-12 form-group col-md-8">
+              <label for=""
+                >¿Sufrió la madre algún accidente durante el embarazo?
+              </label>
+              <select
+                required
+                class="form-control"
+                formControlName="accidente_embarazo"
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="">Tipo de accidente</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ej: "
+                formControlName="explique_accidente"
+              />
+            </div>
+
+            <div class="col-12 mt-4 text-center">
+              <button class="btn btn-secondary mx-1" matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-secondary mx-1" matStepperNext>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- step 5 -->
+
+    <mat-step [stepControl]="formFive">
+      <form class="was-validated"  [formGroup]="formFive">
+        <ng-template matStepLabel>Antecedentes para-natales</ng-template>
+
+        <fieldset>
+          <legend>Antecedentes para-natales</legend>
+
+
+          <div class="row">
+
+            <div class="col-12 form-group col-md-4">
+              <label for="tipo_parto">¿Cómo fue el parto?</label>
+              <select formControlName="tipo_parto" class="form-control" required>
+                <option value="" selected disabled>Seleccione</option>
+                <option value="normal">Normal</option>
+                <option value="cesarea">Cesárea</option>
+                <option value="a termino">A termino</option>
+                <option value="prematuro">Prematuro</option>
+                <option value="forcet">Forcet</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="edad_parto">Edad de la madre en el momento del parto</label>
+              <input formControlName="edad_parto" min="0" max="99" type="number" class="form-control" placeholder="Ej: 30 " required>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="problema_embarazo">¿Surgió algún problema durante el parto?</label>
+              <select formControlName="problema_embarazo" class="form-control" required>
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="explique_problema">Explique</label>
+              <input formControlName="explique_problema" type="text" class="form-control">
+            </div>
+
+
+            <div class="col-12 mt-4 text-center">
+              <button class="btn btn-secondary mx-1" matStepperPrevious>
+                Anterior
+              </button>
+              <button class="btn btn-success mx-1" (click)="guardar()" matStepperNext>
+                Guardar
+              </button>
+            </div>
+
+          </div>
+
+
+
+        </fieldset>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

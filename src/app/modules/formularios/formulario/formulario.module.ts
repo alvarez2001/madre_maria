@@ -15,9 +15,14 @@ import { MaterialModule } from 'src/app/modules/shared/material/material.module'
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { DireccionesComponent } from '../../../components/usuarios/direcciones/direcciones.component';
 import { BalancesComponent } from 'src/app/components/usuarios/balances/balances.component';
+import { TextosRepetidoComponent } from "src/app/components/usuarios/textos-repetido/textos-repetido.component";
+import { PlantelesComponent } from 'src/app/components/usuarios/planteles/planteles.component';
+import { PreescolarStep1Component } from '../../../components/usuarios/preescolar-step1/preescolar-step1.component';
+import { PreescolarStep2Component } from '../../../components/usuarios/preescolar-step2/preescolar-step2.component';
+import { ModalPagosReferenciaComponent } from '../../../components/usuarios/modal-pagos-referencia/modal-pagos-referencia.component';
 
 @NgModule({
-  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent, BalancesComponent],
+  declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent, BalancesComponent,TextosRepetidoComponent,PlantelesComponent, PreescolarStep1Component, PreescolarStep2Component, ModalPagosReferenciaComponent],
   imports: [
     CommonModule,
     RoundProgressModule,

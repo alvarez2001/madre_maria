@@ -1,0 +1,408 @@
+<div>
+  <app-textos-repetido class="col-12"></app-textos-repetido>
+
+  <mat-horizontal-stepper linear #linear>
+    <!-- HERMANAS QUE ESTUDIAN EN EL PLANTEL -->
+    <mat-step [stepControl]="formOne">
+      <form class="was-validated" [formGroup]="formOne" >
+        <ng-template matStepLabel
+          >Distribución de la vivienda <small>( Cantidad )</small></ng-template
+        >
+
+        <fieldset>
+          <legend>
+            Distribución de la vivienda <small>( Cantidad )</small>
+          </legend>
+
+          <div class="row">
+            <div class="col-md-3 form-group col-12">
+              <label for="dormitorios_cantidad">Dormitorios *</label>
+              <select formControlName="dormitorios_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="cocina_cantidad">Cocina *</label>
+              <select formControlName="cocina_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="comedor_cantidad">Comedor *</label>
+              <select formControlName="comedor_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="banos_cantidad">Baños *</label>
+              <select formControlName="banos_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="garajes_cantidad">Garajes *</label>
+              <select formControlName="garajes_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="depositos_cantidad">Depósitos *</label>
+              <select formControlName="depositos_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="lavandero_cantidad">Lavandero *</label>
+              <select formControlName="lavandero_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 form-group col-12">
+              <label for="patios_cantidad">Patios *</label>
+              <select formControlName="patios_cantidad" required class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option *ngFor="let numero of cantidades" [value]="numero">{{
+                  numero
+                }}</option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group text-center mt-4">
+              <button
+                class="btn btn-secondary mx-1"
+                type="button"
+                matStepperNext
+              >
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- STEP 2 -->
+
+    <mat-step [stepControl]="formTwo">
+      <form class="was-validated" [formGroup]="formTwo">
+        <ng-template matStepLabel>¿Quién cuida a la niña ?</ng-template>
+        <fieldset>
+          <legend>
+            ¿Quién cuida la niña durante el tiempo que permanece en el hogar?
+          </legend>
+
+          <div class="row">
+            <div class="col-12 form-group col-md-6">
+              <label for="quien_cuida_estudiante"
+                >¿Quién cuida a la niña?</label
+              >
+              <select formControlName="quien_cuida_estudiante" required class="form-control">
+                <option value="" selected disabled>Seleccione</option>
+                <option
+                  *ngFor="let datos of quienCuida"
+                  [value]="datos.value"
+                  >{{ datos.data }}</option
+                >
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-6">
+              <label for="otros">¿Quién?</label>
+              <input formControlName="otros" type="text" class="form-control" placeholder="Ej: tío" />
+            </div>
+
+            <div class="col-12 form-group text-center mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperPrevious
+              >
+                Anterior
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperNext
+              >
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- STEP 3 -->
+
+    <mat-step [stepControl]="formThree">
+      <form class="was-validated" [formGroup]="formThree">
+        <ng-template matStepLabel>¿Ha asistido al Preescolar ?</ng-template>
+        <fieldset>
+          <legend>
+            ¿Ha asistido al Preescolar?
+          </legend>
+
+          <div class="row">
+            <div class="col-12 col-md-6 form-group">
+              <label for="asistido_preescolar">¿Ha asistido al Preescolar? *</label>
+              <select required class="form-control" formControlName="asistido_preescolar">
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+              <label for="nombre_preescolar">¿Cómo se llama?</label>
+              <input formControlName="nombre_preescolar" type="text" class="form-control" />
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+              <label for="orientacion_estudiante"
+                >¿Ha orientado a la niña con respecto a su ingreso a la
+                institución? *</label
+              >
+              <select required class="form-control" formControlName="orientacion_estudiante">
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+              <label for="como_orientacion">¿Cómo?</label>
+              <input formControlName="como_orientacion" type="text" class="form-control" />
+            </div>
+
+
+            <div class="col-12 form-group text-center mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperPrevious
+              >
+                Anterior
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperNext
+              >
+                Siguiente
+              </button>
+            </div>
+
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- STEP 4 -->
+
+    <mat-step [stepControl]="formFord">
+      <form class="was-validated" [formGroup]="formFord">
+        <ng-template matStepLabel>¿Cómo son sus relaciones?</ng-template>
+        <fieldset>
+          <legend>
+            ¿Cómo son sus relaciones?
+          </legend>
+
+          <div class="row">
+            <div class="col-12 form-group col-md-4">
+              <label for="papa_relacion">Papá *</label>
+              <select required formControlName="papa_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="mama_relacion">Mamá *</label>
+              <select required formControlName="mama_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="hermano_relacion">Hermano *</label>
+              <select required formControlName="hermano_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="hermana_relacion">Hermana *</label>
+              <select required formControlName="hermana_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="abuela_relacion">Abuela *</label>
+              <select required formControlName="abuela_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="familiares_relacion">Familiares *</label>
+              <select required formControlName="familiares_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="amigos_relacion">Amigos *</label>
+              <select required formControlName="amigos_relacion" class="form-control">
+                <option value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group col-md-4">
+              <label for="perros_relacion">Perro *</label>
+              <select required formControlName="perros_relacion" class="form-control">
+                <option  value="" disabled selected>Seleccione</option>
+                <option
+                  *ngFor="let relacion of relaciones"
+                  [value]="relacion.value"
+                >
+                  {{ relacion.data }}
+                </option>
+              </select>
+            </div>
+            <div class="col-12 form-group text-center mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperPrevious
+              >
+                Anterior
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperNext
+              >
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </mat-step>
+
+    <!-- STEP 5 -->
+
+    <mat-step [stepControl]="formFive">
+      <form class="was-validated" [formGroup]="formFive">
+        <ng-template matStepLabel>¿Qué tipos de juegos?</ng-template>
+        <fieldset>
+          <legend>
+            ¿Qué tipos de juegos?
+          </legend>
+
+          <div class="row">
+            <div class="form-group col-12">
+              <label for="juego_estudiante">¿Qué tipos de juegos?</label>
+              <select required formControlName="juego_estudiante" class="form-control" >
+                <option value="">Seleccione</option>
+                <option *ngFor="let tipos of tiposJuegos" [value]="tipos.value"> {{tipos.data}} </option>
+              </select>
+            </div>
+
+            <div class="col-12 form-group text-center mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary mx-1"
+                matStepperPrevious
+              >
+                Anterior
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success mx-1"
+                matStepperNext
+                (click)="guardar()"
+              >
+                Guardar y continuar
+              </button>
+            </div>
+
+          </div>
+
+
+
+        </fieldset>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

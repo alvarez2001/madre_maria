@@ -26,7 +26,8 @@ export class MenuUsuarioComponent implements OnInit , DoCheck {
   }
 
   private comprueba(){
-    const usuario:any = this.loginSvc.regresarUsuario()
+    const usuario:any | null = this.loginSvc.regresarUsuario()
+
     if(usuario){
       this.existeUsuario = true;
       this.tipoUsuario = usuario.tipo
@@ -49,14 +50,9 @@ export class MenuUsuarioComponent implements OnInit , DoCheck {
     }).then(
       result =>{
         if(result.value){
-          this.sharedSvc.lanzarCarga(true)
-          setTimeout(()=>{
-            this.sharedSvc.lanzarCarga(false)
-            this.router.navigate(['/'])
-            sessionStorage.removeItem('token')
-          sessionStorage.removeItem('usuario')
-          sessionStorage.removeItem('estudiante')
-          },1200)
+          this.loginSvc.logoutUsuario().subscribe(res => {
+            this.loginSvc.borrarDatos(res);
+          })
         }
       }
     )

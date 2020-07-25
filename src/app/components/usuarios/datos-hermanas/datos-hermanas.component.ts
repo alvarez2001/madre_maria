@@ -78,7 +78,6 @@ export class DatosHermanasComponent implements OnInit {
 
 
     const datosTransform = EstructuraFamiliarClass.EstructuraFamiliarObj(datos);
-    console.log(datosTransform);
     this.incripSvc.registrarDatosFamiliares(datosTransform).subscribe(res => {
       this.sharedSvc.mensajeSuccessAlerta(res)
       this.route.navigate(['/formularios']);

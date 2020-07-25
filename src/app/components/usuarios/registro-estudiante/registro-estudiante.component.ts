@@ -138,7 +138,7 @@ export class RegistroEstudianteComponent implements OnInit {
       this.form.controls['apellidos_representante'].setValue(res.apellidos);
       this.form.controls['celular_representante'].setValue(res.celular);
       this.form.controls['email'].setValue(res.email);
-      this.form.controls['nombres_representante'].setValue(res.apellidos);
+      this.form.controls['nombres_representante'].setValue(res.nombres);
       this.form.controls['ocupacion_representante'].setValue(res.ocupacion);
       this.form.controls['parentesco'].setValue(res.parentesco);
       this.form.controls['tlf_representante'].setValue(res.tlf_local);

@@ -5,7 +5,6 @@
       <thead>
         <th>Apellido y Nombre</th>
         <th>Cedula</th>
-        <th>Año / Grado</th>
         <th>Acciones</th>
       </thead>
       <tbody>
@@ -13,14 +12,13 @@
           <td colspan="4">Buscando Datos...</td>
         </tr>
         <tr *ngIf="data.length === 0 && !existeMayor">
-          <td colspan="4">No hay estudiantes inactivos</td>
+          <td colspan="4">No hay estudiantes {{estado}}</td>
         </tr>
         <tr *ngFor="let usuario of data">
           <td> {{usuario.nombreCompleto}} </td>
           <td> {{usuario.cedula}} </td>
-          <td>  </td>
           <td>
-            <button class="btn btn-info efectoBoxShadow" (click)="openDialog(usuario.id)">
+            <button class="btn btn-info efectoBoxShadow" (click)="openDialog(usuario.cedula, usuario.id)">
               <img src="./assets/icons/searchIcon.svg" class="iconoButton" alt="Buscador">
             </button>
           </td>
@@ -28,5 +26,9 @@
       </tbody>
 
     </table>
+  </div>
+
+  <div class="col-12">
+    <app-paginacion [paginacion]="paginacion" (emitir)="recibirPaginacion($event)" *ngIf="paginacion"></app-paginacion>
   </div>
 </div>

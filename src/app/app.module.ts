@@ -15,6 +15,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 import { MaterialModule } from './modules/shared/material/material.module';
 import { MensajeModalComponent } from './mensaje-modal/mensaje-modal.component';
+import { PasosGuard } from './guards/pasos.guard';
+import { AuthGuard } from "./guards/auth.guard";
 
 
 @NgModule({
@@ -26,7 +28,6 @@ import { MensajeModalComponent } from './mensaje-modal/mensaje-modal.component';
     FooterUsuarioComponent,
     MensajeModalComponent,
 
-
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule,
     MaterialModule
@@ -34,6 +35,8 @@ import { MensajeModalComponent } from './mensaje-modal/mensaje-modal.component';
   providers: [
     SharedService,
     LoginService,
+    PasosGuard,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS, useClass: InterceptorPrimary, multi: true
     }

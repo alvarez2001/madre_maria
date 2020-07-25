@@ -34,6 +34,7 @@ export class DireccionesComponent implements OnInit {
   techoVivienda: string[] = techoVivienda;
   pisoVivienda: string[] = pisoVivienda;
   medioTransporte: string[] = tipoTransporte;
+  disponeTransporte:boolean = false;
 
   nuevoPiso: string = '';
   nuevoTecho: string = '';
@@ -93,6 +94,16 @@ export class DireccionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.valoresCambiantes();
+
+    this.formMedioTransporte.controls['tipo_transporte'].valueChanges.subscribe(res => {
+      if(res === this.medioTransporte[3]){
+        this.disponeTransporte = true;
+
+      }
+      else {
+        this.disponeTransporte = false;
+      }
+    })
   }
 
   guardarDatos() {
@@ -100,9 +111,9 @@ export class DireccionesComponent implements OnInit {
     const form2 = this.formTipoVivienda.value;
     const form3 = this.formMedioTransporte.value;
     if (
-      this.formTipoVivienda.valid &&
-      this.formMedioTransporte.valid &&
-      this.formCasoEmergencia.valid
+      this.formTipoVivienda &&
+      this.formMedioTransporte &&
+      this.formCasoEmergencia
     ) {
       if (form1.parentesco === parentesco[10]) {
         form1.parentesco = this.Nuevoparentesco;
@@ -122,9 +133,17 @@ export class DireccionesComponent implements OnInit {
 
       const datosModel = Direcciones.DireccionesObj(datosIngresar);
 
+      const data:any = datosModel;
+      for (const propName in data) {
+        if (data[propName] === null || data[propName] === undefined || data[propName] === '') {
+          delete data[propName];
+        }
+      }
+
+
       /* console.log('datos Model ->', datosModel); */
 
-      this.incrip.addEmergencia(datosModel).subscribe(res => {
+      this.incrip.addEmergencia(data).subscribe(res => {
           this.sharedSvc.mensajeSuccessAlerta(res);
           this.router.navigate(['/formularios'])
         })

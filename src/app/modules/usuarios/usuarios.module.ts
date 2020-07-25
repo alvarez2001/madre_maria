@@ -19,7 +19,7 @@ import { PlantelesComponent } from '../../components/usuarios/planteles/plantele
     LoginComponent,
     FormulariosComponent,
     HomeComponent,
-    PlantelesComponent,
+
 
 
   ],

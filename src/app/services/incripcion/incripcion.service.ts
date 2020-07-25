@@ -9,7 +9,7 @@ import { SharedService } from '../shared/shared.service';
 import { CedulaModel } from './cedula.model';
 import Swal from 'sweetalert2';
 import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
-import { PasoSolicitud, Direcciones, PlantelesEstudiantes } from 'src/app/models';
+import { PasoSolicitud, Direcciones, PlantelesEstudiantes, PreescolarStep1, PreescolarStep2 } from 'src/app/models';
 
 @Injectable()
 export class IncripcionService {
@@ -24,6 +24,70 @@ export class IncripcionService {
     this.url = Global.url;
     this.idEstudiante = this.loginSvc.regresarEstudiante();
   }
+
+
+  /* ENVIAR NUMEROS DE REFERENCIA */
+
+  /* transferencias/id  */
+
+  enviarNumerosReferencia(data:any){
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post(this.url+'transferencias/'+this.idEstudiante,data).pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false);
+        return result
+      })
+    )
+  }
+
+
+
+  /* VERIFICAR NUMEROS DE REFERENCIA  */
+
+  consultarSiexisteTransferencia():Observable<any>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.get(this.url+'consulta/transferencias/'+this.idEstudiante).pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false);
+        return result
+      })
+    )
+  }
+
+
+
+  /* PREESCOLAR PASO 1   */
+
+  registrarDatosPreescolarStep1(data:PreescolarStep1){
+    this.sharedSvc.lanzarCarga(true)
+    return this.http.post(this.url+'add/datos/preescolar/primera/parte/'+this.idEstudiante,data).pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false)
+        return result
+      })
+    )
+  }
+
+  /* PREESCOLAR PASO2  */
+
+  registrarDatosPreescolarStep2(data:PreescolarStep2){
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post(this.url+'add/datos/preescolar/segunda/parte/'+this.idEstudiante,data).pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false);
+        return result;
+      })
+    )
+  }
+
+
+
+
+
+
+
+
+
 
 
   registrarDatosFamiliares(data:EstructuraFamiliarClass):Observable<any>{
@@ -43,7 +107,7 @@ export class IncripcionService {
   procesoSolicitud():Observable<PasoSolicitud>{
     return this.http.get<PasoSolicitud>(this.url+'consulta/paso/solicitud/'+this.idEstudiante).pipe(
       map(paso => {
-        console.log(paso)
+
         return PasoSolicitud.pasoSolicitudObj(paso)
       })
     )

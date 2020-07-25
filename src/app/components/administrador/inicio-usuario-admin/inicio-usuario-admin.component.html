@@ -1,1 +1,59 @@
-<h2 class="text-center">SITIO EN CONSTRUCCIÓN</h2>
+<form  (ngSubmit)="guardarAdmin()" class="was-validated" [formGroup]="formAdmin">
+  <fieldset>
+    <legend>Registrar cuenta administrador</legend>
+    <div class="row">
+      <div class="col-md-6 form-group col-12">
+        <label for="">Nombres</label>
+        <input type="text" class="form-control" placeholder="Ej: Jose Miguel" required formControlName="nombres">
+      </div>
+
+
+      <div class="col-md-6 form-group col-12">
+        <label for="">Apellidos</label>
+        <input type="text" class="form-control" placeholder="Ej: Alvarez Suarez" required formControlName="apellidos">
+      </div>
+
+      <div class="col-md-6 form-group col-12">
+        <label for=""> Cédula </label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <select required class="form-control" required formControlName="nacionalidad">
+              <option value="">Tipo</option>
+              <option *ngFor="let nacio of nacionalidad" [value]="nacio.letraIdentificacion"> {{nacio.identificacion}} </option>
+            </select>
+          </div>
+          <input type="text" pattern="[0-9]+" class="form-control" placeholder="Ej: 00000000" required formControlName="cedula">
+        </div>
+      </div>
+      <div class="col-md-6 form-group col-12">
+        <label for="">Celular</label>
+        <input type="text" class="form-control" pattern="[0-9]+" required placeholder="Ej: 04120000000" formControlName="celular">
+      </div>
+
+      <div class="col-md-6 form-group col-12">
+        <label for="">Status</label>
+        <select class="form-control" required formControlName="status">
+          <option value="1" selected>Activo</option>
+          <option value="0">Inactivo</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 form-group col-12">
+        <label for="">Contraseña</label>
+        <input type="password" class="form-control" required placeholder="Ej: ********" formControlName="password">
+      </div>
+
+      <div class="col-12 form-group">
+        <label for="">Email</label>
+        <input type="email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control" required placeholder="Ej: ejemplo@ejemplo.com" formControlName="email">
+      </div>
+
+      <div class="col-12 text-center form-group mt-4">
+        <button class="btn btn-primary" type="submit">
+          Registrar administrador
+        </button>
+      </div>
+
+    </div>
+  </fieldset>
+</form>

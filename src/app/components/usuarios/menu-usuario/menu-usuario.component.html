@@ -33,18 +33,36 @@
           [routerLink]="['/registro']"
           routerLinkActive="menuActivo"
           *ngIf="!existeUsuario"
-          data-toggle="modal" data-target="#exampleModal"
+
         >
+
+        <!--
+
+data-toggle="modal" data-target="#exampleModal"
+
+
+        -->
+
+
+
           <a class="text-decoration-none navbarPrincipal__link">Registro</a>
         </li>
 
         <li
           class="navbarPrincipal__item"
+
+          *ngIf="!existeUsuario"
+
           [routerLink]="['/login']"
           routerLinkActive="menuActivo"
-          *ngIf="!existeUsuario"
-          data-toggle="modal" data-target="#exampleModal"
+
         >
+        <!--
+data-toggle="modal" data-target="#exampleModal"
+
+        -->
+
+
           <a class="text-decoration-none navbarPrincipal__link">Acceder al sistema</a>
         </li>
 
@@ -64,7 +82,7 @@
 
 <section class="stepPagina">
   <div class="container h-100">
-    <div class="row h-100 justify-content-center align-items-center">
+    <div class="row h-100 justify-content-center align-items-center animate__animated animate__bounceInRight ">
       <div class="col-12">
         <h2 class="m-0 display-5">{{ paginaActual }}</h2>
       </div>

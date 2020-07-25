@@ -18,8 +18,6 @@ export class MensajeModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.numeroAleatorio)
-
   }
 
 }

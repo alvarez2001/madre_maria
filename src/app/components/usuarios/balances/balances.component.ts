@@ -46,7 +46,7 @@ export class BalancesComponent implements OnInit {
     this.razon = razones;
 
     this.relacionIngresos = this.fb.group({
-      balance:this.fb.array([], [Validators.required, Validators.minLength(3)]),
+      balance:this.fb.array([], [Validators.required, Validators.minLength(1)]),
       portador:new FormControl(''),
       sueldo:new FormControl('0'),
       alimentacion:new FormControl('0'),
@@ -78,7 +78,9 @@ export class BalancesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
+
 
 
 

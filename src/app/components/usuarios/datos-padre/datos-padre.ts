@@ -1,4 +1,5 @@
 export interface datosPadre {
+  vive:string;
   apellidos:string;
   nombres:string;
   nacionalidad:string;
