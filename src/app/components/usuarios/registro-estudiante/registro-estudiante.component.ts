@@ -11,6 +11,7 @@ import {
 import {
   FormGroup,
   FormBuilder,
+  NgForm,
   FormControl,
   Validators,
   AbstractControl,
@@ -20,8 +21,7 @@ import {
   RegistroEstudiantesClass,
 } from 'src/app/components/usuarios/registro-estudiante/registroEstudiante';
 import { LoginService } from 'src/app/services/login/login.service';
-import { debounce, debounceTime, tap, map, first, distinctUntilChanged } from 'rxjs/operators';
-import Swal from 'sweetalert2';
+import {  debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registro-estudiante',

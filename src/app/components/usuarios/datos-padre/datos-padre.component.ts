@@ -36,7 +36,6 @@ export class DatosPadreComponent implements OnInit,AfterViewInit {
     this.children.valueChanges?.pipe(
       debounceTime(1500),
       distinctUntilChanged(),
-      map(result => result !== '' ? result.trim(): '')
     )
     .subscribe(res => {
       if(res.length > 6){

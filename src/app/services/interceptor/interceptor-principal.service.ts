@@ -42,7 +42,16 @@ export class InterceptorPrimary implements HttpInterceptor {
       console.log(err);
       return throwError('error de validacion');
     } else if (err.status === 401) {
-      console.log('error 401 ->', err);
+
+      Swal.fire({
+        title:'Acceso Denegado',
+        text:'Estas intentando acceder a un área no autorizada ó su sesión ha vencido',
+        imageUrl: 'assets/imgs/madre/errores.png',
+        imageWidth: 200,
+        imageHeight: 200,
+      })
+
+
       return throwError(`no estas autentificado`);
     }
     else if (err.status === 0){

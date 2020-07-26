@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
 import { LoginModel } from './login.model';
 

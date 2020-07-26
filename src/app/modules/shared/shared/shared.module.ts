@@ -7,11 +7,11 @@ import { MilesDirective } from 'src/app/directivas/formateadores/miles.directive
 
 
 @NgModule({
-  declarations: [CedulaDirective,MilesDirective,
+  declarations: [MilesDirective,
   ],
   imports: [
     CommonModule,ReactiveFormsModule,FormsModule
 
-  ],exports:[ReactiveFormsModule, FormsModule, CedulaDirective,MilesDirective]
+  ],exports:[ReactiveFormsModule, FormsModule, MilesDirective]
 })
 export class SharedModule { }

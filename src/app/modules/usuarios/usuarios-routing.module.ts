@@ -10,26 +10,13 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent,
-    data:{pagina:'Inicio'}
-  },
-  {
-    path:'formularios',
     loadChildren:()=>import('src/app/modules/formularios/formulario/formulario.module').then( m => m.FormularioModule),
     component:FormulariosComponent,
     canActivate:[AuthGuard],
     data:{pagina:'Procesos de Solicitud',tipoUsuario:'Estudiante'}
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: { pagina: 'Login estudiante' },
-  },
-  {
-    path: 'registro',
-    component: RegistroEstudianteComponent,
-    data: { pagina: 'Registro estudiante' },
-  },
+
+
 ];
 
 @NgModule({

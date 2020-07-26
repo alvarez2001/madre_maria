@@ -16,8 +16,9 @@ import { LoginService } from './services/login/login.service';
 import { MaterialModule } from './modules/shared/material/material.module';
 import { MensajeModalComponent } from './mensaje-modal/mensaje-modal.component';
 import { PasosGuard } from './guards/pasos.guard';
-import { AuthGuard } from "./guards/auth.guard";
-
+import { AuthGuard } from './guards/auth.guard';
+import { SharedModule } from './modules/shared/shared/shared.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,15 @@ import { AuthGuard } from "./guards/auth.guard";
     MenuUsuarioComponent,
     FooterUsuarioComponent,
     MensajeModalComponent,
-
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule,
-    MaterialModule
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MaterialModule,
+    QuicklinkModule,
+    SharedModule
   ],
   providers: [
     SharedService,
@@ -38,8 +44,10 @@ import { AuthGuard } from "./guards/auth.guard";
     PasosGuard,
     AuthGuard,
     {
-      provide: HTTP_INTERCEPTORS, useClass: InterceptorPrimary, multi: true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorPrimary,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

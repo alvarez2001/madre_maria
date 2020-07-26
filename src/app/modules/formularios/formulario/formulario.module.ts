@@ -25,7 +25,6 @@ import { ModalPagosReferenciaComponent } from '../../../components/usuarios/moda
   declarations: [DataEstudianteComponent, InfoFormularioComponent, DatosHermanasComponent, DatosPadreComponent, DatosMadreComponent, InicioInscripComponent, DireccionesComponent, BalancesComponent,TextosRepetidoComponent,PlantelesComponent, PreescolarStep1Component, PreescolarStep2Component, ModalPagosReferenciaComponent],
   imports: [
     CommonModule,
-    RoundProgressModule,
     NgCircleProgressModule.forRoot({}),
     SharedModule,
     FormularioRoutingModule,
