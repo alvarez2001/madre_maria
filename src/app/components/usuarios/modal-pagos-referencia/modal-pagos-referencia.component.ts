@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IncripcionService } from 'src/app/services/incripcion/incripcion.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SharedService } from 'src/app/services/shared/shared.service';
@@ -11,7 +11,17 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 })
 export class ModalPagosReferenciaComponent implements OnInit {
 
-  constructor(private sharedSvc:SharedService,private incripSvc:IncripcionService,private dialogRef: MatDialogRef<ModalPagosReferenciaComponent>) { }
+  constructor(private sharedSvc:SharedService,private incripSvc:IncripcionService,private dialogRef: MatDialogRef<ModalPagosReferenciaComponent>,private fb:FormBuilder) { }
+
+
+  formReferencia:FormGroup = this.fb.group({
+
+    /*  */
+    referencia_bancaria_inscripcion:['',[Validators.required]],
+    fullname_titular_inscripcion:['',[Validators.required]],
+    cedula_titular_inscripcion:['',[Validators.required]]
+
+  })
 
   mensualidad!:string;
   inscripcion!:string;

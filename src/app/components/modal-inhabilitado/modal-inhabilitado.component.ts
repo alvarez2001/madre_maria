@@ -32,7 +32,6 @@ export class ModalInhabilitadoComponent implements OnInit, OnDestroy {
 
   comprobarSistema(){
     this.loginSvc.comprobarStatusSistema().subscribe(res => {
-      console.log(res)
       if(res !== 'true'){
 
         $(this.modal.nativeElement).modal({
