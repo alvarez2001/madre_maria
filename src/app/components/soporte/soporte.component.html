@@ -1,0 +1,31 @@
+<app-modal-inhabilitado></app-modal-inhabilitado>
+<div class="container login  mt-4 animate__animated animate__fadeInLeft pt-4">
+  <form class="row was-validated" [formGroup]="formContacto">
+
+    <div class="col-12 form-group">
+      <h3 >Lo contactaremos en un lapso de 24 horas</h3>
+    </div>
+
+    <div class="col-12 form-group">
+      <label for="cedula_estudiante">Cédula de la estudiante</label>
+      <input name="cedula_estudiante" required formControlName="cedula_estudiante" type="text" pattern="[0-9]+" placeholder="Cédula" class="form-control">
+    </div>
+
+    <div class="col-12 form-group">
+      <label for="titulo_mensaje">Título del mensaje</label>
+      <input name="titulo_mensaje" required formControlName="titulo_mensaje" type="text" placeholder="Título" class="form-control">
+    </div>
+
+    <div class="col-12 form-group">
+      <label for="motivo">Mensaje</label>
+      <textarea formControlName="motivo" required name="motivo" class="form-control w-100 mw-100" style="min-height: 100px; max-height: 100px;" maxlength="400" placeholder="Explique brevemente sus requerimientos" ></textarea>
+      <small class="text-danger">Máximo 400 caracteres</small>
+    </div>
+
+
+    <div class="col-12 form-group text-center">
+      <button class="btn btn-primary text-uppercase" (click)="enviarAyuda()">Enviar mensaje</button>
+    </div>
+
+  </form>
+</div>

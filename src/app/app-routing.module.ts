@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path:'formularios',
     loadChildren:()=>import('src/app/modules/usuarios/usuarios.module').then( m => m.UsuariosModule ),
-    data:{tipoUsuario:'Administrador'},
+    data:{tipoUsuario:'Estudiante'},
     canActivate:[AuthGuard]
   },
   {
@@ -34,8 +34,13 @@ const routes: Routes = [
     data: { pagina: 'Login estudiante' },
   },
   {
+    path:'soporte',
+    loadChildren:()=>import('src/app/modules/soporte-tecnico/soporte-tecnico.module').then( m => m.SoporteTecnicoModule ),
+    data: { pagina: 'Centro de ayuda' },
+  },
+  {
     path:'**',
-    redirectTo:''
+    redirectTo:'/'
   }
 ];
 

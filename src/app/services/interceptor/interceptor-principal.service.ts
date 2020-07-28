@@ -49,9 +49,8 @@ export class InterceptorPrimary implements HttpInterceptor {
         imageUrl: 'assets/imgs/madre/errores.png',
         imageWidth: 200,
         imageHeight: 200,
-      })
-
-
+      });
+      this.loginSvc.borrarDatos('Se ha cerrado sesión')
       return throwError(`no estas autentificado`);
     }
     else if (err.status === 0){

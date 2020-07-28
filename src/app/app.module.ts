@@ -19,6 +19,9 @@ import { PasosGuard } from './guards/pasos.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { SharedModule } from './modules/shared/shared/shared.module';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ModalInhabilitadoComponent } from './components/modal-inhabilitado/modal-inhabilitado.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { QuicklinkModule } from 'ngx-quicklink';
     MenuUsuarioComponent,
     FooterUsuarioComponent,
     MensajeModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { QuicklinkModule } from 'ngx-quicklink';
     HttpClientModule,
     MaterialModule,
     QuicklinkModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     SharedService,

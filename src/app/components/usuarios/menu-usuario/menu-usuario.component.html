@@ -46,7 +46,19 @@ data-toggle="modal" data-target="#exampleModal"
 
 
           <a class="text-decoration-none navbarPrincipal__link">Registro</a>
+
         </li>
+
+
+
+        <li
+          class="navbarPrincipal__item"
+          [routerLink]="['/soporte']"
+          routerLinkActive="menuActivo"
+        >
+          <a class="text-decoration-none navbarPrincipal__link">Centro de ayuda</a>
+        </li>
+
 
         <li
           class="navbarPrincipal__item"
@@ -55,6 +67,7 @@ data-toggle="modal" data-target="#exampleModal"
 
           [routerLink]="['/login']"
           routerLinkActive="menuActivo"
+
 
         >
         <!--
@@ -91,22 +104,4 @@ data-toggle="modal" data-target="#exampleModal"
 </section>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h5 class="modal-title  mx-auto text-uppercase" id="exampleModalLabel">Sistema inhabilitado</h5>
-      </div>
-      <div class="modal-body text-center">
 
-        <img src="./assets/imgs/madre/6.png" class="w-75 mx-auto d-block h-50"  alt="madre maria">
-
-        <p class="font-weight-bold text-center text-uppercase">Muy pronto estará disponible el sistema online</p>
-      </div>
-      <div class="modal-footer">
-
-        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>

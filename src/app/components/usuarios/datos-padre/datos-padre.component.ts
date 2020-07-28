@@ -38,29 +38,31 @@ export class DatosPadreComponent implements OnInit,AfterViewInit {
       distinctUntilChanged(),
     )
     .subscribe(res => {
-      if(res.length > 6){
-        const dataCedula:CedulaModel = {
-          cedula:res
-        }
-        this.incripSvc.verificarCedulaPadre(dataCedula).subscribe(datos =>{
-          const estudiante = this.loginSvc.regresarUsuario();
-          if(typeof datos === 'object'){
-            this.incripSvc.mostrarMensajeConfirm(datos,estudiante).then(
-              (result:any) => {
-                if(result.value){
-                  this.incripSvc.asignarPadreExistente(datos.id).subscribe((res:any) => {
-                    this.route.navigate(['/formularios']);
-                    this.sharedSvc.mensajeSuccessAlerta(res)
-                  })
-                }else{
-                  this.blockDatos = true;
-                }
-              }
-            )
-          }else{
-            this.blockDatos = false;
+      if(res !== '' && res){
+        if(res.length > 6){
+          const dataCedula:CedulaModel = {
+            cedula:res
           }
-        })
+          this.incripSvc.verificarCedulaPadre(dataCedula).subscribe(datos =>{
+            const estudiante = this.loginSvc.regresarUsuario();
+            if(typeof datos === 'object'){
+              this.incripSvc.mostrarMensajeConfirm(datos,estudiante).then(
+                (result:any) => {
+                  if(result.value){
+                    this.incripSvc.asignarPadreExistente(datos.id).subscribe((res:any) => {
+                      this.route.navigate(['/formularios']);
+                      this.sharedSvc.mensajeSuccessAlerta(res)
+                    })
+                  }else{
+                    this.blockDatos = true;
+                  }
+                }
+              )
+            }else{
+              this.blockDatos = false;
+            }
+          })
+        }
       }
     })
   }

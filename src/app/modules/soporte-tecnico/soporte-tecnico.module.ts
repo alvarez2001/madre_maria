@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoginRoutingModule } from './login-routing.module';
+import { SoporteTecnicoRoutingModule } from './soporte-tecnico-routing.module';
+import { SoporteComponent } from '../../components/soporte/soporte.component';
 import { SharedModule } from '../shared/shared/shared.module';
-import { LoginComponent } from 'src/app/components/usuarios/login/login.component';
 import { ModalInhabilitadoComponent } from 'src/app/components/modal-inhabilitado/modal-inhabilitado.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [SoporteComponent],
   imports: [
     CommonModule,
     SharedModule,
-    LoginRoutingModule
+    SoporteTecnicoRoutingModule
   ]
 })
-export class LoginModule { }
+export class SoporteTecnicoModule { }

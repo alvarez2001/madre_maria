@@ -20,6 +20,19 @@ export class LoginService {
    }
 
 
+   /* comprobar status del sistema */
+
+   comprobarStatusSistema(){
+     this.sharedSvc.lanzarCarga(true);
+     return this.http.get(this.url+'sistema/status/inscripcion').pipe(
+       map(result => {
+         this.sharedSvc.lanzarCarga(false);
+         return result
+       })
+     )
+   }
+
+
   regresarToken():string | null {
     const token = sessionStorage.getItem('token');
     return token;
