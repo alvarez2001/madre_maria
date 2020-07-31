@@ -10,6 +10,7 @@ import { CedulaModel } from './cedula.model';
 import Swal from 'sweetalert2';
 import { EstructuraFamiliarClass } from 'src/app/models/EstructuraClass';
 import { PasoSolicitud, Direcciones, PlantelesEstudiantes, PreescolarStep1, PreescolarStep2 } from 'src/app/models';
+import { modeloReferencias } from 'src/app/components/usuarios/modal-pagos-referencia/modal-pagos-referencia.component';
 
 @Injectable()
 export class IncripcionService {
@@ -41,6 +42,18 @@ export class IncripcionService {
   }
 
 
+  /*  */
+
+  addTransferencias(data:FormData){
+    this.sharedSvc.lanzarCarga(true)
+    return this.http.post(this.url+'add/transferencias/inscripciones/'+this.idEstudiante,data).pipe(
+      map(result => {
+        this.sharedSvc.lanzarCarga(false)
+        return result
+      })
+    )
+  }
+
 
   /* VERIFICAR NUMEROS DE REFERENCIA  */
 
@@ -53,6 +66,7 @@ export class IncripcionService {
       })
     )
   }
+
 
 
 

@@ -24,7 +24,6 @@ export class SoporteComponent implements OnInit {
   enviarAyuda(){
     const data = this.formContacto.value;
     this.tecnicoSvc.enviarMensajeSoporte(data).subscribe(res => {
-      console.log(res)
     })
   }
 

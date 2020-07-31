@@ -39,7 +39,7 @@ export class InterceptorPrimary implements HttpInterceptor {
     this.sharedSvc.lanzarCarga(false);
     if (err.status !== 500 && err.status !== 0 && err.status !== 401) {
       this.sharedSvc.mostrarAlertaError(err);
-      console.log(err);
+      /* console.log(err); */
       return throwError('error de validacion');
     } else if (err.status === 401) {
 

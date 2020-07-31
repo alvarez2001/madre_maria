@@ -26,7 +26,6 @@ export class InicioInscripComponent implements OnInit {
   max:number = 100;
   constructor(private incripSvc:IncripcionService, private loginSvc:LoginService,private dialog:MatDialog) {
     this.idEstudiante = this.loginSvc.regresarEstudiante();
-    /* console.log(this.loginSvc.regresarUsuario()) */
     this.estudiante = this.loginSvc.regresarUsuario()
   }
 
@@ -37,19 +36,20 @@ export class InicioInscripComponent implements OnInit {
 
   private comprobarNumerosReferencia(){
     this.incripSvc.consultarSiexisteTransferencia().subscribe(res => {
-      if(res === 'false'){
-        this.llamarModalRefencia()
+      if(!res.inscripciones){
+        this.llamarModalRefencia(res)
       }
     })
   }
 
-  private llamarModalRefencia(){
+  private llamarModalRefencia(res:any){
     const dialogRef = this.dialog.open(ModalPagosReferenciaComponent,{
-      disableClose:true
+      disableClose:true,
+      width:'1200px',
+      data:res
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       this.bloquear = result
     });
   }

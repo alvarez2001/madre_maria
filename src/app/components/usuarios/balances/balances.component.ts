@@ -120,7 +120,6 @@ export class BalancesComponent implements OnInit {
       Object.assign(datosUnidos,datos,{balance:dato});
 
       this.incripSvc.addBalances(datosUnidos).subscribe(res => {
-        console.log(res)
         this.sharedSvc.mensajeSuccessAlerta(res)
         this.router.navigate(['/formularios'])
       })

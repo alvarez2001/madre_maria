@@ -37,9 +37,9 @@ export class ListarUsuariosComponent implements OnInit {
   }
 
   recibirPaginacion(paginate:Paginacion){
-
-    this.paginacion = paginate;
     this.data = paginate.data.map( result => Usuario.UsuarioObj(result));
+    this.paginacion = paginate;
+
   }
 
 

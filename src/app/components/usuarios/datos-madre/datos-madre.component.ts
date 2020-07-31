@@ -36,7 +36,6 @@ export class DatosMadreComponent implements OnInit,AfterViewInit {
     )
     .subscribe(res => {
       if(res !== ''  && res ){
-        console.log(res)
         if(res.length > 6){
           const dataCedula:CedulaModel = {
             cedula:res
@@ -124,7 +123,6 @@ export class DatosMadreComponent implements OnInit,AfterViewInit {
 
       this.incripSvc.asignarMadre(this.datosPadre).subscribe(res => {
         this.route.navigate(['/formularios']);
-        console.log(res)
         this.sharedSvc.mensajeSuccessAlerta(res)
       })
     }

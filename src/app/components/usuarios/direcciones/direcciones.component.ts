@@ -124,9 +124,6 @@ export class DireccionesComponent implements OnInit {
       if (form2.techo === techoVivienda[2]) {
         form2.techo = this.nuevoTecho;
       }
-      /* console.log('Form 1 ->', form1);
-      console.log('Form 2 ->', form2);
-      console.log('Form 3 ->', form3); */
 
       const datosIngresar = {};
       Object.assign(datosIngresar, form1, form2, form3);
@@ -141,7 +138,6 @@ export class DireccionesComponent implements OnInit {
       }
 
 
-      /* console.log('datos Model ->', datosModel); */
 
       this.incrip.addEmergencia(data).subscribe(res => {
           this.sharedSvc.mensajeSuccessAlerta(res);

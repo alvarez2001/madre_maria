@@ -39,7 +39,6 @@ export class NominasVistaComponent implements OnInit {
     if(grado.grado !== ''){
       //
       this.adminSvc.consultarNomina(grado).subscribe(res => {
-        console.log(res)
         if(res === 'true'){
           window.open(this.url+'planilla/inscripciones/nomina/'+this.gradoElegido)
         }

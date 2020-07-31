@@ -24,9 +24,10 @@ export class PreescolarStep2Component implements OnInit {
     'nunca'
   ];
   public especialistas:tipadoArray[] = [
-    {control:'Psicologo',value:'Psicólogo'},
+    {control:'Ninguno',value:'Ninguno'},
+    {control:'Psicólogo',value:'Psicólogo'},
     {control:'Psicopedagogos',value:'Psicopedagogos'},
-    {control:'Neurologo',value:'Neurólogo'},
+    {control:'Neurólogo',value:'Neurólogo'},
     {control:'Terapista del lenguaje', value:'Terapista del lenguaje'},
     {control:'Otro', value:'Otro'}
   ];
@@ -126,10 +127,15 @@ export class PreescolarStep2Component implements OnInit {
     this.formThree = this.fb.group({
       especialista:new FormControl('',Validators.required),
       otro:new FormControl({value:'',disabled:true}),
-      motivos:new FormControl('',Validators.required)
+      motivos:new FormControl({value:'',disabled:true})
     });
 
     this.formThree.controls['especialista'].valueChanges.subscribe(res => {
+      if(res === 'Ninguno'){
+        this.desactivar('motivos',this.formThree)
+      }else{
+        this.activar('motivos',this.formThree)
+      }
       if(res === 'Otro'){
         this.activar('otro',this.formThree);
       }else{

@@ -39,7 +39,6 @@ import { ModalInhabilitadoComponent } from './components/modal-inhabilitado/moda
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    QuicklinkModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
