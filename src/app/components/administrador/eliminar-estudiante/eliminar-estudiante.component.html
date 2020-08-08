@@ -1,0 +1,15 @@
+<form class="row was-validated" [formGroup]="form">
+  <div class="form-group col-12 col-md-6 mx-auto">
+    <label for="">Cédula</label>
+    <input type="text" pattern="[0-9]+" required minlength="7"  maxlength="20" formControlName="cedula" class="form-control" placeholder="Ingrese la cédula">
+    <div class="invalid-feedback"  *ngIf="form.get('cedula')?.errors as control">
+      <span *ngIf="control.required"> El campo cédula es requerido </span>
+      <span *ngIf="control.pattern">Introduce caracteres numéricos en este campo <br></span>
+      <span *ngIf="control.minlength as minimo">El mínimo de caracteres es {{minimo.requiredLength}} y tienes {{minimo.actualLength}}</span>
+    </div>
+  </div>
+
+  <div class="form-group col-12 text-center">
+    <button type="button" [disabled]="!form.valid" (click)="Eliminar()" class="btn btn-primary">Eliminar estudiante</button>
+  </div>
+</form>

@@ -11,10 +11,13 @@ import { PaginacionComponent } from '../../components/administrador/paginacion/p
 import { ListarActivosEstudiantesComponent } from '../../components/administrador/listar-activos-estudiantes/listar-activos-estudiantes.component';
 import { ConsultarUsuarioComponent } from '../../components/administrador/consultar-usuario/consultar-usuario.component';
 import { DetalleUsuarioPersonalizadoComponent } from '../../components/administrador/detalle-usuario-personalizado/detalle-usuario-personalizado.component';
+import { ModificarUsuarioComponent } from '../../components/administrador/modificar-usuario/modificar-usuario.component';
+import { ModificarUsuarioDetallesComponent } from '../../components/administrador/modificar-usuario-detalles/modificar-usuario-detalles.component';
+import { EliminarEstudianteComponent } from '../../components/administrador/eliminar-estudiante/eliminar-estudiante.component';
 
 
 @NgModule({
-  declarations: [InicioUsuarioAdminComponent, ListarUsuariosComponent,DetalleUsuarioComponent, PaginacionComponent, ListarActivosEstudiantesComponent, ConsultarUsuarioComponent, DetalleUsuarioPersonalizadoComponent],
+  declarations: [InicioUsuarioAdminComponent, ListarUsuariosComponent,DetalleUsuarioComponent, PaginacionComponent, ListarActivosEstudiantesComponent, ConsultarUsuarioComponent, DetalleUsuarioPersonalizadoComponent, ModificarUsuarioComponent, ModificarUsuarioDetallesComponent, EliminarEstudianteComponent],
   imports: [
     CommonModule,
     MaterialModule,

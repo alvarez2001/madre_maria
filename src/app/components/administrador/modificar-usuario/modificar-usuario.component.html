@@ -1,0 +1,18 @@
+<form class="row was-validated" [formGroup]="formModificar" (ngSubmit)="buscarInfo()">
+  <div class="form-group col-12 col-md-6 mx-auto">
+    <label for="">Cédula</label>
+    <input type="text" pattern="[0-9]+" required minlength="7" [readOnly]="infoPasada"  maxlength="20" formControlName="cedula" class="form-control" placeholder="Ingrese la cédula">
+    <div class="invalid-feedback"  *ngIf="formModificar?.get('cedula')?.errors as control">
+      <span *ngIf="control?.required"> El campo cédula es requerido </span>
+      <span *ngIf="control?.pattern">Introduce caracteres numéricos en este campo <br></span>
+      <span *ngIf="control?.minlength as minimo">El mínimo de caracteres es {{minimo.requiredLength}} y tienes {{minimo.actualLength}}</span>
+    </div>
+  </div>
+
+  <div class="form-group col-12 text-center">
+    <button type="submit"  [disabled]="formModificar.invalid || infoPasada"  class="btn btn-primary">Buscar información</button>
+  </div>
+</form>
+
+
+

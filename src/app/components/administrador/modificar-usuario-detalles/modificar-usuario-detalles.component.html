@@ -1,0 +1,60 @@
+<div *ngIf="info">
+  <hr />
+  <h3>Información actual</h3>
+  <p class="mb-0">Nombres: {{ info.nombres }}</p>
+  <p class="mb-0">Apellidos: {{ info.apellidos }}</p>
+  <p class="mb-0">Cédula: {{ info.nacionalidad }}-{{ info.cedula }}</p>
+  <hr />
+
+  <h3>Información a modificar</h3>
+  <form class="row was-validated" [formGroup]="form" (ngSubmit)="enviarInformacion()">
+    <div class="form-group col-12 col-md-6 col-lg-4">
+      <label for="">Nombres</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nombres"
+        required
+        maxlength="50"
+      />
+      <div class="invalid-feedback"  *ngIf="form.get('nombres')?.errors as control">
+        <span *ngIf="control.required"> El campo nombres es requerido </span>
+      </div>
+    </div>
+
+    <div class="form-group col-12 col-md-6 col-lg-4">
+      <label for="">Apellidos</label>
+      <input
+        type="text"
+        class="form-control"
+        required
+        maxlength="50"
+        formControlName="apellidos"
+      />
+      <div class="invalid-feedback"  *ngIf="form.get('apellidos')?.errors as control">
+        <span *ngIf="control.required"> El campo apellidos es requerido </span>
+      </div>
+    </div>
+
+    <div class="form-group col-12 col-md-6 mx-auto col-lg-4">
+      <label for="">Cédula</label>
+      <input
+        type="text"
+        class="form-control"
+        pattern="[0-9]+"
+        required
+        minlength="7"
+        maxlength="20"
+        formControlName="cedula"
+      />
+      <div class="invalid-feedback"  *ngIf="form.get('cedula')?.errors as control">
+        <span *ngIf="control.required"> El campo cédula es requerido </span>
+        <span *ngIf="control.pattern">Introduce caracteres numéricos en este campo <br></span>
+        <span *ngIf="control.minlength as minimo">El mínimo de caracteres es {{minimo.requiredLength}} y tienes {{minimo.actualLength}}</span>
+      </div>
+    </div>
+    <div class="form-group col-12 text-center">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>
+</div>

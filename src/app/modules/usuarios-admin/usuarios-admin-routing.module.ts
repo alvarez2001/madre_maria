@@ -6,6 +6,9 @@ import { ListarUsuariosComponent } from 'src/app/components/administrador/listar
 import { ListarActivosEstudiantesComponent } from 'src/app/components/administrador/listar-activos-estudiantes/listar-activos-estudiantes.component';
 
 import { ConsultarUsuarioComponent } from "src/app/components/administrador/consultar-usuario/consultar-usuario.component";
+import { ModificarUsuarioComponent } from 'src/app/components/administrador/modificar-usuario/modificar-usuario.component';
+import { EliminarEstudianteComponent } from "src/app/components/administrador/eliminar-estudiante/eliminar-estudiante.component";
+import { ModificarUsuarioDetallesComponent } from 'src/app/components/administrador/modificar-usuario-detalles/modificar-usuario-detalles.component';
 
 const routes: Routes = [
   {
@@ -23,6 +26,18 @@ const routes: Routes = [
   {
     path:'consultar-usuario',
     component:ConsultarUsuarioComponent
+  },
+  {
+    path:'modificar-usuario',
+    component:ModificarUsuarioComponent
+  },
+  {
+    path:'modificar',
+    component:ModificarUsuarioDetallesComponent
+  },
+  {
+    path:'eliminar-estudiante',
+    component:EliminarEstudianteComponent
   }
 
 ];

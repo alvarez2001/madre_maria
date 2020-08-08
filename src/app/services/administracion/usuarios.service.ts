@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 import { Paginacion, Usuario, DetalleUsuario } from 'src/app/models';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared/shared.service';
+import { ModificarUsuario } from 'src/app/components/administrador/modificar-usuario/modificar-usuario.component';
 
 @Injectable()
 export class UsuariosService {
@@ -15,6 +16,41 @@ export class UsuariosService {
   constructor(private http:HttpClient, private sharedSvc:SharedService) {
     this.url = Global.url
   }
+
+
+  eliminarUsuarioporCedula(cedula:string):Observable<string>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.delete<string>(this.url+'eliminar/datos/estudiante/usuario',{
+      params:{cedula:cedula}
+    }).pipe(
+      map(value => {
+        this.sharedSvc.lanzarCarga(false);
+        return value;
+      })
+    )
+  }
+
+  modificarUsuarioCedula(datos:any, usuarioId:number, estudianteId:number):Observable<any>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post(this.url+'actualizacion/datos/'+usuarioId+'/'+estudianteId,datos).pipe(
+      map(value => {
+        this.sharedSvc.lanzarCarga(false);
+        return value;
+      })
+    )
+  }
+
+
+  buscarInfoPorCedula(cedula:string):Observable<ModificarUsuario>{
+    this.sharedSvc.lanzarCarga(true);
+    return this.http.post<ModificarUsuario>(this.url+'buscar/informacion/estudiante',cedula).pipe(
+      map(value => {
+        this.sharedSvc.lanzarCarga(false);
+        return value;
+      })
+    )
+  }
+
 
   buscarTodosEstudiantesInactivos():Observable<Paginacion>{
     this.sharedSvc.lanzarCarga(true)
